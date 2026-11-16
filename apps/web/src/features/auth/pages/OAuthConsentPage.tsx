@@ -90,7 +90,7 @@ export function OAuthConsentPage() {
   const complete = chosen.length > 0 && chosen.every(({ id }) => pickOf(id).all || (pickOf(id).selected.length > 0 && pickOf(id).selected.length <= 100))
   return <AuthCard><div className="grid gap-5">
     <AuthBrand />
-    <h1 className="text-xl font-semibold">Connect to Orbit</h1>
+    <h1 className="text-xl font-semibold">Connect to lukethomas</h1>
     {user.isError || consent.isError || !/^[A-Za-z0-9_-]{43}$/.test(request) ? <p role="alert">This request is not available. Restart the connection from your MCP client.</p> : consent.data ? <>
       <p><strong>{consent.data.client_name}</strong> wants to connect to the workspaces and projects you select.</p>
       <p className="text-sm text-muted-foreground">Signed in as {user.data?.display_name}.</p>
@@ -100,7 +100,7 @@ export function OAuthConsentPage() {
           <Checkbox checked={id in picks} onCheckedChange={(checked) => toggleWorkspace(id, Boolean(checked))} />
           {name}
         </Label>)}
-      </div> : workspaces.length ? <p className="text-sm">Workspace: <strong>{workspaces[0].name}</strong></p> : <p className="text-sm text-muted-foreground">No workspaces available. Create a workspace in Orbit, then restart the connection.</p>}
+      </div> : workspaces.length ? <p className="text-sm">Workspace: <strong>{workspaces[0].name}</strong></p> : <p className="text-sm text-muted-foreground">No workspaces available. Create a workspace in lukethomas, then restart the connection.</p>}
       {workspaces.length ? <AccessPicker id="consent-access" resources={RESOURCES.map((resource) => resource.name === 'Tasks' ? { ...resource, details: <div className="grid gap-4">
         {chosen.length ? chosen.map(({ id, name }) => {
           const projects = consent.data?.projects.filter((project) => project.workspace_id === id) ?? []
@@ -115,7 +115,7 @@ export function OAuthConsentPage() {
           <Checkbox checked={remote} disabled={approve.isPending} onCheckedChange={(checked) => setRemote(Boolean(checked))} />
           Client runs on a remote server
         </Label>
-        <InfoTip text="Use --no-browser when you start sign-in in Claude or Codex. Orbit will show a callback URL to paste into that terminal." />
+        <InfoTip text="Use --no-browser when you start sign-in in Claude or Codex. lukethomas will show a callback URL to paste into that terminal." />
       </div> : null}
       {approve.isError ? <p role="alert" className="text-sm text-destructive">{approve.error.message}</p> : null}
       <div className="flex gap-3">

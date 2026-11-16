@@ -46,7 +46,7 @@ impl Fixture {
                     password_hash: PasswordService::default()
                         .hash("correct horse battery")
                         .unwrap(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "General".to_owned(),
                 },
                 now,
@@ -597,7 +597,7 @@ async fn versions_follow_page_visibility() {
 #[tokio::test]
 async fn versions_are_isolated_between_workspaces() {
     let fixture = Fixture::new().await;
-    let page = fixture.create(json!({"title": "Orbit only"})).await;
+    let page = fixture.create(json!({"title": "lukethomas only"})).await;
     let version_id = fixture
         .insert_version(id_of(&page), "Before", TimestampMillis::now().as_millis())
         .await;

@@ -24,13 +24,13 @@ use crate::export::{ExportEntry, ExportLimits, compressed_type, plan, zip_time};
 use crate::repositories::page_export::{PageExportError, PageExportRepository};
 
 pub(super) const README: &str = "\
-Orbit workspace export
+lukethomas workspace export
 ======================
 
 All JSON field names are snake_case and stable. Times are RFC 3339 in UTC. Every record has
-the \"id\" it has in Orbit, so another Orbit instance can import the archive more than once
+the \"id\" it has in lukethomas, so another lukethomas instance can import the archive more than once
 without duplicates. People appear as {\"id\", \"name\"}; their email and role are in
-workspace.json. Chat and comment text keeps Orbit's mention tokens (<@user-id>,
+workspace.json. Chat and comment text keeps lukethomas's mention tokens (<@user-id>,
 <#channel-id>, <!channel>, <!here>).
 
 manifest.json
@@ -60,7 +60,7 @@ pages/<Teamspace>/<Page>.md, pages/Private/<Page>.md
 pages/.../<Page>.blocknote.json
     The same page without loss, next to its .md file: id, parent_id, teamspace_id (null for
     a private page), title, icon, cover_url, position, created_by, created_at, updated_at,
-    content (Orbit's BlockNote document) and files. A file link in the content is
+    content (lukethomas's BlockNote document) and files. A file link in the content is
     /api/v1/workspaces/<workspace-id>/pages/<page-id>/files/<file-id>; \"files\" lists those
     files with their id, blob_id, name, media_type, size_bytes and path (the file in
     <Page>/assets/, or null when it could not be read from storage).

@@ -74,8 +74,8 @@ test('an account with two-factor sign-in continues with the code step', async ()
 })
 
 test('a refused sign-in says why and links back to sign in', async () => {
-  const { view } = setup(() => problem(403, 'registration_closed', 'Registration closed', 'There is no Orbit account for this email, and this server does not accept new accounts.'))
-  expect((await view.findByRole('alert')).textContent).toBe('There is no Orbit account for this email, and this server does not accept new accounts.')
+  const { view } = setup(() => problem(403, 'registration_closed', 'Registration closed', 'There is no lukethomas account for this email, and this server does not accept new accounts.'))
+  expect((await view.findByRole('alert')).textContent).toBe('There is no lukethomas account for this email, and this server does not accept new accounts.')
   expect(view.getByRole('heading', { name: 'Registration closed' })).toBeTruthy()
   expect(view.getByRole('link', { name: 'Back to sign in' }).getAttribute('href')).toBe('/login')
   expect(view.getByTestId('location').textContent).toBe('/login/callback')

@@ -16,7 +16,7 @@ export function linearImportErrorMessage(error: unknown): string {
       case 'linear_token_invalid':
         return 'Linear rejected this API key. Check that you copied the whole key and that it was not revoked.'
       case 'app_key_missing':
-        return 'Orbit is not ready to import from Linear yet. Ask the Orbit administrator to set the app key.'
+        return 'lukethomas is not ready to import from Linear yet. Ask the lukethomas administrator to set the app key.'
       case 'import_in_progress':
         return 'You already have an import running. Wait for it to finish or cancel it.'
       case 'linear_unavailable':

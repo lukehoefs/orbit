@@ -72,7 +72,7 @@ test('explains unreadable settings and missing views', () => {
       <ViewNotFound />
     </>,
   )
-  expect(view.getByText("This view has settings Orbit can't read. Update the view to reset them.")).toBeTruthy()
+  expect(view.getByText("This view has settings lukethomas can't read. Update the view to reset them.")).toBeTruthy()
   expect(view.getByText('View not found')).toBeTruthy()
   expect(view.getByRole('link', { name: 'Go to views' }).getAttribute('href')).toBe('/views')
 })

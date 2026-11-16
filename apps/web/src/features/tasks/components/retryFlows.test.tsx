@@ -56,7 +56,7 @@ test('workspace creation retry repeats form clearing and workspace selection', a
   const view = render(<WorkspaceSwitcher />, { wrapper: Wrapper })
   const user = userEvent.setup()
 
-  await user.click(view.getByRole('button', { name: 'Workspace: Orbit' }))
+  await user.click(view.getByRole('button', { name: 'Workspace: lukethomas' }))
   await user.click(view.getByRole('button', { name: 'Create workspace' }))
   await user.type(view.getByLabelText('New workspace'), 'Second')
   expect((view.getByLabelText('New workspace') as HTMLInputElement).value).toBe('Second')

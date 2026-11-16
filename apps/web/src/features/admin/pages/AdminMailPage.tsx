@@ -49,7 +49,7 @@ export function AdminMailPage() {
 function DomainsCard({ admin }: { admin: MailAdmin }) {
   const save = useSetAdminMail()
   return (
-    <SettingsCard title="Mail" description="Orbit receives mail for the verified domains of each workspace, through its own SMTP listener or through a mail provider." flush>
+    <SettingsCard title="Mail" description="lukethomas receives mail for the verified domains of each workspace, through its own SMTP listener or through a mail provider." flush>
       <div className="flex flex-col divide-y">
         <SettingsRow className="flex-nowrap">
           <span className="flex min-w-0 flex-1 items-center gap-1.5 text-[0.8125rem] font-medium text-foreground">
@@ -93,8 +93,8 @@ function DomainsCard({ admin }: { admin: MailAdmin }) {
             <span className="font-medium text-foreground">Mode</span>
             <span className="text-xs text-muted-foreground">
               {admin.mode === 'relay'
-                ? 'Relay: a trusted mail service receives the mail and sends it to Orbit, which uses its authentication results.'
-                : 'Direct: the MX record points to Orbit, which checks SPF, DKIM and DMARC itself.'}
+                ? 'Relay: a trusted mail service receives the mail and sends it to lukethomas, which uses its authentication results.'
+                : 'Direct: the MX record points to lukethomas, which checks SPF, DKIM and DMARC itself.'}
             </span>
           </div>
           <Badge variant="outline">{admin.mode === 'relay' ? 'Relay' : 'Direct'}</Badge>
@@ -134,7 +134,7 @@ function healthItems(admin: MailAdmin, hasProviders: boolean): HealthItem[] {
       label: 'Mail on this server',
       state: 'info',
       detail: 'The SMTP listener is off.',
-      fix: 'Add a mail provider above (no port 25 needed), or set ORBIT_MAIL_ENABLED=true and ORBIT_MAIL_HOSTNAME and restart Orbit. See the operations guide.',
+      fix: 'Add a mail provider above (no port 25 needed), or set ORBIT_MAIL_ENABLED=true and ORBIT_MAIL_HOSTNAME and restart lukethomas. See the operations guide.',
     }]
   }
   const { listener } = admin
@@ -147,11 +147,11 @@ function healthItems(admin: MailAdmin, hasProviders: boolean): HealthItem[] {
   if (!cert) {
     items.push(admin.mode === 'direct'
       ? { label: 'Certificate', state: 'error', detail: 'No certificate is loaded.', fix: 'Set ORBIT_MAIL_TLS_CERT and ORBIT_MAIL_TLS_KEY to PEM files that UID 65532 can read.' }
-      : { label: 'Certificate', state: 'info', detail: 'None: Orbit offers no STARTTLS. That is fine when the relay is on a private network.', fix: 'Optional in relay mode: set ORBIT_MAIL_TLS_CERT and ORBIT_MAIL_TLS_KEY.' })
+      : { label: 'Certificate', state: 'info', detail: 'None: lukethomas offers no STARTTLS. That is fine when the relay is on a private network.', fix: 'Optional in relay mode: set ORBIT_MAIL_TLS_CERT and ORBIT_MAIL_TLS_KEY.' })
   } else if (!cert.covers_hostname) {
-    items.push({ label: 'Certificate', state: 'error', detail: `Names ${cert.names.join(', ')}, not ${admin.hostname}.`, fix: `Get a certificate for ${admin.hostname}, for example with certbot. Orbit loads new files within a minute.` })
+    items.push({ label: 'Certificate', state: 'error', detail: `Names ${cert.names.join(', ')}, not ${admin.hostname}.`, fix: `Get a certificate for ${admin.hostname}, for example with certbot. lukethomas loads new files within a minute.` })
   } else if (cert.expires_soon) {
-    items.push({ label: 'Certificate', state: 'warning', detail: `Expires ${dateTime(cert.expires_at)}.`, fix: 'Renew it. Orbit loads the new files within a minute, without a restart.' })
+    items.push({ label: 'Certificate', state: 'warning', detail: `Expires ${dateTime(cert.expires_at)}.`, fix: 'Renew it. lukethomas loads the new files within a minute, without a restart.' })
   } else {
     items.push({ label: 'Certificate', state: 'ok', detail: `Covers ${admin.hostname}, expires ${dateTime(cert.expires_at)}.` })
   }
@@ -160,7 +160,7 @@ function healthItems(admin: MailAdmin, hasProviders: boolean): HealthItem[] {
       label: 'Client address',
       state: 'error',
       detail: `${listener.bridge_peers} ${listener.bridge_peers === 1 ? 'connection' : 'connections'} came from a Docker bridge address, so the real client address is lost.`,
-      fix: 'Set "userland-proxy": false in /etc/docker/daemon.json, or run Orbit with network_mode: host. Behind a load balancer, use PROXY protocol v2 and ORBIT_MAIL_PROXY_CIDRS.',
+      fix: 'Set "userland-proxy": false in /etc/docker/daemon.json, or run lukethomas with network_mode: host. Behind a load balancer, use PROXY protocol v2 and ORBIT_MAIL_PROXY_CIDRS.',
     })
   } else if (listener.last_peer_ip) {
     items.push({ label: 'Client address', state: 'ok', detail: `The last client was ${listener.last_peer_ip}.` })

@@ -32,7 +32,7 @@ export function AcceptInvitationPage() {
   const [password, setPassword] = useState('')
   if (!token) return <AuthMessage title="Invitation unavailable" detail="This invitation link is missing its token." />
   if (invitation.isError) return <AuthMessage title="Invitation unavailable" detail="This invitation could not be loaded. Try reopening the link, or ask the inviter for a new invitation." />
-  if (user.isError) return <AuthMessage title="Orbit is unavailable" detail="The server could not verify this session. Try reopening the invitation." />
+  if (user.isError) return <AuthMessage title="lukethomas is unavailable" detail="The server could not verify this session. Try reopening the invitation." />
   if (!invitation.data || user.isPending) return <AuthMessage title="Loading invitation" detail="Checking the invitation and your session." />
 
   const { email, workspace_name: workspaceName } = invitation.data

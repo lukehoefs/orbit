@@ -3,14 +3,14 @@ import { version as emojibaseVersion } from 'emojibase-data/package.json'
 import { version as twemojiVersion } from 'twemoji-assets/package.json'
 
 /**
- * Emoji show as Twemoji images, so they look the same on every device. The SVG files are served by Orbit itself
- * (`vite.config.ts` copies them from `twemoji-assets`): the production CSP has no CDN, and a self-hosted Orbit must work
+ * Emoji show as Twemoji images, so they look the same on every device. The SVG files are served by lukethomas itself
+ * (`vite.config.ts` copies them from `twemoji-assets`): the production CSP has no CDN, and a self-hosted lukethomas must work
  * without one. The paths are under `/assets` and carry the package version, so the server sends them as immutable: a
  * browser downloads each file once and then never asks again. Graphics © Twitter, Inc. and other contributors, CC-BY 4.0.
  */
 const TWEMOJI_PATH = `/assets/twemoji-${twemojiVersion}`
 
-/** The emoji data that the picker loads, also served by Orbit (from `emojibase-data`). */
+/** The emoji data that the picker loads, also served by lukethomas (from `emojibase-data`). */
 export const EMOJIBASE_PATH = `/assets/emojibase-${emojibaseVersion}`
 
 /**

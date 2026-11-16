@@ -11,7 +11,7 @@ afterEach(() => { globalThis.fetch = originalFetch })
 const STORAGE = { s3: null, attachments_in_s3: false, backups_in_s3: false, backup_schedule: 'off', files_to_move: 0, move_error: null }
 const LIMITS = { max_owned_workspaces: 10, workspace_storage_quota_bytes: 5_000_000_000 }
 const ENVIRONMENT: EnvironmentView = { registration_open: false, smtp: false, s3: false, attachments_in_s3: false, backups_in_s3: false, backup_schedule: false, s3_keep_deleted_days: false, sign_in_providers: [] }
-const SMTP = { host: 'smtp.example.com', port: 587, security: 'starttls', username: 'orbit', password_set: true, from_address: 'orbit@example.com', from_name: 'Orbit' }
+const SMTP = { host: 'smtp.example.com', port: 587, security: 'starttls', username: 'orbit', password_set: true, from_address: 'orbit@example.com', from_name: 'lukethomas' }
 
 test('saving with an empty password field keeps the saved password', async () => {
   const bodies: unknown[] = []
@@ -48,16 +48,16 @@ function renderSaved(billingEnabled: boolean, environment: EnvironmentView = ENV
   return render(<QueryClientProvider client={client}><AdminEmailPage /></QueryClientProvider>)
 }
 
-test('Orbit Cloud offers no Remove and says why', async () => {
+test('lukethomas Cloud offers no Remove and says why', async () => {
   const view = renderSaved(true)
-  expect(await view.findByText('Orbit Cloud needs a mail server. Save a different one instead.')).toBeTruthy()
+  expect(await view.findByText('lukethomas Cloud needs a mail server. Save a different one instead.')).toBeTruthy()
   expect(view.queryByRole('button', { name: 'Remove' })).toBeNull()
 })
 
 test('a self-hosted server can remove its mail server', async () => {
   const view = renderSaved(false)
   expect(await view.findByRole('button', { name: 'Remove' })).toBeTruthy()
-  expect(view.queryByText('Orbit Cloud needs a mail server. Save a different one instead.')).toBeNull()
+  expect(view.queryByText('lukethomas Cloud needs a mail server. Save a different one instead.')).toBeNull()
 })
 
 test('a mail server set by the environment is read-only, and the test email still works', async () => {

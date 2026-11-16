@@ -160,7 +160,7 @@ export function usePasskeyLogin() {
 
 /**
  * Leaves for the provider's sign-in page. `connect` and `confirm` apply to the signed-in account; `return_to` is an
- * Orbit path that comes back with the handoff.
+ * lukethomas path that comes back with the handoff.
  */
 export function useStartProviderSignIn() {
   return useMutation({

@@ -1,6 +1,6 @@
 import { en } from '@blocknote/core/locales'
 
-/** Placeholders of Orbit's comment fields (BlockNote reads them from the page editor's dictionary). */
+/** Placeholders of lukethomas's comment fields (BlockNote reads them from the page editor's dictionary). */
 export const COMMENT_PLACEHOLDERS = {
   new_comment: 'Add a comment… Use @ to mention',
   comment_reply: 'Reply…',

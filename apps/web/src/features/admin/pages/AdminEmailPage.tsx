@@ -39,7 +39,7 @@ export function AdminEmailPage() {
 
 function EmailCard({ smtp, locked }: { smtp: SmtpView | null; locked: boolean }) {
   const currentUser = useCurrentUser()
-  // Orbit Cloud always needs a mail server: it can be replaced, not removed.
+  // lukethomas Cloud always needs a mail server: it can be replaced, not removed.
   const cloud = useAuthOptions().data?.billing_enabled ?? false
   const save = useSaveSmtp()
   const remove = useRemoveSmtp()
@@ -75,7 +75,7 @@ function EmailCard({ smtp, locked }: { smtp: SmtpView | null; locked: boolean })
   async function removeServer() {
     const confirmed = await confirmAction({
       title: 'Remove the mail server?',
-      description: 'Orbit stops sending invitations and password reset links by email, and registration closes.',
+      description: 'lukethomas stops sending invitations and password reset links by email, and registration closes.',
       confirmLabel: 'Remove',
       danger: true,
     })
@@ -90,7 +90,7 @@ function EmailCard({ smtp, locked }: { smtp: SmtpView | null; locked: boolean })
     <form onSubmit={submit}>
       <SettingsCard
         title="Email"
-        description="The SMTP server for invitations, sign-up links, password reset links and email changes. Orbit sends no other email."
+        description="The SMTP server for invitations, sign-up links, password reset links and email changes. lukethomas sends no other email."
         actions={smtp ? (
           <>
             <Button type="button" variant="outline" disabled={test.isPending} onClick={() => test.mutate(undefined, {
@@ -138,12 +138,12 @@ function EmailCard({ smtp, locked }: { smtp: SmtpView | null; locked: boolean })
           </Field>
           <Field>
             <FieldLabel htmlFor="smtp-from-name">From name</FieldLabel>
-            <Input id="smtp-from-name" placeholder="Orbit" disabled={locked} value={draft.from_name} onChange={set('from_name')} />
+            <Input id="smtp-from-name" placeholder="lukethomas" disabled={locked} value={draft.from_name} onChange={set('from_name')} />
           </Field>
         </FieldGrid>
         <div className="mt-4 flex items-center justify-end gap-3">
           {locked ? <SetByEnvironment variable="ORBIT_SMTP_*" className="mr-auto" /> : null}
-          {cloud && smtp && !locked ? <p className="mr-auto text-xs text-muted-foreground">Orbit Cloud needs a mail server. Save a different one instead.</p> : null}
+          {cloud && smtp && !locked ? <p className="mr-auto text-xs text-muted-foreground">lukethomas Cloud needs a mail server. Save a different one instead.</p> : null}
           <Button type="submit" disabled={locked || save.isPending}>{save.isPending ? 'Saving…' : 'Save mail settings'}</Button>
         </div>
       </SettingsCard>

@@ -2,7 +2,7 @@
 //!
 //! The caller fetches a page's block tree, downloads its Notion-hosted files
 //! ([`collect_file_refs`]), creates Orbit pages, and then converts with a [`Resolver`] that
-//! answers "which Orbit page is this Notion page?" and "which Orbit URL has this file?".
+//! answers "which lukethomas page is this Notion page?" and "which lukethomas URL has this file?".
 //!
 //! Output follows Orbit's editor schema (`apps/web/src/features/docs/editor/schema.ts`,
 //! BlockNote 0.55 default blocks + the custom `page` and `callout` blocks): every block is
@@ -1054,7 +1054,7 @@ fn non_empty_title(title: &str) -> String {
 }
 
 pub(crate) const TRUNCATION_NOTE: &str =
-    "The rest of this page was not imported because it is larger than Orbit's page size limit.";
+    "The rest of this page was not imported because it is larger than lukethomas's page size limit.";
 
 /// Keeps whole top-level blocks while the serialized content fits `max_content_bytes`.
 fn truncate(content: &mut Vec<Value>, ctx: &mut ConvertContext<'_>) {

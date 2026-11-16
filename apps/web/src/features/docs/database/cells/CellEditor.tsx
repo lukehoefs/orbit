@@ -221,7 +221,7 @@ function ChoiceEditor({ property, row, anchor, onCommit, onOptions, onClose }: C
   const list = options(property)
   const trimmed = query.trim()
   const search = trimmed.toLowerCase()
-  // Orbit filters, not cmdk: cmdk hides a group with no matching option, and the Create row with it.
+  // lukethomas filters, not cmdk: cmdk hides a group with no matching option, and the Create row with it.
   const shown = search === '' ? list : list.filter((option) => option.name.toLowerCase().includes(search))
   const canCreate = onOptions && trimmed !== '' && !list.some((option) => option.name.toLowerCase() === search)
   const onOpenChange = usePopoverClose(anchor, onClose)

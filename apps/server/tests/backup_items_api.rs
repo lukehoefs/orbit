@@ -60,7 +60,7 @@ impl Fixture {
                     password_hash: PasswordService::default()
                         .hash("correct horse battery")
                         .unwrap(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "General".to_owned(),
                 },
                 now,
@@ -455,7 +455,7 @@ async fn lists_the_workspaces_and_items_of_a_backup() {
     assert_eq!(status, StatusCode::OK, "{workspaces}");
     assert_eq!(
         workspaces["items"],
-        json!([{"id": fixture.workspace_id, "name": "Orbit", "live": true}])
+        json!([{"id": fixture.workspace_id, "name": "lukethomas", "live": true}])
     );
 
     let items_uri = format!("{}/items", fixture.backup_uri(&backup));

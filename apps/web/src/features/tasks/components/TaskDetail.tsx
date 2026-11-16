@@ -79,7 +79,7 @@ export function TaskDetail({ task, project, state, onClose, onOpenTask, onOpenPr
   const githubLinks = useTaskGithubLinks(workspace.id, task?.id)
   const workspaceReadOnly = useWorkspaceReadOnly()
   const githubContentReadOnly = !githubLinks.isSuccess || githubLinks.data.some((link) => link.source)
-  // Orbit Cloud without a subscription: the description socket drops edits, so offer none.
+  // lukethomas Cloud without a subscription: the description socket drops edits, so offer none.
   const contentReadOnly = githubContentReadOnly || workspaceReadOnly
   const githubSyncPaused = githubLinks.data?.some((link) => link.source && link.state === 'paused')
   const githubPullRequests = githubLinks.data?.filter((link) => link.kind === 'pull_request' && !link.source) ?? []

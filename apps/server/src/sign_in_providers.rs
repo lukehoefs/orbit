@@ -205,7 +205,7 @@ impl ProviderClient {
             .redirect(reqwest::redirect::Policy::none())
             .connect_timeout(Duration::from_secs(10))
             .timeout(Duration::from_secs(20))
-            .user_agent("Orbit")
+            .user_agent("lukethomas")
             .build()
             .expect("the provider HTTP client builds");
         Self { http, endpoints }
@@ -512,7 +512,7 @@ fn display_name(name: Option<&str>, email: Option<&str>) -> String {
         .filter(|name| !name.is_empty())
         .or_else(|| email.and_then(|email| email.split('@').next()))
         .filter(|name| !name.is_empty())
-        .unwrap_or("Orbit user");
+        .unwrap_or("lukethomas user");
     name.chars().take(100).collect()
 }
 
@@ -621,7 +621,7 @@ mod tests {
     fn new_accounts_get_a_short_non_empty_name() {
         assert_eq!(display_name(Some("  Ada Lovelace "), None), "Ada Lovelace");
         assert_eq!(display_name(Some(" "), Some("ada@example.com")), "ada");
-        assert_eq!(display_name(None, None), "Orbit user");
+        assert_eq!(display_name(None, None), "lukethomas user");
         assert_eq!(display_name(Some(&"x".repeat(300)), None).len(), 100);
     }
 

@@ -34,7 +34,7 @@ export function ViewChanges({ controller, onSaveAsNew }: ViewChangesProps) {
       // a 409 resolves and sets `controller.conflict`, which opens the conflict dialog with the edits kept
       await controller.save(overwrite ? { overwrite: true } : undefined)
     } catch (error) {
-      toast.error(error instanceof ApiProblem ? error.detail : "Orbit couldn't update the view. Try again.")
+      toast.error(error instanceof ApiProblem ? error.detail : "lukethomas couldn't update the view. Try again.")
     } finally {
       savingRef.current = false
       setSaving(false)

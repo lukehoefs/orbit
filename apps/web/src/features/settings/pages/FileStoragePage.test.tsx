@@ -65,8 +65,8 @@ test('an admin saves the workspace bucket and sees the files move to it', async 
 test('a removed bucket shows the files moving back and offers no second removal', async () => {
   globalThis.fetch = mock(async (input: RequestInfo | URL, init?: RequestInit) => isUsage(input, init) ? Response.json(USAGE) : Response.json({ s3: S3, removing: true, checking: false, files_to_move: 1, move_error: 'access denied.' })) as unknown as typeof fetch
   const { view } = renderPage('owner')
-  await waitFor(() => expect(view.getByRole('status').textContent).toBe("1 file left to move back to Orbit's storage."))
-  expect(view.getByRole('alert').textContent).toBe('Moving files stopped: access denied. Orbit tries again every ten minutes.')
+  await waitFor(() => expect(view.getByRole('status').textContent).toBe("1 file left to move back to lukethomas's storage."))
+  expect(view.getByRole('alert').textContent).toBe('Moving files stopped: access denied. lukethomas tries again every ten minutes.')
   expect(view.queryAllByRole('button', { name: 'Remove' })).toHaveLength(0)
 })
 

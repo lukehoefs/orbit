@@ -11,7 +11,7 @@ import { testWorkspace } from '@/test/workspace'
 import { NO_MEMBER_ABILITIES } from '@/features/workspaces/models'
 
 const author: User = {
-  id: 'user-1', membershipId: 'm1', name: 'Orbit Developers', handle: 'orbit', email: 'dev@orbit.test',
+  id: 'user-1', membershipId: 'm1', name: 'lukethomas Developers', handle: 'orbit', email: 'dev@orbit.test',
   role: 'Owner', color: '#4ade80', title: '', roleIds: [], can: NO_MEMBER_ABILITIES, version: 1,
 }
 
@@ -40,9 +40,9 @@ function state(overrides: Partial<TaskViewState> = {}): TaskViewState {
 test('comment header keeps author name and timestamp as separate text', () => {
   const view = render(<CommentItem state={state()} taskId="task-1" comment={comment()} />, { wrapper: wrapper() })
 
-  expect(view.getByText('Orbit Developers')).toBeTruthy()
+  expect(view.getByText('lukethomas Developers')).toBeTruthy()
   expect(view.getByText('just now')).toBeTruthy()
-  expect(view.container.textContent).not.toContain('Orbit Developersjust now')
+  expect(view.container.textContent).not.toContain('lukethomas Developersjust now')
 })
 
 test('author comments expose compact copy, edit, and delete actions', () => {
@@ -162,7 +162,7 @@ test('a comment from a service account names the service account, not the member
     { wrapper: wrapper() },
   )
   expect(view.getAllByText('CI bot').length).toBeGreaterThan(0)
-  expect(view.queryAllByText('Orbit Developers').length).toBe(0)
+  expect(view.queryAllByText('lukethomas Developers').length).toBe(0)
   expect(view.queryAllByRole('button', { name: 'Edit comment' }).length).toBe(0)
 })
 
@@ -171,5 +171,5 @@ test('an empty service account name falls back to the author name', () => {
     <CommentItem state={state()} taskId="task-1" comment={comment({ authorServiceAccountName: '' })} />,
     { wrapper: wrapper() },
   )
-  expect(view.getAllByText('Orbit Developers').length).toBeGreaterThan(0)
+  expect(view.getAllByText('lukethomas Developers').length).toBeGreaterThan(0)
 })

@@ -239,7 +239,7 @@ pub(super) async fn start_provider_sign_in(
     {
         return Err(unprocessable(
             "invalid_return_to",
-            "return_to must be a path in Orbit.",
+            "return_to must be a path in lukethomas.",
             START,
             rid,
         ));
@@ -474,19 +474,19 @@ fn refusal_problem(refusal: SignInRefusal, request_id: Option<&Extension<Request
             StatusCode::FORBIDDEN,
             "registration_closed",
             "Registration closed",
-            "There is no Orbit account for this email, and this server does not accept new accounts.",
+            "There is no lukethomas account for this email, and this server does not accept new accounts.",
         ),
         SignInRefusal::IdentityConflict => (
             StatusCode::CONFLICT,
             "identity_conflict",
             "Another account is connected",
-            "The Orbit account with this email is connected to another account at this provider.",
+            "The lukethomas account with this email is connected to another account at this provider.",
         ),
         SignInRefusal::AccountEmailUnverified => (
             StatusCode::FORBIDDEN,
             "account_email_unverified",
             "Email not confirmed",
-            "The Orbit account with this email has not confirmed it yet. Sign in with your password, then connect this provider in Account settings → Security.",
+            "The lukethomas account with this email has not confirmed it yet. Sign in with your password, then connect this provider in Account settings → Security.",
         ),
         SignInRefusal::Suspended => (
             StatusCode::FORBIDDEN,
@@ -746,7 +746,7 @@ async fn password_challenge(
             StatusCode::FORBIDDEN,
             "link_needs_sign_in",
             "Account already exists",
-            "An Orbit account with this email already exists. Sign in to it another way, then connect this provider in Account settings → Security.",
+            "An lukethomas account with this email already exists. Sign in to it another way, then connect this provider in Account settings → Security.",
             EXCHANGE,
             rid,
         ));
@@ -922,7 +922,7 @@ fn identity_change_problem(
             StatusCode::CONFLICT,
             "identity_in_use",
             "Account in use",
-            "This provider account is connected to another Orbit account.",
+            "This provider account is connected to another lukethomas account.",
         ),
         IdentityChangeError::AlreadyConnected => (
             StatusCode::CONFLICT,
@@ -934,7 +934,7 @@ fn identity_change_problem(
             StatusCode::FORBIDDEN,
             "identity_mismatch",
             "Different account",
-            "Sign in with the provider account that is connected to your Orbit account.",
+            "Sign in with the provider account that is connected to your lukethomas account.",
         ),
         IdentityChangeError::LastSignInMethod => {
             return last_sign_in_method(EXCHANGE, rid);

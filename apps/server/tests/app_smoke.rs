@@ -103,7 +103,7 @@ async fn embedded_spa_uses_safe_cache_policies_and_never_masks_api_404s() {
     assert!(
         String::from_utf8(spa.into_body().collect().await.unwrap().to_bytes().to_vec())
             .unwrap()
-            .contains("<title>Orbit</title>")
+            .contains("<title>lukethomas</title>")
     );
 
     let manifest = router

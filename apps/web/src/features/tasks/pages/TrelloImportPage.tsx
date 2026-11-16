@@ -42,7 +42,7 @@ const TITLE = 'Import from Trello'
 
 /** Trello's authorization page for a read-only token that expires in a day, for the given API key. */
 function tokenUrl(key: string): string {
-  return `https://trello.com/1/authorize?expiration=1day&scope=read&response_type=token&name=Orbit&key=${encodeURIComponent(key)}`
+  return `https://trello.com/1/authorize?expiration=1day&scope=read&response_type=token&name=lukethomas&key=${encodeURIComponent(key)}`
 }
 
 function plural(count: number, one: string, many: string): string {
@@ -97,7 +97,7 @@ function ConnectStep({ workspaceId }: { workspaceId: string }) {
           <TitleTip
             as="h2"
             title="Connect Trello"
-            text="Orbit needs an API key and a token. It keeps both encrypted only until the import finishes."
+            text="lukethomas needs an API key and a token. It keeps both encrypted only until the import finishes."
             className="text-sm font-semibold text-foreground"
           />
           <form className="flex flex-col gap-4" onSubmit={(event) => void submit(event)} autoComplete="off">
@@ -113,7 +113,7 @@ function ConnectStep({ workspaceId }: { workspaceId: string }) {
                 </li>
                 <li>
                   Choose <span className="font-medium text-foreground">My app doesn’t use Power-up capabilities</span>, type a name (for
-                  example “Orbit import”), pick your Trello workspace, fill in your email, and click{' '}
+                  example “lukethomas import”), pick your Trello workspace, fill in your email, and click{' '}
                   <span className="font-medium text-foreground">Create</span>.
                 </li>
                 <li>
@@ -225,7 +225,7 @@ function useCancel(workspaceId: string, item: TrelloImport) {
       title: started ? 'Cancel the import?' : 'Cancel this import?',
       description: started
         ? 'Projects and cards already imported stay. The import stops before the next card.'
-        : 'Orbit deletes the Trello key and token. You can start a new import at any time.',
+        : 'lukethomas deletes the Trello key and token. You can start a new import at any time.',
       confirmLabel: 'Cancel import',
       cancelLabel: 'Keep going',
       danger: true,
@@ -353,7 +353,7 @@ function BoardChooser({ workspaceId, item, tree }: { workspaceId: string; item: 
       </div>
       <div className="flex flex-wrap items-center gap-3 border-t border-border px-3 py-3">
         <p className="min-w-0 flex-1 text-xs text-muted-foreground">
-          Each board becomes a new Orbit project. Its open lists become statuses, and its open cards become tasks with their labels,
+          Each board becomes a new lukethomas project. Its open lists become statuses, and its open cards become tasks with their labels,
           checklists, comments and files. Nobody is notified.
         </p>
         <div className="flex flex-col items-end gap-1.5">
@@ -436,7 +436,7 @@ function ImportingStep({ workspaceId, item }: { workspaceId: string; item: Trell
             </Button>
           </div>
           <p className="text-sm text-muted-foreground">
-            You can leave this page; the import continues on the server. Trello limits how fast Orbit can read, so large boards take a
+            You can leave this page; the import continues on the server. Trello limits how fast lukethomas can read, so large boards take a
             while.
           </p>
         </section>
@@ -464,7 +464,7 @@ function ResultStep({ workspaceId, item }: { workspaceId: string; item: TrelloIm
     if (report.links_added > 0) notes.push(`${plural(report.links_added, 'link attachment was', 'link attachments were')} added to card descriptions.`)
     if (report.unmatched_members > 0)
       notes.push(
-        `${plural(report.unmatched_members, 'card member has', 'card members have')} no Orbit member of the same full name; the card description names them. Assign them to a member in Settings → Import.`,
+        `${plural(report.unmatched_members, 'card member has', 'card members have')} no lukethomas member of the same full name; the card description names them. Assign them to a member in Settings → Import.`,
       )
     if (report.archived_lists_skipped > 0)
       notes.push(

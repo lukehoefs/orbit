@@ -14,7 +14,7 @@ use super::{Delivery, InboundError, SpfHeaderOwned, SpfSource, address, fresh, v
 
 /// The Email Worker the admin pastes into Cloudflare, with the Worker variables
 /// `ORBIT_WEBHOOK_URL` and `ORBIT_SIGNING_SECRET` (a secret).
-pub const WORKER_SCRIPT: &str = r#"// Orbit mail: forwards each message to Orbit.
+pub const WORKER_SCRIPT: &str = r#"// lukethomas mail: forwards each message to lukethomas.
 // Variables: ORBIT_WEBHOOK_URL, and the secret ORBIT_SIGNING_SECRET.
 const hex = (bytes) => [...new Uint8Array(bytes)].map((b) => b.toString(16).padStart(2, "0")).join("");
 
@@ -50,7 +50,7 @@ export default {
       message.setReject("Message too large");
       return;
     }
-    // Anything else (Orbit down, a storage error): a temporary failure, so the sender retries.
+    // Anything else (lukethomas down, a storage error): a temporary failure, so the sender retries.
     throw new Error("Orbit answered " + response.status);
   },
 };

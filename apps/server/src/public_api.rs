@@ -582,7 +582,7 @@ impl Responder {
                 StatusCode::LOCKED,
                 "page_locked",
                 "Doc locked",
-                "The doc is locked. Unlock it in Orbit to change its title, icon or content.",
+                "The doc is locked. Unlock it in lukethomas to change its title, icon or content.",
             ),
             PageError::Busy => (
                 StatusCode::SERVICE_UNAVAILABLE,

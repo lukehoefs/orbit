@@ -29,7 +29,7 @@ pub(super) fn relying_party(public_origin: &str) -> Option<Webauthn> {
     let host = origin.domain()?.to_owned();
     WebauthnBuilder::new(&host, &origin)
         .ok()?
-        .rp_name("Orbit")
+        .rp_name("lukethomas")
         .build()
         .ok()
 }
@@ -49,7 +49,7 @@ fn unavailable(instance: &'static str, request_id: Option<&Extension<RequestId>>
         StatusCode::CONFLICT,
         "passkeys_unavailable",
         "Passkeys are not available",
-        "Passkeys need Orbit to be opened at a domain name, not an IP address.",
+        "Passkeys need lukethomas to be opened at a domain name, not an IP address.",
         instance,
         request_id,
     )

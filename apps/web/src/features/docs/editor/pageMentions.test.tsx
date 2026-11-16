@@ -31,18 +31,18 @@ const BOB = '0199a0b0-0000-7000-8000-0000000000b2'
 const GONE = '0199a0b0-0000-7000-8000-0000000000ff'
 
 const members: PageMentionMember[] = [
-  { id: ME, name: 'Orbit Owner', handle: 'test', email: 'test@example.com' },
+  { id: ME, name: 'lukethomas Owner', handle: 'test', email: 'test@example.com' },
   { id: ANN, name: 'Ann Lee', handle: 'ann', email: 'ann@example.com' },
   { id: BOB, name: 'Bob Stone', handle: 'bstone', email: 'bob@corp.test', suspended: true },
-  { id: '0199a0b0-0000-7000-8000-0000000000c3', name: 'Orbit Member', handle: 'member', email: 'member@example.com' },
+  { id: '0199a0b0-0000-7000-8000-0000000000c3', name: 'lukethomas Member', handle: 'member', email: 'member@example.com' },
 ]
 
 describe('who "@" offers', () => {
   test('a teamspace page offers every active member, yourself last', () => {
     expect(pageMentionCandidates(members, { teamspace_id: 'ts' }, ME).map((member) => member.name)).toEqual([
       'Ann Lee',
-      'Orbit Member',
-      'Orbit Owner',
+      'lukethomas Member',
+      'lukethomas Owner',
     ])
   })
 
@@ -53,7 +53,7 @@ describe('who "@" offers', () => {
 
   test('filters by name, handle or email, case-insensitively, at most 10', () => {
     const candidates = pageMentionCandidates(members, { teamspace_id: 'ts' }, ME)
-    expect(filterPageMentionCandidates(candidates, 'orb').map((member) => member.name)).toEqual(['Orbit Member', 'Orbit Owner'])
+    expect(filterPageMentionCandidates(candidates, 'orb').map((member) => member.name)).toEqual(['lukethomas Member', 'lukethomas Owner'])
     expect(filterPageMentionCandidates(candidates, 'ANN').map((member) => member.id)).toEqual([ANN])
     expect(filterPageMentionCandidates(candidates, 'example.com').length).toBe(3)
     expect(filterPageMentionCandidates(candidates, 'bob')).toEqual([])
@@ -69,7 +69,7 @@ describe('who "@" offers', () => {
     shared[0].onItemClick()
     expect(insert).toHaveBeenCalledWith(members[1])
     const own = pageMentionItems({ candidates: [members[0]], privatePage: true }, '', insert)
-    expect(own.map((item) => [item.title, item.group])).toEqual([['Orbit Owner', PRIVATE_PAGE_HINT]])
+    expect(own.map((item) => [item.title, item.group])).toEqual([['lukethomas Owner', PRIVATE_PAGE_HINT]])
   })
 })
 

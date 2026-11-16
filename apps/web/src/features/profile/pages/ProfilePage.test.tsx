@@ -75,7 +75,7 @@ test('profile shows the email read-only with a Change button, and no 2FA', async
 
 test('without a mail server the email cannot be changed and the page says why', async () => {
   const { view } = setup(undefined, { options: { ...OPTIONS, email_enabled: false } })
-  expect(await view.findByText('This Orbit cannot send email, so the email cannot be changed. Ask an administrator.')).toBeTruthy()
+  expect(await view.findByText('This lukethomas cannot send email, so the email cannot be changed. Ask an administrator.')).toBeTruthy()
   expect(view.queryAllByRole('button', { name: 'Change' })).toHaveLength(0)
 })
 
@@ -210,7 +210,7 @@ test('an owner of workspaces is told which ones to delete first', async () => {
   const alpha = await view.findByRole('link', { name: 'Alpha' })
   expect(alpha.getAttribute('href')).toBe('/settings/danger-zone?workspace=w-1')
   expect(view.getByRole('link', { name: 'Beta' })).toBeTruthy()
-  expect(view.getByText('Delete them first in Workspace settings → Danger zone. Ownership transfer is not available on Orbit Cloud.')).toBeTruthy()
+  expect(view.getByText('Delete them first in Workspace settings → Danger zone. Ownership transfer is not available on lukethomas Cloud.')).toBeTruthy()
 })
 
 test('the root account has no delete button', () => {

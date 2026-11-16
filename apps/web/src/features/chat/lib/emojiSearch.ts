@@ -62,7 +62,7 @@ export function emojiNamed(index: readonly EmojiShortcode[], name: string): stri
 
 let loading: Promise<EmojiShortcode[]> | null = null
 
-/** Loads the index once, from Orbit's own copy of the emoji data. A failed load can be tried again. */
+/** Loads the index once, from lukethomas's own copy of the emoji data. A failed load can be tried again. */
 export function loadEmojiIndex(): Promise<EmojiShortcode[]> {
   loading ??= Promise.all([
     fetch(`${EMOJIBASE_PATH}/en/data.json`).then((response) => response.json() as Promise<EmojibaseEmoji[]>),

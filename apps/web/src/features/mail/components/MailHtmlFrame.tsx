@@ -6,7 +6,7 @@ import { FRAME_MIN_HEIGHT, frameHeight } from '@/features/mail/mailLib'
 
 /**
  * A message's HTML in a sandboxed frame (spec §6.5). Without `allow-same-origin` the frame has an opaque origin: it
- * cannot read Orbit's cookies, storage or this page. Its one script posts the content height; only a finite number
+ * cannot read lukethomas's cookies, storage or this page. Its one script posts the content height; only a finite number
  * from this frame's own window sets the height (80–20,000 px).
  */
 export function MailHtmlFrame({ messageId, loadImages, title }: { messageId: string; loadImages: boolean; title: string }) {

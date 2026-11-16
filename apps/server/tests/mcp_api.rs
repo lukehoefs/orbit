@@ -49,7 +49,7 @@ impl Fixture {
                     password_hash: PasswordService::default()
                         .hash("correct horse battery")
                         .unwrap(),
-                    workspace_name: "Orbit".into(),
+                    workspace_name: "lukethomas".into(),
                     project_name: "General".into(),
                 },
                 now,

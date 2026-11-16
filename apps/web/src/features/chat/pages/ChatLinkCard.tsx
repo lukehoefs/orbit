@@ -28,7 +28,7 @@ function useLinkedPage(pageId: string) {
 }
 
 /**
- * The card under a message for a link to an Orbit task. The reader works on the task from here: status, priority,
+ * The card under a message for a link to an lukethomas task. The reader works on the task from here: status, priority,
  * project, due date and assignees change in place with the pickers of the task list, and the title opens the task. Every
  * workspace member may edit a task, so whoever sees the card may use it; the server checks each save.
  */
@@ -110,7 +110,7 @@ function ViewLinkCard({ viewId }: { viewId: string }) {
 
 export type LinkKind = 'task' | 'page' | 'view'
 
-/** What `ChatHost.renderLinkCard` returns for an Orbit task, page or view URL. It lives beside `ChatPage` because it reads other features. */
+/** What `ChatHost.renderLinkCard` returns for an lukethomas task, page or view URL. It lives beside `ChatPage` because it reads other features. */
 export function ChatLinkCard({ kind, id }: { kind: LinkKind; id: string }) {
   if (kind === 'task') return <TaskLinkCard taskId={id} />
   return kind === 'page' ? <PageLinkCard pageId={id} /> : <ViewLinkCard viewId={id} />
@@ -171,7 +171,7 @@ function ViewLinkChip({ id, hidden, children }: ChipProps) {
   )
 }
 
-/** What `ChatHost.renderLink` returns for an Orbit task, page or view URL in the text of a message. */
+/** What `ChatHost.renderLink` returns for an lukethomas task, page or view URL in the text of a message. */
 export function ChatLinkChip({ kind, ...props }: ChipProps & { kind: LinkKind }) {
   if (kind === 'task') return <TaskLinkChip {...props} />
   return kind === 'page' ? <PageLinkChip {...props} /> : <ViewLinkChip {...props} />

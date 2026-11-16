@@ -111,7 +111,7 @@ function TreeEditor({ open, filter, options, onApply, validate, onClose }: TreeE
       try {
         serverIssue = await validate(draft)
       } catch {
-        serverIssue = { path: 'filter', message: "Orbit couldn't check this filter. Try again." }
+        serverIssue = { path: 'filter', message: "lukethomas couldn't check this filter. Try again." }
       }
       if (!active.current) return
       setChecking(false)

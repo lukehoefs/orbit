@@ -147,7 +147,7 @@ pub(super) async fn request_email_change(
             StatusCode::CONFLICT,
             "mail_unavailable",
             "Email is not set up",
-            "This Orbit cannot send email, so the email cannot be changed. Ask an administrator.",
+            "This lukethomas cannot send email, so the email cannot be changed. Ask an administrator.",
             CHANGE_EMAIL,
             rid,
         ));

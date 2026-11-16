@@ -36,7 +36,7 @@ async fn seed(database: &Database, now: i64) -> Seed {
     // A workspace and its owner membership reference each other (deferred foreign key), so both
     // go in one transaction.
     for (workspace, owner, name) in [
-        (seed.workspace, seed.owner, "Orbit"),
+        (seed.workspace, seed.owner, "lukethomas"),
         (foreign_workspace, seed.outsider, "Other"),
     ] {
         let membership = Id::new_v7();

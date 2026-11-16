@@ -56,7 +56,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
 }
 
 /**
- * Orbit Cloud: the first screen waits for the billing state, so the trial or read-only line above the top bar is
+ * lukethomas Cloud: the first screen waits for the billing state, so the trial or read-only line above the top bar is
  * there from the start and does not push the page down when it arrives. A failed request does not hold the app.
  */
 function BillingReady({ children }: { children: ReactNode }) {

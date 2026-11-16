@@ -5,7 +5,7 @@ const workspace = (workspaceId: string) => ['workspace', workspaceId] as const
 export const queryKeys = {
   setup: ['setup-status'] as const,
   currentUser: ['current-user'] as const,
-  /** Orbit Cloud: the caller's trial, which every workspace they create shares. */
+  /** lukethomas Cloud: the caller's trial, which every workspace they create shares. */
   accountTrial: ['account-trial'] as const,
   sessions: ['sessions'] as const,
   /** Whether the authenticator app is on and how many recovery codes are left. */
@@ -44,7 +44,7 @@ export const queryKeys = {
   importPeople: (workspaceId: string) => [...workspace(workspaceId), 'import-people'] as const,
   /** Full workspace exports (ZIP archives) that have not expired. */
   workspaceExports: (workspaceId: string) => [...workspace(workspaceId), 'exports'] as const,
-  /** Orbit Cloud: the workspace's subscription and access. */
+  /** lukethomas Cloud: the workspace's subscription and access. */
   billing: (workspaceId: string) => [...workspace(workspaceId), 'billing'] as const,
   /** Bytes of files the workspace stores, and its quota. */
   workspaceStorage: (workspaceId: string) => [...workspace(workspaceId), 'storage'] as const,

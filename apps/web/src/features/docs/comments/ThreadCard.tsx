@@ -1,4 +1,4 @@
-// Orbit's comment thread card (Comments panel and the floating thread) and the new-comment card. They replace
+// lukethomas's comment thread card (Comments panel and the floating thread) and the new-comment card. They replace
 // BlockNote's stock comment UI but keep its data flow: threads come from the comments extension's thread store,
 // bodies are comment-editor BlockNote documents (mentions, formatting), saves go through `CommentEditorSubmitExtension`.
 import { memo, use, useRef, useState, type KeyboardEvent, type MouseEvent } from 'react'

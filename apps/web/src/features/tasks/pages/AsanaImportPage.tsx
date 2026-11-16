@@ -77,8 +77,8 @@ function ConnectStep({ workspaceId }: { workspaceId: string }) {
               <a className="text-primary underline underline-offset-2" href={TOKEN_URL} target="_blank" rel="noreferrer noopener">
                 {TOKEN_URL}
               </a>
-              , choose <span className="font-medium text-foreground">Create new token</span>, name it (for example “Orbit import”) and copy it. The
-              token can read everything you can see in Asana. Orbit keeps it encrypted only until the import finishes; you can delete it in Asana
+              , choose <span className="font-medium text-foreground">Create new token</span>, name it (for example “lukethomas import”) and copy it. The
+              token can read everything you can see in Asana. lukethomas keeps it encrypted only until the import finishes; you can delete it in Asana
               afterwards.
             </p>
           </div>
@@ -157,7 +157,7 @@ function useCancel(workspaceId: string, item: AsanaImport) {
       title: started ? 'Cancel the import?' : 'Cancel this import?',
       description: started
         ? 'Projects and tasks already imported stay. The import stops before the next task.'
-        : 'Orbit deletes the Asana token. You can start a new import at any time.',
+        : 'lukethomas deletes the Asana token. You can start a new import at any time.',
       confirmLabel: 'Cancel import',
       cancelLabel: 'Keep going',
       danger: true,
@@ -325,7 +325,7 @@ function ProjectChooser({ workspaceId, item, tree }: { workspaceId: string; item
       </div>
       <div className="flex flex-wrap items-center gap-3 border-t border-border px-3 py-3">
         <p className="min-w-0 flex-1 text-xs text-muted-foreground">
-          Each project becomes a new Orbit project with its sections, tasks, subtasks, comments, files and dependencies. Nobody is notified.
+          Each project becomes a new lukethomas project with its sections, tasks, subtasks, comments, files and dependencies. Nobody is notified.
         </p>
         <div className="flex flex-col items-end gap-1.5">
           {start.isError ? (
@@ -433,7 +433,7 @@ function ResultStep({ workspaceId, item }: { workspaceId: string; item: AsanaImp
     if (report.dependencies_linked > 0) notes.push(`${report.dependencies_linked} dependencies became “blocked by” relations.`)
     if (report.links_added > 0) notes.push(`${report.links_added} linked files (Google Drive, Dropbox and others) were added to descriptions as links.`)
     if (report.unmatched_assignees > 0)
-      notes.push(`${report.unmatched_assignees} tasks had an assignee with no Orbit member of the same email; they are unassigned and name the assignee. Assign them to a member in Settings → Import.`)
+      notes.push(`${report.unmatched_assignees} tasks had an assignee with no lukethomas member of the same email; they are unassigned and name the assignee. Assign them to a member in Settings → Import.`)
     if (report.missing_files > 0) notes.push(`${report.missing_files} Asana files could not be downloaded.`)
     if (report.skipped_subtasks > 0) notes.push(`${report.skipped_subtasks} subtasks deeper than five levels were not imported.`)
   }

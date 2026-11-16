@@ -44,7 +44,7 @@ export function GeneralPage() {
       </SettingsCard> : null}
 
       <WorkspaceLeave key={workspace.id} />
-      {version ? <p className="text-center text-xs text-muted-foreground tabular-nums">Orbit v{version}</p> : null}
+      {version ? <p className="text-center text-xs text-muted-foreground tabular-nums">lukethomas v{version}</p> : null}
       {dirty ? (
         <UnsavedBar
           onReset={() => { if (renameWorkspace.isPending) return; setNameDraft(null); renameWorkspace.reset() }}

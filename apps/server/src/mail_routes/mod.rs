@@ -409,7 +409,7 @@ impl<'a> Call<'a> {
 fn detail(code: &'static str) -> &'static str {
     match code {
         "mail_forbidden" => "Only workspace owners and admins can manage mail.",
-        "mail_disabled" => "Mail is off on this Orbit server. An instance admin can turn it on.",
+        "mail_disabled" => "Mail is off on this lukethomas server. An instance admin can turn it on.",
         "domain_claimed" => {
             "This domain, a parent domain or a subdomain of it belongs to another workspace."
         }
@@ -428,7 +428,7 @@ fn detail(code: &'static str) -> &'static str {
         }
         "domain_not_verified" => "A test message needs a verified domain.",
         "workspace_providers_disabled" => {
-            "This Orbit server does not let workspaces add their own mail providers. An instance admin can turn it on."
+            "This lukethomas server does not let workspaces add their own mail providers. An instance admin can turn it on."
         }
         "provider_in_use" => "Route the domains that use this provider elsewhere first.",
         _ => "This action is not possible.",

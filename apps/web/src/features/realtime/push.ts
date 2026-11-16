@@ -75,7 +75,7 @@ export function pushSupported(): boolean {
   return typeof navigator !== 'undefined' && 'serviceWorker' in navigator && typeof window !== 'undefined' && 'PushManager' in window && 'Notification' in window
 }
 
-/** An app path: what a notification opens never leaves Orbit. */
+/** An app path: what a notification opens never leaves lukethomas. */
 export function appPath(url: unknown): string {
   if (typeof url !== 'string' || !url.startsWith('/')) return '/'
   try {

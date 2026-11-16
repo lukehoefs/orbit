@@ -273,7 +273,7 @@ test('scanning: cancel asks first, then shows the cancelled import', async () =>
   })
   fireEvent.click(await view.findByRole('button', { name: 'Cancel' }))
   const dialog = await view.findByRole('dialog')
-  expect(dialog.textContent).toContain('Orbit deletes the uploaded file.')
+  expect(dialog.textContent).toContain('lukethomas deletes the uploaded file.')
   fireEvent.click(within(dialog).getByRole('button', { name: 'Cancel import' }))
   expect(await view.findByText('Import cancelled')).toBeTruthy()
   expect(cancelled).toBe(true)

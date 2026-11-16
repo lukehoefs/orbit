@@ -11,11 +11,11 @@ export function OrbitLoader() {
   const side = (index: number) => ({ animationDelay: `${phase + index * 400}ms` })
   return (
     <svg data-slot="orbit-loader" viewBox="0 0 11 11" shapeRendering="crispEdges" aria-hidden="true" className="size-[66px]">
-      <path fill="#742f4d" d="M1 3h2v6H1zM3 1h6v2H3zM9 3h2v6H9zM3 9h6v2H3z" />
-      <path fill="#f2458f" d="M2 0h6v2H2z" style={side(0)} className="animate-orbit-chase motion-reduce:animate-none" />
-      <path fill="#f2458f" d="M8 2h2v6H8z" style={side(1)} className="animate-orbit-chase motion-reduce:animate-none" />
-      <path fill="#f2458f" d="M2 8h6v2H2z" style={side(2)} className="animate-orbit-chase motion-reduce:animate-none" />
-      <path fill="#f2458f" d="M0 2h2v6H0z" style={side(3)} className="animate-orbit-chase motion-reduce:animate-none" />
+      <path fill="#312e81" d="M1 3h2v6H1zM3 1h6v2H3zM9 3h2v6H9zM3 9h6v2H3z" />
+      <path fill="#4f46e5" d="M2 0h6v2H2z" style={side(0)} className="animate-orbit-chase motion-reduce:animate-none" />
+      <path fill="#4f46e5" d="M8 2h2v6H8z" style={side(1)} className="animate-orbit-chase motion-reduce:animate-none" />
+      <path fill="#4f46e5" d="M2 8h6v2H2z" style={side(2)} className="animate-orbit-chase motion-reduce:animate-none" />
+      <path fill="#4f46e5" d="M0 2h2v6H0z" style={side(3)} className="animate-orbit-chase motion-reduce:animate-none" />
     </svg>
   )
 }
@@ -27,7 +27,7 @@ interface OrbitUnavailableProps {
   overlay?: boolean
 }
 
-/** The full screen for "Orbit cannot reach the server": the loader, why, and Retry. */
+/** The full screen for "lukethomas cannot reach the server": the loader, why, and Retry. */
 export function OrbitUnavailable({ detail, onRetry, overlay = false }: OrbitUnavailableProps) {
   const [retrying, setRetrying] = useState(false)
 
@@ -47,7 +47,7 @@ export function OrbitUnavailable({ detail, onRetry, overlay = false }: OrbitUnav
       <div role="alert" className="flex max-w-sm flex-col items-center gap-4 text-center">
         <OrbitLoader />
         <div className="flex flex-col gap-1.5">
-          <h1 className="text-lg font-semibold">Orbit is unavailable</h1>
+          <h1 className="text-lg font-semibold">lukethomas is unavailable</h1>
           <p className="text-sm leading-[1.6] text-muted-foreground">{detail}</p>
         </div>
         <Button

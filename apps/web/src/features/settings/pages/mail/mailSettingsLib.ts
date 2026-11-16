@@ -5,7 +5,7 @@ import { fullDate, relativeTime, timeOfDay } from '@/lib/format'
 
 /** The server's words for a refused mail request (its `detail` names the reason), else `fallback`. */
 export function mailProblem(error: unknown, fallback: string): string {
-  return error instanceof ApiProblem ? error.detail : `${fallback} Orbit did not answer. Check your connection and try again.`
+  return error instanceof ApiProblem ? error.detail : `${fallback} lukethomas did not answer. Check your connection and try again.`
 }
 
 /** Mail is off for this server (Admin → Inbound mail). */

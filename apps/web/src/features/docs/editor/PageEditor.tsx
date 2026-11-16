@@ -100,7 +100,7 @@ export interface PageEditorComments {
 }
 
 
-/** "Comment" in the formatting toolbar (BlockNote says "Add comment"); Orbit's comment field placeholders. */
+/** "Comment" in the formatting toolbar (BlockNote says "Add comment"); lukethomas's comment field placeholders. */
 const dictionary = {
   ...en,
   formatting_toolbar: { ...en.formatting_toolbar, comment: { tooltip: 'Comment' } },

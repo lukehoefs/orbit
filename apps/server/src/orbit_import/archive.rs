@@ -38,7 +38,7 @@ pub enum ArchiveError {
     #[error("The archive has no {0}.")]
     Missing(&'static str),
     /// Not a workspace export, or a version this server does not read.
-    #[error("The archive is not an Orbit workspace export this server can import.")]
+    #[error("The archive is not an lukethomas workspace export this server can import.")]
     Unsupported,
     #[error("The archive could not be read: {0}")]
     Read(String),

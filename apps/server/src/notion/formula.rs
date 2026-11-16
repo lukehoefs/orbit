@@ -70,7 +70,7 @@ pub fn keep_live(database: Id, source: &Source, plan: &mut DatabasePlan) {
     }
 }
 
-/// The expression with each Notion property token as `prop("<Orbit property id>")`; `None` for
+/// The expression with each Notion property token as `prop("<lukethomas property id>")`; `None` for
 /// a token that does not close.
 fn orbit_expression(database: Id, expression: &str) -> Option<String> {
     let mut out = String::with_capacity(expression.len());

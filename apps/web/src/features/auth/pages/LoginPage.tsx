@@ -41,7 +41,7 @@ export function LoginPage() {
   const showPasskey = options.data?.passkeys_enabled === true && passkeysSupported()
   const passkeyError = passkey.error && !isPasskeyCancel(passkey.error) ? passkey.error : null
   return (
-    <AuthForm title="Orbit" description="Sign in to your tasks, docs, mail and chat." error={mutation.error ?? passkeyError ?? returnError} pending={mutation.isPending || passkey.isPending} submitLabel="Sign in" onSubmit={async () => {
+    <AuthForm title="lukethomas" description="Sign in to your tasks, docs, mail and chat." error={mutation.error ?? passkeyError ?? returnError} pending={mutation.isPending || passkey.isPending} submitLabel="Sign in" onSubmit={async () => {
       setReturnError(null)
       passkey.reset()
       const response = await mutation.mutateAsync({ email, password })
@@ -59,7 +59,7 @@ export function LoginPage() {
         Sign in with a passkey
       </Button> : null}
       <ProviderButtons providers={options.data?.providers ?? []} returnTo={params.get('return_to')} disabled={mutation.isPending || passkey.isPending} />
-    </>} footer={options.data?.registration_open || options.data?.provider_registration_open ? <>New to Orbit? <Link to="/register" className="font-medium text-foreground">Create an account</Link></> : undefined}>
+    </>} footer={options.data?.registration_open || options.data?.provider_registration_open ? <>New to lukethomas? <Link to="/register" className="font-medium text-foreground">Create an account</Link></> : undefined}>
       <AuthInput label="Email" type="email" value={email} onChange={setEmail} />
       <AuthInput label="Password" type="password" value={password} onChange={setPassword} />
       <Link to="/recovery" className="justify-self-end text-[0.8125rem] text-muted-foreground hover:text-foreground">Forgot password?</Link>

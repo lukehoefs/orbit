@@ -167,7 +167,7 @@ function useCancel(workspaceId: string, item: ObsidianImport) {
       title: started ? 'Cancel the import?' : 'Cancel this import?',
       description: started
         ? 'Pages already imported stay. Empty pages the import created but did not fill yet are moved to the trash.'
-        : 'Orbit deletes the uploaded file. You can start a new import at any time.',
+        : 'lukethomas deletes the uploaded file. You can start a new import at any time.',
       confirmLabel: 'Cancel import',
       cancelLabel: 'Keep going',
       danger: true,

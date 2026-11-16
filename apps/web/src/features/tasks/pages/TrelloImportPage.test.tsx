@@ -107,7 +107,7 @@ test('connect: key and token are password fields, the token link carries the key
   await userEvent.type(key, 'bad key')
   const tokenLink = view.getByRole('link', { name: 'Generate a token' })
   expect(tokenLink.getAttribute('href')).toBe(
-    'https://trello.com/1/authorize?expiration=1day&scope=read&response_type=token&name=Orbit&key=bad%20key',
+    'https://trello.com/1/authorize?expiration=1day&scope=read&response_type=token&name=lukethomas&key=bad%20key',
   )
   expect(tokenLink.getAttribute('rel')).toBe('noreferrer noopener')
   await userEvent.type(token, 'goodtoken')
@@ -186,7 +186,7 @@ test('result: shows counts, notes, imported projects and failures', async () => 
     report: {
       comments_imported: 7, files_imported: 2, missing_files: 1, refused_files: 3, links_added: 1, checklists_added: 2,
       unmatched_members: 0, archived_lists_skipped: 1, archived_cards_skipped: 5,
-      failures: [{ trello_id: 'card-9', kind: 'card', title: 'Broken card', error: 'Orbit refused the task.' }],
+      failures: [{ trello_id: 'card-9', kind: 'card', title: 'Broken card', error: 'lukethomas refused the task.' }],
     },
   })
   const { view } = setup('/tasks-import/trello/import-1', (call) => {
@@ -207,7 +207,7 @@ test('result: shows counts, notes, imported projects and failures', async () => 
   expect(view.getByText('5 archived cards were left out.')).toBeTruthy()
   expect(view.getByText('Trello refused 3 file downloads; some Enterprise workspaces block them.')).toBeTruthy()
   expect(view.getByText('1 Trello file could not be downloaded or attached (too large, or gone).')).toBeTruthy()
-  expect(view.queryByText(/no Orbit member of the same full name/)).toBeNull()
+  expect(view.queryByText(/no lukethomas member of the same full name/)).toBeNull()
   expect(view.getByText('Broken card')).toBeTruthy()
-  expect(view.getByText('Orbit refused the task.')).toBeTruthy()
+  expect(view.getByText('lukethomas refused the task.')).toBeTruthy()
 })

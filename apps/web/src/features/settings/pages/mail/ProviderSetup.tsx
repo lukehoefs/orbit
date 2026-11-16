@@ -24,7 +24,7 @@ function CopyRow({ label, value }: { label: string; value: string }) {
 
 /**
  * What to set up at the provider: the webhook URL, the steps and (Cloudflare) the Email Worker. `generated` holds the
- * secrets Orbit made, which only the create response has.
+ * secrets lukethomas made, which only the create response has.
  */
 export function ProviderSetup({ setup, generated }: { setup: MailProviderSetup; generated?: Record<string, string> | null }) {
   const secrets = Object.entries(generated ?? {})
@@ -33,7 +33,7 @@ export function ProviderSetup({ setup, generated }: { setup: MailProviderSetup; 
       {secrets.length > 0 ? (
         <Alert>
           <Danger />
-          <AlertTitle>Copy these now. Orbit does not show them again.</AlertTitle>
+          <AlertTitle>Copy these now. lukethomas does not show them again.</AlertTitle>
           <AlertDescription>If you lose them, remove the provider and add it again.</AlertDescription>
         </Alert>
       ) : null}

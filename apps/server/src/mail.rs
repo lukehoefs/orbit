@@ -128,7 +128,7 @@ fn message(smtp: &SmtpSettings, email: &OutgoingEmail) -> Result<Message, MailEr
             .map_err(|_| MailError::Address(value.to_owned()))
     };
     let from = Mailbox::new(
-        Some(smtp.from_name.clone().unwrap_or_else(|| "Orbit".to_owned())),
+        Some(smtp.from_name.clone().unwrap_or_else(|| "lukethomas".to_owned())),
         address(&smtp.from_address)?,
     );
     Message::builder()
@@ -189,9 +189,9 @@ pub mod templates {
         };
         OutgoingEmail {
             to: to.to_owned(),
-            subject: "You have been invited to Orbit".to_owned(),
+            subject: "You have been invited to lukethomas".to_owned(),
             body: format!(
-                "You have been invited {invited} on Orbit.\n\n\
+                "You have been invited {invited} on lukethomas.\n\n\
                  Accept the invitation:\n{url}\n\n\
                  The link expires in 7 days. If you did not expect this invitation, ignore this email.\n"
             ),
@@ -257,9 +257,9 @@ pub mod templates {
     pub fn registration(to: &str, url: &str) -> OutgoingEmail {
         OutgoingEmail {
             to: to.to_owned(),
-            subject: "Finish creating your Orbit account".to_owned(),
+            subject: "Finish creating your lukethomas account".to_owned(),
             body: format!(
-                "Open this link to finish creating your Orbit account:\n{url}\n\n\
+                "Open this link to finish creating your lukethomas account:\n{url}\n\n\
                  The link works once and expires in 60 minutes. If you did not ask for an account, ignore this email.\n"
             ),
         }
@@ -269,9 +269,9 @@ pub mod templates {
     pub fn recovery(to: &str, url: &str) -> OutgoingEmail {
         OutgoingEmail {
             to: to.to_owned(),
-            subject: "Reset your Orbit password".to_owned(),
+            subject: "Reset your lukethomas password".to_owned(),
             body: format!(
-                "Open this link to set a new Orbit password:\n{url}\n\n\
+                "Open this link to set a new lukethomas password:\n{url}\n\n\
                  The link works once and expires in 30 minutes. If you did not ask for this, ignore this email; \
                  your password stays the same.\n"
             ),
@@ -283,9 +283,9 @@ pub mod templates {
     pub fn admin_recovery(to: &str, url: &str) -> OutgoingEmail {
         OutgoingEmail {
             to: to.to_owned(),
-            subject: "Reset your Orbit password".to_owned(),
+            subject: "Reset your lukethomas password".to_owned(),
             body: format!(
-                "An Orbit administrator started a password reset for your account. Open this link to set a new \
+                "An lukethomas administrator started a password reset for your account. Open this link to set a new \
                  password:\n{url}\n\n\
                  The link works once and expires in 30 minutes. If you did not ask for this, contact support; \
                  your password stays the same until the link is used.\n"
@@ -298,8 +298,8 @@ pub mod templates {
     pub fn email_set_by_admin(to: &str) -> OutgoingEmail {
         OutgoingEmail {
             to: to.to_owned(),
-            subject: "Your Orbit email was changed".to_owned(),
-            body: "An Orbit administrator set this address as the email of your account.\n\n\
+            subject: "Your lukethomas email was changed".to_owned(),
+            body: "An lukethomas administrator set this address as the email of your account.\n\n\
                    If you did not ask for this, contact support.\n"
                 .to_owned(),
         }
@@ -311,7 +311,7 @@ pub mod templates {
         OutgoingEmail {
             to: to.to_owned(),
             subject: "Two-step sign-in was turned off".to_owned(),
-            body: "An Orbit administrator turned off two-step sign-in for your account. If you did not ask for \
+            body: "An lukethomas administrator turned off two-step sign-in for your account. If you did not ask for \
                    this, contact support.\n"
                 .to_owned(),
         }
@@ -322,9 +322,9 @@ pub mod templates {
     pub fn email_change(to: &str, url: &str) -> OutgoingEmail {
         OutgoingEmail {
             to: to.to_owned(),
-            subject: "Confirm your new Orbit email".to_owned(),
+            subject: "Confirm your new lukethomas email".to_owned(),
             body: format!(
-                "Open this link to make this address the email of your Orbit account:\n{url}\n\n\
+                "Open this link to make this address the email of your lukethomas account:\n{url}\n\n\
                  The link works once and expires in 60 minutes. If you did not ask for this, ignore this email.\n"
             ),
         }
@@ -335,9 +335,9 @@ pub mod templates {
     pub fn email_changed(to: &str, new_email: &str) -> OutgoingEmail {
         OutgoingEmail {
             to: to.to_owned(),
-            subject: "Your Orbit email was changed".to_owned(),
+            subject: "Your lukethomas email was changed".to_owned(),
             body: format!(
-                "The email of your Orbit account was changed to {new_email}.\n\nIf this was not you, contact support right away.\n"
+                "The email of your lukethomas account was changed to {new_email}.\n\nIf this was not you, contact support right away.\n"
             ),
         }
     }
@@ -346,8 +346,8 @@ pub mod templates {
     pub fn test(to: &str) -> OutgoingEmail {
         OutgoingEmail {
             to: to.to_owned(),
-            subject: "Orbit test email".to_owned(),
-            body: "Your Orbit mail settings work. Orbit can now send invitations, registration links and \
+            subject: "lukethomas test email".to_owned(),
+            body: "Your lukethomas mail settings work. lukethomas can now send invitations, registration links and \
                    password reset links.\n"
                 .to_owned(),
         }
@@ -363,9 +363,9 @@ pub mod templates {
                 &[],
                 "https://orbit.test/accept-invitation?token=t",
             );
-            assert_eq!(email.subject, "You have been invited to Orbit");
+            assert_eq!(email.subject, "You have been invited to lukethomas");
             assert!(email.body.starts_with(
-                "You have been invited to join the workspace \"Acme Your account is locked: 'visit' evil.example\" on Orbit.\n\n"
+                "You have been invited to join the workspace \"Acme Your account is locked: 'visit' evil.example\" on lukethomas.\n\n"
             ));
             let long = super::invitation("g@example.com", &"x".repeat(100), &[], "u");
             assert!(long.body.contains(&format!("\"{}…\"", "x".repeat(60))));
@@ -376,7 +376,7 @@ pub mod templates {
                 "u",
             );
             assert!(guest.body.starts_with(
-                "You have been invited as a guest to the channels \"launch\", \"press news\" of the workspace \"Acme\" on Orbit.\n\n"
+                "You have been invited as a guest to the channels \"launch\", \"press news\" of the workspace \"Acme\" on lukethomas.\n\n"
             ));
         }
     }

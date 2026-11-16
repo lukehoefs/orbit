@@ -26,7 +26,7 @@ test('project settings save an installed repository and label without an API tok
     const request = input as Request
     if (request.method === 'PUT') {
       saved = await request.json()
-      return Response.json({ ...settings, repository: 'acme/repo', label: 'Orbit' })
+      return Response.json({ ...settings, repository: 'acme/repo', label: 'lukethomas' })
     }
     return Response.json(settings)
   }) as typeof fetch
@@ -46,13 +46,13 @@ test('project settings save an installed repository and label without an API tok
   expect(view.getByText('You have unsaved changes.')).toBeTruthy()
   fireEvent.click(view.getByRole('button', { name: 'Save Changes' }))
 
-  await waitFor(() => expect(saved).toEqual({ installation_id: 1234, repository: 'acme/repo', label: 'Orbit' }))
+  await waitFor(() => expect(saved).toEqual({ installation_id: 1234, repository: 'acme/repo', label: 'lukethomas' }))
 })
 
 test('choosing No repository disconnects a linked project', async () => {
   let settings = {
     app_slug: 'orbit-test', install_url: null,
-    repository: 'acme/repo' as string | null, label: 'Orbit' as string | null,
+    repository: 'acme/repo' as string | null, label: 'lukethomas' as string | null,
     repositories: [{ installation_id: 1234, repository: 'acme/repo' }],
     can_manage: true, key_configured: true,
   }
@@ -84,7 +84,7 @@ test('Reset restores the saved repository and label without a request', async ()
   globalThis.fetch = (async (input: RequestInfo | URL) => {
     if ((input as Request).method !== 'GET') writes += 1
     return Response.json({
-      app_slug: 'orbit-test', install_url: null, repository: 'acme/repo', label: 'Orbit',
+      app_slug: 'orbit-test', install_url: null, repository: 'acme/repo', label: 'lukethomas',
       repositories: [{ installation_id: 1234, repository: 'acme/repo' }], can_manage: true, key_configured: true,
     })
   }) as typeof fetch
@@ -95,7 +95,7 @@ test('Reset restores the saved repository and label without a request', async ()
   await userEvent.type(label, 'New label')
   expect(view.getByRole('button', { name: 'Save Changes' })).toBeTruthy()
   fireEvent.click(view.getByRole('button', { name: 'Reset' }))
-  expect(label.value).toBe('Orbit')
+  expect(label.value).toBe('lukethomas')
   expect(view.queryByRole('button', { name: 'Save Changes' })).toBeNull()
   expect(writes).toBe(0)
 })

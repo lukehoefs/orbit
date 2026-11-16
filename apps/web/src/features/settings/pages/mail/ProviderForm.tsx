@@ -21,10 +21,10 @@ const MAILGUN_REGIONS = [
   { value: 'eu', label: 'EU' },
 ]
 
-/** The secrets each kind needs from its provider; Orbit makes Cloudflare's and Postmark's. */
+/** The secrets each kind needs from its provider; lukethomas makes Cloudflare's and Postmark's. */
 const SECRET_FIELDS: Record<MailProviderKind, { name: keyof MailProviderSecretsBody; label: string; hint?: string }[]> = {
   postshiba: [
-    { name: 'api_key', label: 'API key', hint: 'A key of a team admin: Orbit reads the raw message with it.' },
+    { name: 'api_key', label: 'API key', hint: 'A key of a team admin: lukethomas reads the raw message with it.' },
     { name: 'webhook_secret', label: 'Inbox signing secret', hint: 'In the inbox’s Webhook dialog.' },
   ],
   cloudflare: [],
@@ -92,7 +92,7 @@ export function ProviderForm({
   return (
     <Modal
       title={provider ? `Change ${provider.name}` : 'Add a mail provider'}
-      description="The provider receives the domain's mail and sends each message to Orbit over HTTPS: this server needs no open port 25."
+      description="The provider receives the domain's mail and sends each message to lukethomas over HTTPS: this server needs no open port 25."
       onClose={onClose}
       dismissible={!saving}
     >
@@ -113,7 +113,7 @@ export function ProviderForm({
           </Field>
         </div>
         {fields.length === 0 && !provider ? (
-          <p className="m-0 text-[0.8125rem] text-muted-foreground">Orbit makes the secret for this provider and shows it once, after you add it.</p>
+          <p className="m-0 text-[0.8125rem] text-muted-foreground">lukethomas makes the secret for this provider and shows it once, after you add it.</p>
         ) : null}
         {fields.map((field) => (
           <Field key={field.name}>

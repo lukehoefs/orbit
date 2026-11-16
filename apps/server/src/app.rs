@@ -465,7 +465,7 @@ impl App {
             .is_none()
         {
             tracing::warn!(
-                "Orbit Cloud has no mail server: email change, invitations by email, password reset and sign-up do not work until one is saved in Admin → Email"
+                "lukethomas Cloud has no mail server: email change, invitations by email, password reset and sign-up do not work until one is saved in Admin → Email"
             );
         }
         let production_services = initialize_production_services(
@@ -1284,7 +1284,7 @@ async fn initialize_production_services(
                         .expire_stale(TimestampMillis::now())
                         .await
                         .map(|_| ())
-                        .map_err(|_| JobError::Retryable("Orbit import cleanup failed".to_owned()))
+                        .map_err(|_| JobError::Retryable("lukethomas import cleanup failed".to_owned()))
                 }
             })
         })

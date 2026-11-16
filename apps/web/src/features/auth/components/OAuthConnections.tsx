@@ -12,7 +12,7 @@ export function OAuthConnections() {
     mutationFn: (id: string) => oauthRequest<void>(`/api/v1/oauth/grants/${id}`, { method: 'DELETE' }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['oauth-grants'] }),
   })
-  return <SettingsCard title="Connected apps" description="MCP clients with approved Orbit access. Disconnecting an app stops its access and refresh tokens.">
+  return <SettingsCard title="Connected apps" description="MCP clients with approved lukethomas access. Disconnecting an app stops its access and refresh tokens.">
     {connections.isPending ? <p><LoadingText>Loading connections…</LoadingText></p> : null}
     {connections.isError || disconnect.isError ? <p role="alert">Connections could not be updated. Try again.</p> : null}
     {connections.data?.items.length === 0 ? <p className="text-sm text-muted-foreground">No connected apps.</p> : null}

@@ -34,8 +34,8 @@ type ExpirationValue = typeof EXPIRATION_OPTIONS[number]['value']
 /** An export scope stands alone on a personal token, so it is a kind of token, not an access level. */
 const TOKEN_KINDS = [
   { value: 'access', label: 'Tasks, docs and chat', description: 'For scripts, bots and AI clients.' },
-  { value: 'workspace:export', label: 'Workspace export', description: 'Lets another Orbit instance import this workspace as you see it: tasks, docs, chat and files.' },
-  { value: 'workspace:export:personal', label: 'Personal export', description: 'Lets another Orbit instance import only your private docs, your private channels and your DMs.' },
+  { value: 'workspace:export', label: 'Workspace export', description: 'Lets another lukethomas instance import this workspace as you see it: tasks, docs, chat and files.' },
+  { value: 'workspace:export:personal', label: 'Personal export', description: 'Lets another lukethomas instance import only your private docs, your private channels and your DMs.' },
 ] as const
 
 type TokenKind = typeof TOKEN_KINDS[number]['value']
@@ -103,7 +103,7 @@ export function ApiTokensPage() {
     <SettingsCard title="Create API token" description={canManage ? 'Create a personal token, or select a non-login service account for an integration. The secret is shown only once.' : `${kindDescription} Paste it with this workspace's URL in the other instance. The secret is shown only once.`}>
       <form onSubmit={(event) => void submit(event)}>
         <FieldGrid>
-        <Field><FieldLabel htmlFor="api-token-name">Name <RequiredMark /></FieldLabel><Input id="api-token-name" value={name} maxLength={100} onChange={(event) => setName(event.target.value)} placeholder={access ? 'Discord bot' : 'Orbit import'} /></Field>
+        <Field><FieldLabel htmlFor="api-token-name">Name <RequiredMark /></FieldLabel><Input id="api-token-name" value={name} maxLength={100} onChange={(event) => setName(event.target.value)} placeholder={access ? 'Discord bot' : 'lukethomas import'} /></Field>
         <Field>
           <FieldLabel htmlFor="api-token-expiration">Expiration</FieldLabel>
           {/* `items` lets Select.Value render the option label instead of the raw value. */}

@@ -15,7 +15,7 @@ export function WorkspaceLeave() {
   const leave = useLeaveWorkspace(workspace.id)
   const navigate = useNavigate()
   const membership = members.data?.find((member) => member.id === userId)
-  // Orbit Cloud refuses ownership transfer.
+  // lukethomas Cloud refuses ownership transfer.
   const billing = useBillingEnabled()
 
   // The server allows everyone but the owner to leave.
@@ -23,7 +23,7 @@ export function WorkspaceLeave() {
     <SettingsCard title="Leave workspace">
       {billing ? (
         <p className="text-[0.8125rem] text-muted-foreground">
-          The owner cannot leave. Ownership transfer is not available on Orbit Cloud yet. To remove the workspace, delete it in <Link to="/settings/danger-zone" className="text-foreground underline underline-offset-4">Danger zone</Link>.
+          The owner cannot leave. Ownership transfer is not available on lukethomas Cloud yet. To remove the workspace, delete it in <Link to="/settings/danger-zone" className="text-foreground underline underline-offset-4">Danger zone</Link>.
         </p>
       ) : (
         <p className="text-[0.8125rem] text-muted-foreground">

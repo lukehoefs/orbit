@@ -176,7 +176,7 @@ export function ChatPage() {
   const conversations = useConversations()
   const people = useMembers(workspaceId).data
   const openNewTask = useOpenNewTask()
-  // a guest has no tasks or docs: no task keys, no Orbit link cards, no "Create task"; it cannot browse channels
+  // a guest has no tasks or docs: no task keys, no lukethomas link cards, no "Create task"; it cannot browse channels
   const guest = useIsGuest()
   const projects = useProjects(workspaceId, !guest).data
   const phone = useIsPhone()

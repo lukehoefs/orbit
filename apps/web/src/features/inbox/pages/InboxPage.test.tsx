@@ -96,7 +96,7 @@ test('page body mentions name the editor and the page and open the page at the b
   const client = new QueryClient({ defaultOptions: { queries: { retry: false, staleTime: Infinity } } })
   client.setQueryData(queryKeys.workspaces, [{ id: 'workspace-1', name: 'Alpha', role: 'owner', permissions: [], version: 1 }])
   client.setQueryData(queryKeys.members('workspace-1'), [{
-    id: 'user-owner', membershipId: 'm1', name: 'Orbit Owner', handle: 'owner', email: 'o@x',
+    id: 'user-owner', membershipId: 'm1', name: 'lukethomas Owner', handle: 'owner', email: 'o@x',
     role: 'Owner', color: '#000', title: '', roleIds: [], can: NO_MEMBER_ABILITIES, version: 1,
   }])
   client.setQueryData(queryKeys.pages.tree('workspace-1'), [{ id: 'page-7', title: '[mention-test]', parent_id: null, teamspace_id: 'ts', icon: null, position: 0, version: 1, updated_at: '2026-09-06T10:00:00Z' }])
@@ -122,7 +122,7 @@ test('page body mentions name the editor and the page and open the page at the b
     </QueryClientProvider>,
   )
 
-  const title = 'Orbit Owner mentioned you in “[mention-test]”'
+  const title = 'lukethomas Owner mentioned you in “[mention-test]”'
   expect(await view.findByText(title)).toBeTruthy()
   fireEvent.click(view.getByRole('tab', { name: 'Mentions' }))
   expect(view.getByText(title)).toBeTruthy()

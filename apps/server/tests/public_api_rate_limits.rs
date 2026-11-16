@@ -75,7 +75,7 @@ impl Server {
                     password_hash: PasswordService::default()
                         .hash("correct horse battery")
                         .unwrap(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "General".to_owned(),
                 },
                 now,

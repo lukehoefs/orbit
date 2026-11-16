@@ -220,7 +220,7 @@ export function ProfilePage() {
                       <Input id="profile-email" value={me?.email ?? ''} readOnly />
                       {emailEnabled ? <Button type="button" variant="outline" onClick={() => setChangingEmail(true)}>Change</Button> : null}
                     </div>
-                    {options.data && !emailEnabled ? <FieldDescription>This Orbit cannot send email, so the email cannot be changed. Ask an administrator.</FieldDescription> : null}
+                    {options.data && !emailEnabled ? <FieldDescription>This lukethomas cannot send email, so the email cannot be changed. Ask an administrator.</FieldDescription> : null}
                     {me ? <SignInMethods hasPassword={hasPassword} /> : null}
                   </Field>
                   <Field>

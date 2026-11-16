@@ -23,7 +23,7 @@ const PATTERN_OPTIONS: { value: MailNamePattern; label: string }[] = [
 const LOCAL_PART = /^[a-z0-9-]+(\.[a-z0-9-]+)*$/
 
 /**
- * **Create a mailbox for each member**: the admin picks a domain and a pattern, Orbit proposes an ASCII address for
+ * **Create a mailbox for each member**: the admin picks a domain and a pattern, lukethomas proposes an ASCII address for
  * each member without a personal mailbox and marks the conflicts, the admin edits any address, then confirms.
  * Members whose address still conflicts get no mailbox.
  */

@@ -153,7 +153,7 @@ function SetupTotpDialog({ onClose }: { onClose: () => void }) {
           }}>
             <DialogHeader>
               <DialogTitle>Set up an authenticator app</DialogTitle>
-              <DialogDescription>{hasPassword ? 'Confirm your password to start.' : 'Orbit makes a key for your authenticator app.'}</DialogDescription>
+              <DialogDescription>{hasPassword ? 'Confirm your password to start.' : 'lukethomas makes a key for your authenticator app.'}</DialogDescription>
             </DialogHeader>
             <CurrentPassword returnTo={SECURITY_PATH} hasPassword={hasPassword} value={password} onChange={setPassword} error={setup.error} fallback="The setup could not start." />
             <DialogFooter>
@@ -255,7 +255,7 @@ async function copyText(text: string) {
 }
 
 function downloadCodes(codes: string[]) {
-  const text = `Orbit recovery codes\nEach code signs in once in place of an authenticator app code.\n\n${codes.join('\n')}\n`
+  const text = `lukethomas recovery codes\nEach code signs in once in place of an authenticator app code.\n\n${codes.join('\n')}\n`
   const url = URL.createObjectURL(new Blob([text], { type: 'text/plain' }))
   const link = document.createElement('a')
   link.href = url
@@ -331,7 +331,7 @@ function PasskeysCard() {
       flush
     >
       <div className="flex flex-col divide-y">
-        {options.data && !available ? <SettingsRow className="text-[0.8125rem] text-muted-foreground">Passkeys need Orbit to be opened at a domain name.</SettingsRow> : null}
+        {options.data && !available ? <SettingsRow className="text-[0.8125rem] text-muted-foreground">Passkeys need lukethomas to be opened at a domain name.</SettingsRow> : null}
         {available && !supported ? <SettingsRow className="text-[0.8125rem] text-muted-foreground">This browser does not support passkeys.</SettingsRow> : null}
         {!adding && add.isPending ? <SettingsRow role="status" className="text-[0.8125rem] text-muted-foreground">Confirm the new passkey in your browser…</SettingsRow> : null}
         {addError ? <SettingsRow role="alert" className="text-[0.8125rem] text-destructive">{addError}</SettingsRow> : null}
@@ -454,7 +454,7 @@ function ConnectedAccountsCard() {
   }
 
   return (
-    <SettingsCard title="Connected accounts" description="Sign in to Orbit with an account you already have." flush>
+    <SettingsCard title="Connected accounts" description="Sign in to lukethomas with an account you already have." flush>
       <div className="flex flex-col divide-y">
         {disconnect.isError ? <SettingsRow role="alert" className="text-[0.8125rem] text-destructive">{problemDetail(disconnect.error, 'The account could not be disconnected.')}</SettingsRow> : null}
         {connect.error instanceof ApiProblem && connect.error.code === 'reauthentication_required'

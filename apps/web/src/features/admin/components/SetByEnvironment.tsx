@@ -4,7 +4,7 @@ import { cn } from 'cn'
 export function SetByEnvironment({ variable, className }: { variable: string; className?: string }) {
   return (
     <p data-slot="set-by-environment" className={cn('text-xs text-muted-foreground', className)}>
-      Set by <code className="font-mono">{variable}</code> on the server. Change the environment variable and restart Orbit.
+      Set by <code className="font-mono">{variable}</code> on the server. Change the environment variable and restart lukethomas.
     </p>
   )
 }

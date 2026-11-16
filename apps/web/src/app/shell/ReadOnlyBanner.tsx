@@ -7,7 +7,7 @@ import { useWorkspaceBilling } from '@/features/workspaces/billing'
 const DAY_MILLIS = 24 * 60 * 60 * 1000
 
 /**
- * Orbit Cloud: one line above the top bar while the workspace is on its trial or has no subscription that grants
+ * lukethomas Cloud: one line above the top bar while the workspace is on its trial or has no subscription that grants
  * access (its data stays readable). The link opens the billing page. A refused write fetches the billing state again,
  * so the line appears as soon as a subscription lapses. The billing state is only served to members.
  */

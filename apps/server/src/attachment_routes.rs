@@ -1108,7 +1108,7 @@ impl IntoResponse for AttachmentApiError {
 }
 
 const STORAGE_QUOTA_DETAIL: &str = "This file does not fit in the workspace's storage quota. Delete files you no \
-     longer need (files in the trash count until the trash is emptied), or ask the administrator of this Orbit for a \
+     longer need (files in the trash count until the trash is emptied), or ask the administrator of this lukethomas for a \
      higher quota.";
 
 /// 413 `storage_quota_exceeded`: the file would take the workspace over its storage quota. Settings show how much

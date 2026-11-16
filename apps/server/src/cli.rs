@@ -22,7 +22,7 @@ use thiserror::Error;
 use tokio_util::sync::CancellationToken;
 
 #[derive(Debug, Parser)]
-#[command(name = "orbit", about = "Orbit server and operations CLI")]
+#[command(name = "orbit", about = "lukethomas server and operations CLI")]
 pub struct Cli {
     #[arg(long, global = true)]
     database: Option<PathBuf>,
@@ -233,7 +233,7 @@ fn healthcheck(address: SocketAddr) -> Result<String, CliError> {
         )));
     }
 
-    Ok("Orbit is ready".to_owned())
+    Ok("lukethomas is ready".to_owned())
 }
 
 fn write_openapi(output: &Path) -> Result<String, CliError> {
@@ -559,7 +559,7 @@ async fn attachments(config: Config, command: &AttachmentsCommand) -> Result<Str
         .await
         .map_err(|error| match error {
             DatabaseError::AlreadyOwned { .. } => CliError::Operation(
-                "Orbit is running: stop it first (to compress images while it runs, use Admin → Storage → \
+                "lukethomas is running: stop it first (to compress images while it runs, use Admin → Storage → \
                  Compress images)"
                     .to_owned(),
             ),
@@ -584,7 +584,7 @@ async fn attachments(config: Config, command: &AttachmentsCommand) -> Result<Str
                 .map_err(operation)?;
             Ok(match forgotten {
                 Some(location) => format!(
-                    "forgot the {location}: Orbit starts with another bucket, and does not read the files in this one again"
+                    "forgot the {location}: lukethomas starts with another bucket, and does not read the files in this one again"
                 ),
                 None => "no bucket of attachment files is recorded".to_owned(),
             })
@@ -636,7 +636,7 @@ fn reset_sqlite_file(path: &Path) -> Result<(), CliError> {
     fs::create_dir_all(parent_directory(path)).map_err(operation)?;
     let _ownership_lock = lock_database_ownership(path).map_err(|error| match error {
         DatabaseError::AlreadyOwned { .. } => CliError::Operation(format!(
-            "database is owned by a serving Orbit process: {}",
+            "database is owned by a serving lukethomas process: {}",
             path.display()
         )),
         error => operation(error),
@@ -931,7 +931,7 @@ async fn install_seed_data(database: Database) -> Result<String, CliError> {
     const EMAIL: &str = "test@example.com";
     const SECOND_EMAIL: &str = "member@example.com";
     const PASSWORD_HASH: &str = "$argon2id$v=19$m=19456,t=2,p=1$WUH9bzy7j6QyIqQ+iO+WUA$E+J7gy74Md7ZnwnccCH7oMqGdoj/u2SDc5QLvOzKMpA";
-    const TASK_TITLE: &str = "Review the Orbit foundation";
+    const TASK_TITLE: &str = "Review the lukethomas foundation";
     const TASK_DESCRIPTION: &str = "A safe, idempotent development seed record.";
     /// Mailpit's SMTP port as AGENTS.md starts it.
     const DEV_SMTP_HOST: &str = "127.0.0.1";
@@ -955,9 +955,9 @@ async fn install_seed_data(database: Database) -> Result<String, CliError> {
                         SetupRequest {
                             token: token.token,
                             email: EMAIL.to_owned(),
-                            display_name: "Orbit Developer".to_owned(),
+                            display_name: "lukethomas Developer".to_owned(),
                             password_hash: PASSWORD_HASH.to_owned(),
-                            workspace_name: "Orbit Development".to_owned(),
+                            workspace_name: "lukethomas Development".to_owned(),
                             project_name: "Foundation".to_owned(),
                         },
                         now,
@@ -982,7 +982,7 @@ async fn install_seed_data(database: Database) -> Result<String, CliError> {
                 .bind(user_id.to_string())
                 .bind(EMAIL)
                 .bind(EMAIL)
-                .bind("Orbit Developer")
+                .bind("lukethomas Developer")
                 .bind(PASSWORD_HASH)
                 .bind(now.as_millis())
                 .bind(now.as_millis())
@@ -1010,7 +1010,7 @@ async fn install_seed_data(database: Database) -> Result<String, CliError> {
                     WorkspaceRepository::new(database.clone())
                         .create(
                             user_id,
-                            "Orbit Development".to_owned(),
+                            "lukethomas Development".to_owned(),
                             "development-seed",
                             now,
                         )
@@ -1048,7 +1048,7 @@ async fn install_seed_data(database: Database) -> Result<String, CliError> {
             .bind(member_id.to_string())
             .bind(SECOND_EMAIL)
             .bind(SECOND_EMAIL)
-            .bind("Orbit Member")
+            .bind("lukethomas Member")
             .bind(PASSWORD_HASH)
             .bind(now.as_millis())
             .bind(now.as_millis())
@@ -1503,7 +1503,7 @@ fn redacted_mail_config(mail: &orbit_platform::MailConfig) -> Vec<String> {
 
 pub fn failure_message(error: &str) -> String {
     format!(
-        "orbit: {error}\nRecovery: stop any serving Orbit process, verify the configured paths, and retry; no automatic repair was attempted."
+        "orbit: {error}\nRecovery: stop any serving lukethomas process, verify the configured paths, and retry; no automatic repair was attempted."
     )
 }
 
@@ -1713,7 +1713,7 @@ mod tests {
                 .unwrap();
         });
 
-        assert_eq!(healthcheck(address).unwrap(), "Orbit is ready");
+        assert_eq!(healthcheck(address).unwrap(), "lukethomas is ready");
         server.join().unwrap();
     }
 
@@ -1779,7 +1779,7 @@ mod tests {
                     email: "owner@example.com".to_owned(),
                     display_name: "Owner".to_owned(),
                     password_hash: "test-password-hash".to_owned(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "Tasks".to_owned(),
                 },
                 now,
@@ -1885,7 +1885,7 @@ mod tests {
                     email: "owner@example.com".to_owned(),
                     display_name: "Owner".to_owned(),
                     password_hash: "test-password-hash".to_owned(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "Tasks".to_owned(),
                 },
                 now,
@@ -2290,7 +2290,7 @@ mod tests {
             .await
             .unwrap()
             .unwrap();
-        assert_eq!(member.display_name, "Orbit Member");
+        assert_eq!(member.display_name, "lukethomas Member");
         assert!(
             orbit_platform::PasswordService::default()
                 .verify("password", member.password_hash.as_deref().unwrap())

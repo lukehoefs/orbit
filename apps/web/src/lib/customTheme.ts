@@ -33,7 +33,7 @@ export const CUSTOM_THEME_PRESETS: readonly CustomThemePreset[] = [
   { name: 'Discord Dark', theme: { sidebar: '#121214', selected: '#2c2c30', accent: '#5865f2', chat: '#1a1a1e' } },
   { name: 'Discord Onyx', theme: { sidebar: '#000000', selected: '#1f1f23', accent: '#5865f2', chat: '#070709' } },
   { name: 'Discord Light', theme: { sidebar: '#f2f3f5', selected: '#d7d9dc', accent: '#5865f2', chat: '#ffffff' } },
-  { name: 'Midnight', theme: { sidebar: '#0f172a', selected: '#2e4a7d', accent: '#f2458f', chat: '#1a2338' } },
+  { name: 'Midnight', theme: { sidebar: '#0f172a', selected: '#2e4a7d', accent: '#4f46e5', chat: '#1a2338' } },
   { name: 'Forest', theme: { sidebar: '#12342b', selected: '#2c6e57', accent: '#f4b860', chat: '#1b2a25' } },
   { name: 'Ember', theme: { sidebar: '#3b1410', selected: '#8f2d1f', accent: '#ffb86b', chat: '#241816' } },
   { name: 'Slate', theme: { sidebar: '#2b3038', selected: '#4a5361', accent: '#6cc4f5', chat: '#353b45' } },
@@ -54,9 +54,9 @@ export const DEFAULT_APP_LOOKS: AppLooks = { docs: NOTION.theme, chat: SLACK.the
 /** The saved choice: colours for the whole app, colours per part of the app, or `null` for Light, System or Dark. */
 export type CustomThemeChoice = CustomTheme | { apps: AppLooks } | null
 
-/** A theme's preset name, `Your colors` when it is not a preset, or `Orbit` for the Light, System or Dark theme. */
+/** A theme's preset name, `Your colors` when it is not a preset, or `lukethomas` for the Light, System or Dark theme. */
 export function themeName(theme: CustomTheme | null): string {
-  if (!theme) return 'Orbit'
+  if (!theme) return 'lukethomas'
   const code = serializeCustomTheme(theme)
   return CUSTOM_THEME_PRESETS.find((preset) => serializeCustomTheme(preset.theme) === code)?.name ?? 'Your colors'
 }
@@ -246,7 +246,7 @@ export function setAppLook(section: AppSection, theme: CustomTheme | null) {
   setCustomTheme({ apps: { ...looks, [section]: theme } })
 }
 
-/** Saves the theme in this browser (theme sync is a backend project). `null` goes back to the Orbit default. */
+/** Saves the theme in this browser (theme sync is a backend project). `null` goes back to the lukethomas default. */
 export function setCustomTheme(theme: CustomThemeChoice) {
   try {
     if (theme) globalThis.localStorage?.setItem(STORAGE_KEY, serializeChoice(theme))

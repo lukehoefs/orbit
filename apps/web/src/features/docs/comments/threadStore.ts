@@ -1,4 +1,4 @@
-// BlockNote's comments UI talks to a ThreadStore; this one keeps Orbit's server as the source of truth. Threads come
+// BlockNote's comments UI talks to a ThreadStore; this one keeps lukethomas's server as the source of truth. Threads come
 // from the TanStack query of the page's threads (refetched on realtime events, so other viewers' comments arrive
 // live); every change is a REST call whose answer is written into that query right away. The thread anchor is
 // BlockNote's `comment` mark, which the editor sets on the selection inside the collaborative document.
@@ -10,7 +10,7 @@ import type { CommentBlocks, CommentsApi } from './api'
 
 type Listener = (threads: Map<string, ThreadData>) => void
 
-/** `metadata` of Orbit threads. */
+/** `metadata` of lukethomas threads. */
 export interface OrbitThreadMetadata {
   createdBy: string
   quote: string

@@ -31,7 +31,7 @@ test('the link posts its token once and shows the new email', async () => {
   const { view, calls, client } = setup(() => Response.json({ email: 'new@orbit.test' }))
   expect(await view.findByText('Your email is changed')).toBeTruthy()
   expect(view.getByText('You now sign in with new@orbit.test. Your other devices are signed out.')).toBeTruthy()
-  expect(view.getByRole('link', { name: 'Continue to Orbit' }).getAttribute('href')).toBe('/')
+  expect(view.getByRole('link', { name: 'Continue to lukethomas' }).getAttribute('href')).toBe('/')
   expect(calls).toEqual([{ method: 'POST', path: '/api/v1/auth/email-change/confirm', body: { token: 'change-token' } }])
   expect(window.location.search).toBe('')
   expect(client.getQueryState(queryKeys.currentUser)?.isInvalidated).toBe(true)

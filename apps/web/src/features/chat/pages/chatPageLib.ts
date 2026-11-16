@@ -25,7 +25,7 @@ export function paneLayout(available: number | null, wanted: number): PaneLayout
 }
 
 /**
- * The Orbit task, page or saved view that a same-origin URL points to; `null` for every other URL. A task `id` is
+ * The lukethomas task, page or saved view that a same-origin URL points to; `null` for every other URL. A task `id` is
  * what the URL names it by: its id or its identifier (`/tasks/ENG-12`, `/views/<view>/ENG-12`).
  */
 export function orbitLinkTarget(url: string, origin: string): { kind: 'task' | 'page' | 'view'; id: string } | null {

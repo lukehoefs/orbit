@@ -1,4 +1,4 @@
-// A stand-in for y-websocket + the Orbit collab server in tests: a real Y.Doc and Awareness, a provider whose socket
+// A stand-in for y-websocket + the lukethomas collab server in tests: a real Y.Doc and Awareness, a provider whose socket
 // events the test drives, and a server-like initializer (page JSON -> Y fragment, never empty).
 import { BlockNoteEditor } from '@blocknote/core'
 import { blocksToYXmlFragment } from '@blocknote/core/yjs'

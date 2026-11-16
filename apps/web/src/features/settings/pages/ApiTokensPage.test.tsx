@@ -33,17 +33,17 @@ test('members can create only a personal export token', async () => {
   globalThis.fetch = mock(async (input: RequestInfo | URL, init?: RequestInit) => {
     const request = new Request(input, init)
     requests.push(request)
-    if (request.method === 'POST') return Response.json({ id: 'token-1', name: 'Orbit import', project_ids: [], all_projects: false, token_prefix: 'orb_12345678', scopes: ['workspace:export:personal'], created_at: '2026-11-09T10:00:00Z', last_used_at: null, token: 'orb_123456789-secret' }, { status: 201 })
+    if (request.method === 'POST') return Response.json({ id: 'token-1', name: 'lukethomas import', project_ids: [], all_projects: false, token_prefix: 'orb_12345678', scopes: ['workspace:export:personal'], created_at: '2026-11-09T10:00:00Z', last_used_at: null, token: 'orb_123456789-secret' }, { status: 201 })
     return Response.json([])
   }) as unknown as typeof fetch
   const view = renderPage('member')
   expect(view.queryAllByLabelText('Token type')).toHaveLength(0)
   expect(view.queryAllByText('Use a service account')).toHaveLength(0)
-  await userEvent.type(view.getByLabelText(/Name/), 'Orbit import')
+  await userEvent.type(view.getByLabelText(/Name/), 'lukethomas import')
   fireEvent.click(view.getByRole('button', { name: 'Create token' }))
   await view.findByText('orb_123456789-secret')
   const post = requests.find((request) => request.method === 'POST')
-  expect(await post?.json()).toEqual({ name: 'Orbit import', project_ids: [], all_projects: false, scopes: ['workspace:export:personal'], service_account: false, expires_in_days: null })
+  expect(await post?.json()).toEqual({ name: 'lukethomas import', project_ids: [], all_projects: false, scopes: ['workspace:export:personal'], service_account: false, expires_in_days: null })
 })
 
 test('admins can create a token and see its secret once', async () => {

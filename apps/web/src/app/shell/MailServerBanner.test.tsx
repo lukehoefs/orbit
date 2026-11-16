@@ -25,9 +25,9 @@ function renderBanner({ admin, cloud, email }: { admin: boolean; cloud: boolean;
   return { view, requests: () => requests }
 }
 
-const TEXT = 'Orbit Cloud has no mail server. Email change, invitations by email, password reset and sign-up do not work.Set it in Admin → Email'
+const TEXT = 'lukethomas Cloud has no mail server. Email change, invitations by email, password reset and sign-up do not work.Set it in Admin → Email'
 
-test('an installation admin on Orbit Cloud without a mail server sees the warning with a link to Admin → Email', async () => {
+test('an installation admin on lukethomas Cloud without a mail server sees the warning with a link to Admin → Email', async () => {
   const { view } = renderBanner({ admin: true, cloud: true, email: false })
   await waitFor(() => expect(view.getByRole('alert').textContent).toBe(TEXT))
   expect(view.getByRole('link', { name: 'Set it in Admin → Email' }).getAttribute('href')).toBe('/admin/email')

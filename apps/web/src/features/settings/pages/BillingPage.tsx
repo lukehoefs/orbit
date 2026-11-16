@@ -120,7 +120,7 @@ function renewal(billing: BillingView) {
   return billing.cancel_at_period_end ? `Ends on ${date}` : `Renews on ${date}`
 }
 
-/** Orbit Cloud: the workspace's plan. The owner subscribes through Stripe Checkout and manages it in the Billing Portal. */
+/** lukethomas Cloud: the workspace's plan. The owner subscribes through Stripe Checkout and manages it in the Billing Portal. */
 export function BillingPage() {
   const options = useAuthOptions()
   const enabled = useBillingEnabled()
@@ -166,7 +166,7 @@ export function BillingPage() {
         title="Billing"
         description={
           billing.exempt
-            ? 'This workspace is included with Orbit and needs no plan.'
+            ? 'This workspace is included with lukethomas and needs no plan.'
             : billing.trial_days > 0
               ? `Each workspace has its own plan. Your account has one ${billing.trial_days}-day trial: it starts with your first workspace, and every workspace you create shares its end. Without an active plan after it, a workspace is read-only: everything stays readable and exportable.`
               : 'Each workspace has its own plan. Without an active plan, the workspace is read-only: everything stays readable and exportable.'

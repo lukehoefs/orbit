@@ -13,7 +13,7 @@ export async function copyViewLink(workspaceId: string, viewId: string): Promise
     await navigator.clipboard.writeText(`${window.location.origin}${switchWorkspaceHref(viewPath(viewId), '', workspaceId)}`)
     toast('Link copied')
   } catch {
-    toast.error("Orbit couldn't copy the link.")
+    toast.error("lukethomas couldn't copy the link.")
   }
 }
 

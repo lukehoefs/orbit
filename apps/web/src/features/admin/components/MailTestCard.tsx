@@ -38,7 +38,7 @@ export function MailTestCard({ admin }: { admin: MailAdmin }) {
   return (
     <SettingsCard
       title="Test message"
-      description="Send a mail from an outside account (for example Gmail) to a one-time address. It does not go to a mailbox; the card shows what Orbit saw."
+      description="Send a mail from an outside account (for example Gmail) to a one-time address. It does not go to a mailbox; the card shows what lukethomas saw."
       flush
     >
       <div className="flex flex-col divide-y">
@@ -78,7 +78,7 @@ function TestResult({ test, result, failed }: { test: MailTestAddress; result: M
       {status === 'waiting' ? (
         <p role="status" className="m-0 flex items-center gap-2 text-muted-foreground">
           {failed ? null : <Spinner role="presentation" aria-hidden aria-label={undefined} className="size-3.5" />}
-          {failed ? 'The result could not be read. Orbit tries again.' : 'Waiting for the message…'}
+          {failed ? 'The result could not be read. lukethomas tries again.' : 'Waiting for the message…'}
         </p>
       ) : null}
       {status === 'expired' ? <p role="status" className="m-0 text-muted-foreground">The address expired before a message arrived. Make a new one.</p> : null}

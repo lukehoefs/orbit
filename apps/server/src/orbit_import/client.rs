@@ -45,11 +45,11 @@ pub enum ClientError {
     #[error("the archive is larger than {limit} bytes")]
     TooLarge { limit: u64 },
     /// Connection, timeout or a 5xx: try again later.
-    #[error("the other Orbit instance could not be reached: {0}")]
+    #[error("the other lukethomas instance could not be reached: {0}")]
     Unreachable(String),
-    #[error("the other Orbit instance answered {status}: {message}")]
+    #[error("the other lukethomas instance answered {status}: {message}")]
     Api { status: u16, message: String },
-    #[error("the answer of the other Orbit instance could not be read: {0}")]
+    #[error("the answer of the other lukethomas instance could not be read: {0}")]
     Decode(String),
 }
 

@@ -20,7 +20,7 @@ function RequestRegistration() {
   // A provider can create the account without a mail server, so email sign-up may be off while providers are on.
   const providers = options.data?.provider_registration_open ? options.data.providers : []
   if (options.data && !options.data.registration_open && providers.length === 0) {
-    return <AuthMessage title="Registration is closed" detail="This Orbit does not accept new accounts. Ask an administrator for an invitation." />
+    return <AuthMessage title="Registration is closed" detail="This lukethomas does not accept new accounts. Ask an administrator for an invitation." />
   }
   if (options.data && !options.data.registration_open) {
     return (

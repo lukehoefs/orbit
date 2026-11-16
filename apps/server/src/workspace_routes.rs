@@ -1022,7 +1022,7 @@ async fn create_invitation(
                 .preview_invitation(&issued.token, now)
                 .await
                 .map(|preview| (preview.workspace_name, preview.channels))
-                .unwrap_or_else(|_| ("Orbit".to_owned(), Vec::new()));
+                .unwrap_or_else(|_| ("lukethomas".to_owned(), Vec::new()));
             mailer
                 .send(mail::templates::invitation(
                     &issued.invitation.email,
@@ -1588,7 +1588,7 @@ async fn account_notice<'a>(
         StatusCode::CONFLICT,
         "smtp_required",
         "Mail server required",
-        "Orbit Cloud emails the person about this change. Save a mail server in Admin → Settings first.",
+        "lukethomas Cloud emails the person about this change. Save a mail server in Admin → Settings first.",
         instance,
         request_id,
     ))
@@ -1901,7 +1901,7 @@ fn set_by_environment(
         "set_by_environment",
         "Set by the environment",
         format!(
-            "{variables} sets this on the server. Change the environment variable and restart Orbit."
+            "{variables} sets this on the server. Change the environment variable and restart lukethomas."
         ),
         instance,
         request_id,
@@ -2385,7 +2385,7 @@ async fn remove_smtp(
                 StatusCode::CONFLICT,
                 "smtp_required",
                 "Mail server required",
-                "Orbit Cloud needs a mail server. Save a different one instead.",
+                "lukethomas Cloud needs a mail server. Save a different one instead.",
                 instance,
                 request_id.as_ref(),
             ),
@@ -2429,7 +2429,7 @@ fn storage_unreachable(
         StatusCode::BAD_GATEWAY,
         "storage_unreachable",
         "Storage unreachable",
-        format!("Orbit could not use the bucket: {}", error.summary()),
+        format!("lukethomas could not use the bucket: {}", error.summary()),
         instance,
         request_id,
     )
@@ -2518,7 +2518,7 @@ fn sign_in_provider_not_found(
         StatusCode::NOT_FOUND,
         "provider_not_found",
         "Unknown provider",
-        "Orbit can sign in with google, github or oidc.",
+        "lukethomas can sign in with google, github or oidc.",
         instance,
         request_id,
     )
@@ -3435,7 +3435,7 @@ async fn create_backup(
                 ),
                 _ => (
                     "backup_failed",
-                    "Orbit could not create a verified backup. The server log has the cause."
+                    "lukethomas could not create a verified backup. The server log has the cause."
                         .to_owned(),
                 ),
             };
@@ -3468,7 +3468,7 @@ async fn list_backups(
             StatusCode::INTERNAL_SERVER_ERROR,
             "backup_list_failed",
             "Backup list failed",
-            "Orbit could not read the stored backups.",
+            "lukethomas could not read the stored backups.",
             instance,
             request_id.as_ref(),
         )
@@ -3505,7 +3505,7 @@ async fn download_backup(
             StatusCode::INTERNAL_SERVER_ERROR,
             "backup_download_failed",
             "Backup download failed",
-            "Orbit could not verify or package this backup.",
+            "lukethomas could not verify or package this backup.",
             &instance,
             request_id.as_ref(),
         )
@@ -3574,7 +3574,7 @@ async fn delete_backup(
                 StatusCode::INTERNAL_SERVER_ERROR,
                 "backup_delete_failed",
                 "Backup delete failed",
-                "Orbit could not delete this backup.",
+                "lukethomas could not delete this backup.",
                 &instance,
                 request_id.as_ref(),
             )
@@ -3944,7 +3944,7 @@ fn workspace_problem(
             StatusCode::CONFLICT,
             "transfer_unavailable",
             "Transfer unavailable",
-            "Ownership transfer is not available on Orbit Cloud yet.",
+            "Ownership transfer is not available on lukethomas Cloud yet.",
             instance,
             request_id,
         ),
@@ -3997,7 +3997,7 @@ fn workspace_problem(
             "Workspace limit reached",
             format!(
                 "An account can own at most {limit} {}, and this account already owns that many. Delete a \
-                 workspace you own, or ask the administrator of this Orbit for a higher limit.",
+                 workspace you own, or ask the administrator of this lukethomas for a higher limit.",
                 if limit == 1 {
                     "workspace"
                 } else {

@@ -37,7 +37,7 @@ export function ViewHeader({ workspaceId, controller, onEdit, onDuplicate, onDel
 export function ViewStateBanner() {
   return (
     <div role="status" className="shrink-0 border-b bg-muted/40 px-3 py-2 text-xs text-muted-foreground">
-      This view has settings Orbit can't read. Update the view to reset them.
+      This view has settings lukethomas can't read. Update the view to reset them.
     </div>
   )
 }

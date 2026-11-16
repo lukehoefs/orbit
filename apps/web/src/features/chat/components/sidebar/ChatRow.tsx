@@ -45,7 +45,7 @@ export function ChatRowEnd({ className, ...props }: ComponentProps<'span'>) {
   return <span data-slot="chat-row-end" className={cn('flex shrink-0 items-center gap-1.5 pr-2 pl-1', className)} {...props} />
 }
 
-/** The unread marker: a 6px pink square, the pixel of the Orbit logo. Always next to bold text, never the only sign. */
+/** The unread marker: a 6px pink square, the pixel of the lukethomas logo. Always next to bold text, never the only sign. */
 export function UnreadMarker({ className, ...props }: ComponentProps<'span'>) {
   return <span data-slot="unread-marker" aria-hidden="true" className={cn('size-1.5 shrink-0 bg-primary', className)} {...props} />
 }

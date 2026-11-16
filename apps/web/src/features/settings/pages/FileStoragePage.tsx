@@ -57,14 +57,14 @@ function BucketForm({ workspaceId, bucket, started, onStart }: {
   async function removeBucket() {
     const confirmed = await confirmAction({
       title: 'Remove the bucket?',
-      description: "New files go to Orbit's storage. Files in the bucket move back and are deleted from it.",
+      description: "New files go to lukethomas's storage. Files in the bucket move back and are deleted from it.",
       confirmLabel: 'Remove',
       danger: true,
     })
     if (!confirmed) return
     remove.mutate(undefined, {
       onSuccess: () => {
-        toast("Files move back to Orbit's storage")
+        toast("Files move back to lukethomas's storage")
         onStart('remove')
       },
       onError: (error) => toast.error(problemText(error, 'The bucket could not be removed.')),
@@ -75,16 +75,16 @@ function BucketForm({ workspaceId, bucket, started, onStart }: {
   const moving = bucket.checking
     ? 'Checking which files to move…'
     : bucket.files_to_move > 0
-      ? (bucket.removing ? `${count} left to move back to Orbit's storage.` : `${count} left to move to your bucket.`)
+      ? (bucket.removing ? `${count} left to move back to lukethomas's storage.` : `${count} left to move to your bucket.`)
       : null
   const moved = started && !moving && !bucket.removing && !bucket.move_error
-    ? (started === 'remove' ? "Done. All files are back in Orbit's storage." : 'Done. All files are in your bucket.')
+    ? (started === 'remove' ? "Done. All files are back in lukethomas's storage." : 'Done. All files are in your bucket.')
     : null
   return (
     <S3BucketForm
       s3={bucket.s3 ?? null}
       title={TITLE}
-      description="Keep this workspace's files in your own S3-compatible bucket (AWS S3, Cloudflare R2, …) instead of Orbit's storage. After you save, new files go to the bucket and existing files move there in the background. Orbit writes, reads and deletes a test file before it saves. The endpoint must be an https URL on the public internet."
+      description="Keep this workspace's files in your own S3-compatible bucket (AWS S3, Cloudflare R2, …) instead of lukethomas's storage. After you save, new files go to the bucket and existing files move there in the background. lukethomas writes, reads and deletes a test file before it saves. The endpoint must be an https URL on the public internet."
       endpointPlaceholder="https://s3.eu-central-1.amazonaws.com"
       saving={save.isPending}
       removing={remove.isPending}
@@ -98,16 +98,16 @@ function BucketForm({ workspaceId, bucket, started, onStart }: {
       onRemove={bucket.s3 && !bucket.removing ? () => void removeBucket() : undefined}
     >
       <div className="mt-4 flex flex-col gap-1 text-xs text-muted-foreground empty:hidden">
-        {bucket.removing ? <span>Removing: files move back to Orbit's storage. Save the bucket again to keep using it.</span> : null}
+        {bucket.removing ? <span>Removing: files move back to lukethomas's storage. Save the bucket again to keep using it.</span> : null}
         {moving ? (
           <span role="status" className="flex items-center gap-1.5">
-            {/* The spinner stops when moving failed; Orbit only tries again later. */}
+            {/* The spinner stops when moving failed; lukethomas only tries again later. */}
             {bucket.move_error ? null : <Spinner role="presentation" aria-hidden aria-label={undefined} className="size-3.5" />}
             {moving}
           </span>
         ) : null}
         {moved ? <span role="status">{moved}</span> : null}
-        {bucket.move_error ? <span role="alert" className="text-destructive">Moving files stopped: {bucket.move_error} Orbit tries again every ten minutes.</span> : null}
+        {bucket.move_error ? <span role="alert" className="text-destructive">Moving files stopped: {bucket.move_error} lukethomas tries again every ten minutes.</span> : null}
       </div>
     </S3BucketForm>
   )

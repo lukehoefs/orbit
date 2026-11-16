@@ -29,7 +29,7 @@ export function trelloImportErrorMessage(error: unknown): string {
       case 'trello_token_invalid':
         return error.detail || 'Trello rejected this token. Generate a new token for this API key and paste it.'
       case 'app_key_missing':
-        return 'Orbit is not ready to import from Trello yet. Ask the Orbit administrator to set the app key.'
+        return 'lukethomas is not ready to import from Trello yet. Ask the lukethomas administrator to set the app key.'
       case 'import_in_progress':
         return 'You already have an import running. Wait for it to finish or cancel it.'
       case 'trello_unavailable':

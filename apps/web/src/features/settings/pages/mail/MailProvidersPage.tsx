@@ -25,13 +25,13 @@ export function MailProvidersPage() {
 
 /**
  * The mail providers of `scope` (Admin → Mail for `instance`): a provider receives a domain's mail and sends it to
- * Orbit over HTTPS. Each own provider shows what to set up at the provider; secrets Orbit makes show once.
+ * lukethomas over HTTPS. Each own provider shows what to set up at the provider; secrets lukethomas makes show once.
  */
 export function MailProviders({ scope }: { scope: ProviderScope }) {
   const providers = useMailProviders(scope)
   const [adding, setAdding] = useState(false)
   const [editing, setEditing] = useState<MailProviderView | null>(null)
-  // a provider with secrets that Orbit just made: shown once
+  // a provider with secrets that lukethomas just made: shown once
   const [shown, setShown] = useState<{ provider: MailProviderView; title: string } | null>(null)
   const canAdd = scope === 'instance' || providers.data?.workspace_providers_enabled === true
 
@@ -102,7 +102,7 @@ function ProviderRow({
 }) {
   const remove = useDeleteProvider(scope)
   const update = useUpdateProvider(scope)
-  // Orbit makes these secrets, so Orbit can replace them
+  // lukethomas makes these secrets, so lukethomas can replace them
   const madeByOrbit = provider.kind === 'cloudflare' || provider.kind === 'postmark'
   const [open, setOpen] = useState(false)
   const own = provider.setup !== null && provider.setup !== undefined
@@ -110,7 +110,7 @@ function ProviderRow({
   async function removeProvider() {
     const confirmed = await confirmAction({
       title: `Remove ${provider.name}?`,
-      description: 'Orbit stops accepting mail from it. Remove it at the provider too.',
+      description: 'lukethomas stops accepting mail from it. Remove it at the provider too.',
       confirmLabel: 'Remove',
       danger: true,
     })

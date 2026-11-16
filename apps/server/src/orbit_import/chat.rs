@@ -201,7 +201,7 @@ async fn create_conversation(
         .collect();
     let chat_error = |error: ChatError| match error {
         ChatError::Unavailable(error) => Failure::from(error),
-        other => Failure::Item(format!("Orbit refused the channel: {other}.")),
+        other => Failure::Item(format!("lukethomas refused the channel: {other}.")),
     };
     match conversation.kind.as_str() {
         "public" if run.mode == ExportMode::Full => {

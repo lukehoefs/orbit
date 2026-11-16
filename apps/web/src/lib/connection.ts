@@ -7,7 +7,7 @@ import { useSyncExternalStore } from 'react'
  */
 export type ConnectionSource = 'events' | 'chat' | 'queries' | 'browser'
 
-/** `lost`: reconnecting for more than 2 seconds, a small pill says so. `failed`: still down after a minute, "Orbit is unavailable" covers the app. */
+/** `lost`: reconnecting for more than 2 seconds, a small pill says so. `failed`: still down after a minute, "lukethomas is unavailable" covers the app. */
 export type ConnectionPhase = 'connected' | 'lost' | 'failed'
 
 export interface ConnectionState {

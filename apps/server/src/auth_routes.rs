@@ -1823,7 +1823,7 @@ fn registration_closed(instance: &str, request_id: Option<&Extension<RequestId>>
         StatusCode::FORBIDDEN,
         "registration_closed",
         "Registration closed",
-        "This Orbit does not accept new accounts. Ask an administrator for an invitation.",
+        "This lukethomas does not accept new accounts. Ask an administrator for an invitation.",
         instance,
         request_id,
     )
@@ -3580,7 +3580,7 @@ mod tests {
                     password_hash: PasswordService::default()
                         .hash("correct horse battery")
                         .unwrap(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "General".to_owned(),
                 },
                 now,

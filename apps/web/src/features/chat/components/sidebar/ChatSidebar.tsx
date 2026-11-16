@@ -452,7 +452,7 @@ export function ChatSidebar() {
           title={perApp ? 'Chat colours' : 'Custom theme'}
           description={
             perApp
-              ? 'Colours of chat pages. Orbit uses your Light, System or Dark theme. Only you see them.'
+              ? 'Colours of chat pages. lukethomas uses your Light, System or Dark theme. Only you see them.'
               : 'Colours of the whole app, in place of Light, System or Dark. Only you see them, and text stays readable on every colour.'
           }
           value={theme}

@@ -36,7 +36,7 @@ function callbackUrlOf(provider: Provider, saved: SignInProviderView | null) {
   return saved?.callback_url ?? `${window.location.origin}/api/v1/auth/providers/${provider}/callback`
 }
 
-/** "Continue with Google / GitHub / SSO" on the sign-in page: the client each provider issued to this Orbit. */
+/** "Continue with Google / GitHub / SSO" on the sign-in page: the client each provider issued to this lukethomas. */
 export function AdminSignInProvidersPage() {
   const settings = useInstanceSettings()
   if (settings.isPending) return <SettingsCard title="Sign-in providers"><p><LoadingText>Loading settings…</LoadingText></p></SettingsCard>
@@ -121,7 +121,7 @@ function OidcCard({ configured, saved }: { configured: boolean; saved: SignInPro
   return (
     <SettingsCard
       title="OpenID Connect"
-      description="Sign in with your own identity provider (Authentik, Keycloak, Authelia, Zitadel, Pocket ID…). Register Orbit as a confidential client with the callback URL as its redirect URI, and the scopes openid, email and profile."
+      description="Sign in with your own identity provider (Authentik, Keycloak, Authelia, Zitadel, Pocket ID…). Register lukethomas as a confidential client with the callback URL as its redirect URI, and the scopes openid, email and profile."
     >
       <FieldGrid>
         <CallbackUrlField id={`${id}-callback`} url={callbackUrlOf('oidc', saved)} />
@@ -151,7 +151,7 @@ function OidcCard({ configured, saved }: { configured: boolean; saved: SignInPro
           <p data-slot="oidc-off" className="text-xs text-muted-foreground">
             Off. To turn it on, set {OIDC_VARIABLES.map((variable, index) => (
               <span key={variable}>{index === 0 ? '' : index === OIDC_VARIABLES.length - 1 ? ' and ' : ', '}<code className="font-mono">{variable}</code></span>
-            ))} on the server, then restart Orbit.
+            ))} on the server, then restart lukethomas.
           </p>
         )}
       </div>

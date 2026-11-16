@@ -83,7 +83,7 @@ impl From<TaskError> for Failure {
             TaskError::NotFound => {
                 Self::Item("The project or task was deleted during the import.".to_owned())
             }
-            other => Self::Item(format!("Orbit refused the task: {other}.")),
+            other => Self::Item(format!("lukethomas refused the task: {other}.")),
         }
     }
 }
@@ -784,7 +784,7 @@ pub(crate) fn is_transient(error: &reqwest::Error) -> bool {
     error.is_timeout() || error.is_connect() || error.is_request()
 }
 
-/// `YYYY-MM-DD` dates become 12:00 UTC of that day (Orbit due dates are instants), which falls
+/// `YYYY-MM-DD` dates become 12:00 UTC of that day (lukethomas due dates are instants), which falls
 /// on the same calendar day from UTC-11 to UTC+11.
 #[must_use]
 pub fn parse_date_millis(value: &str) -> Option<i64> {

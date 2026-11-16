@@ -2709,7 +2709,7 @@ mod tests {
             password_hash: PasswordService::default()
                 .hash("correct horse battery")
                 .unwrap(),
-            workspace_name: "Orbit".to_owned(),
+            workspace_name: "lukethomas".to_owned(),
             project_name: "General".to_owned(),
         };
 
@@ -2751,7 +2751,7 @@ mod tests {
                     password_hash: PasswordService::default()
                         .hash("correct horse battery")
                         .unwrap(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "General".to_owned(),
                 },
                 now,
@@ -2814,7 +2814,7 @@ mod tests {
                     password_hash: PasswordService::default()
                         .hash("correct horse battery")
                         .unwrap(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "General".to_owned(),
                 },
                 TimestampMillis::from_millis(1_000),
@@ -2898,7 +2898,7 @@ mod tests {
             password_hash: PasswordService::default()
                 .hash("correct horse battery")
                 .unwrap(),
-            workspace_name: "Orbit".to_owned(),
+            workspace_name: "lukethomas".to_owned(),
             project_name: "General".to_owned(),
         }
     }

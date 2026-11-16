@@ -92,7 +92,7 @@ async fn sync(billing: &Billing, payload: &Value) -> Result<(), JobError> {
         .and_then(|id| id.parse::<Id>().ok())
         .ok_or_else(|| {
             JobError::Permanent(format!(
-                "subscription {subscription_id} names no Orbit workspace"
+                "subscription {subscription_id} names no lukethomas workspace"
             ))
         })?;
     let plan = subscription

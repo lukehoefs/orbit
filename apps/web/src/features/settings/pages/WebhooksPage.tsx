@@ -81,7 +81,7 @@ export function WebhooksPage() {
   }
 
   return <>
-    <SettingsCard title="Webhooks" description="Orbit posts signed JSON to your URL when a task in a selected project is created, changed or moved to the trash. Deliveries are retried for about a day." actions={<Button type="button" onClick={() => setEditing('new')}>Add webhook</Button>}>
+    <SettingsCard title="Webhooks" description="lukethomas posts signed JSON to your URL when a task in a selected project is created, changed or moved to the trash. Deliveries are retried for about a day." actions={<Button type="button" onClick={() => setEditing('new')}>Add webhook</Button>}>
       {secret ? <div className="grid gap-2.5 rounded-lg border border-primary bg-primary/10 p-3 text-xs" role="status">
         <strong>Copy the signing secret of {secret.name} now. You cannot see it again.</strong>
         <div className="flex items-center gap-2">

@@ -39,7 +39,7 @@ test('workspace edits use the shared save popup and Reset restores the saved nam
   await userEvent.type(input, 'Renamed workspace')
   expect(view.getByRole('button', { name: 'Save Changes' })).toBeTruthy()
   fireEvent.click(view.getByRole('button', { name: 'Reset' }))
-  expect(input.value).toBe('Orbit')
+  expect(input.value).toBe('lukethomas')
   expect(view.queryByRole('button', { name: 'Save Changes' })).toBeNull()
 })
 
@@ -47,6 +47,6 @@ test('unchanged trimmed names do not show the save popup', async () => {
   const view = renderPage()
   await view.findByLabelText('Name')
   await userEvent.clear(view.getByLabelText('Name'))
-  await userEvent.type(view.getByLabelText('Name'), ' Orbit ')
+  await userEvent.type(view.getByLabelText('Name'), ' lukethomas ')
   expect(view.queryByRole('button', { name: 'Save Changes' })).toBeNull()
 })

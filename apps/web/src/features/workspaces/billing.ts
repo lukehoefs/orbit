@@ -7,12 +7,12 @@ import { fullDate } from '@/lib/format'
 import { useAuthOptions } from '@/features/auth/api'
 import { useWorkspace } from './workspaceContext'
 
-/** Orbit Cloud: workspaces need a subscription to be writable. Off on a self-hosted server. */
+/** lukethomas Cloud: workspaces need a subscription to be writable. Off on a self-hosted server. */
 export function useBillingEnabled(): boolean {
   return useAuthOptions().data?.billing_enabled ?? false
 }
 
-/** The current workspace's subscription; only fetched in Orbit Cloud. */
+/** The current workspace's subscription; only fetched in lukethomas Cloud. */
 export function useWorkspaceBilling() {
   const { workspace } = useWorkspace()
   const enabled = useBillingEnabled()
@@ -27,7 +27,7 @@ export function useWorkspaceBilling() {
   })
 }
 
-/** Orbit Cloud: the caller's trial, which every workspace they create shares. Not fetched on a self-hosted server. */
+/** lukethomas Cloud: the caller's trial, which every workspace they create shares. Not fetched on a self-hosted server. */
 export function useAccountTrial() {
   const enabled = useBillingEnabled()
   return useQuery({

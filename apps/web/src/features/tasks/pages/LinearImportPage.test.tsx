@@ -135,7 +135,7 @@ test('result: shows counts, notes, imported projects and failures', async () => 
     report: {
       comments_imported: 7, files_imported: 2, missing_files: 1, links_added: 1, relations_linked: 3,
       relations_skipped: 2, unmatched_assignees: 0, detached_sub_issues: 1,
-      failures: [{ linear_id: 'issue-9', kind: 'issue', title: 'ENG-9 Broken issue', error: 'Orbit refused the task.' }],
+      failures: [{ linear_id: 'issue-9', kind: 'issue', title: 'ENG-9 Broken issue', error: 'lukethomas refused the task.' }],
     },
   })
   const { view } = setup('/tasks-import/linear/import-1', (call) => {
@@ -151,9 +151,9 @@ test('result: shows counts, notes, imported projects and failures', async () => 
   expect(await view.findByText('Import complete')).toBeTruthy()
   expect((await view.findByRole('link', { name: 'Website Launch' })).getAttribute('href')).toBe('/tasks?project=project-1')
   expect(view.getByText('3 blocking, related and duplicate relations were linked.')).toBeTruthy()
-  expect(view.getByText('2 relations were skipped: Orbit keeps one relation per pair of tasks and one duplicate per task.')).toBeTruthy()
+  expect(view.getByText('2 relations were skipped: lukethomas keeps one relation per pair of tasks and one duplicate per task.')).toBeTruthy()
   expect(view.getByText('1 sub-issues are at the top level (parent in another team, or more than five levels deep); their description names the parent.')).toBeTruthy()
   expect(view.getByText('1 Linear files could not be downloaded.')).toBeTruthy()
   expect(view.getByText('ENG-9 Broken issue')).toBeTruthy()
-  expect(view.getByText('Orbit refused the task.')).toBeTruthy()
+  expect(view.getByText('lukethomas refused the task.')).toBeTruthy()
 })

@@ -9,5 +9,5 @@ test('session records identify the browser session without mock device data', ()
     user: { id: 'user-1', email: 'ada@orbit.test', display_name: 'Ada' },
     current: true,
   } as SessionRecord & { current: boolean }
-  expect(sessionView(record)).toMatchObject({ id: 'session-1', current: true, device: 'Signed-in device', browser: 'Orbit web' })
+  expect(sessionView(record)).toMatchObject({ id: 'session-1', current: true, device: 'Signed-in device', browser: 'lukethomas web' })
 })

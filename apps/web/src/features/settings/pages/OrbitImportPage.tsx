@@ -35,7 +35,7 @@ import {
 } from '@/features/settings/api/orbitImports'
 
 const ROOT = '/settings/import/orbit'
-const TITLE = 'Import from Orbit'
+const TITLE = 'Import from lukethomas'
 
 const linkClass = 'text-primary underline underline-offset-2'
 
@@ -108,13 +108,13 @@ function ConnectStep({ workspaceId }: { workspaceId: string }) {
 
   return (
     <>
-      <SettingsCard title={TITLE} description="Copy projects, pages and chats from another Orbit instance into this workspace. Nobody is notified.">
+      <SettingsCard title={TITLE} description="Copy projects, pages and chats from another lukethomas instance into this workspace. Nobody is notified.">
         <div className="flex flex-col gap-4 text-sm">
           <p className="text-muted-foreground">
             On the other instance, open <span className="font-medium text-foreground">Settings → API tokens</span> and create a token
             with <span className="font-medium text-foreground">Workspace export</span> (owners and administrators: the whole
             workspace) or <span className="font-medium text-foreground">Personal export</span> (any member: your private pages,
-            channels and direct messages). Orbit keeps the token encrypted only until the export is downloaded.
+            channels and direct messages). lukethomas keeps the token encrypted only until the export is downloaded.
           </p>
           <form className="flex flex-col gap-3" onSubmit={(event) => void submit(event)} autoComplete="off">
             <div className="grid gap-1.5">
@@ -232,7 +232,7 @@ function useCancel(workspaceId: string, item: OrbitImport) {
       title: started ? 'Cancel the import?' : 'Cancel this import?',
       description: started
         ? 'What was already imported stays. The import stops before the next item.'
-        : 'Orbit deletes the token and the export. You can start a new import at any time.',
+        : 'lukethomas deletes the token and the export. You can start a new import at any time.',
       confirmLabel: 'Cancel import',
       cancelLabel: 'Keep going',
       danger: true,
@@ -243,7 +243,7 @@ function useCancel(workspaceId: string, item: OrbitImport) {
   return { request, pending: cancel.isPending }
 }
 
-/** Step 2: the other instance exports, Orbit downloads the ZIP and reads it. */
+/** Step 2: the other instance exports, lukethomas downloads the ZIP and reads it. */
 function WaitingStep({ workspaceId, item }: { workspaceId: string; item: OrbitImport }) {
   const cancel = useCancel(workspaceId, item)
   const { headline, text } = orbitImportPhaseText(item)

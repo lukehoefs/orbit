@@ -52,7 +52,7 @@ const TEXT_SIZE_OPTIONS: { value: Appearance['textSize']; label: string; sample:
   { value: 'extra-large', label: 'Extra large', sample: 'text-xl' },
 ]
 
-/** Coolify's Profile → Appearance: how Orbit looks in this browser. */
+/** Coolify's Profile → Appearance: how lukethomas looks in this browser. */
 export function AppearancePage() {
   const { appearance, setAppearance } = useTheme()
   const choice = useCustomThemeChoice()
@@ -107,7 +107,7 @@ export function AppearancePage() {
       </SettingsCard>
 
       {appLooks ? (
-        <SettingsCard title="Per app colors" description="Pick the colors of each part of Orbit. Orbit uses your Light, System or Dark theme, as set above.">
+        <SettingsCard title="Per app colors" description="Pick the colors of each part of lukethomas. lukethomas uses your Light, System or Dark theme, as set above.">
           <div className="grid gap-3 sm:grid-cols-3">
             {APP_SECTIONS.map((section) => (
               <AppearanceOption
@@ -232,7 +232,7 @@ export function AppearancePage() {
           open
           onOpenChange={(open) => !open && setEditing(null)}
           title={`${SECTION_LABELS[editing]} colours`}
-          description={`Colours of ${SECTION_LABELS[editing].toLowerCase()} pages. Orbit uses your Light, System or Dark theme. Only you see them.`}
+          description={`Colours of ${SECTION_LABELS[editing].toLowerCase()} pages. lukethomas uses your Light, System or Dark theme. Only you see them.`}
           value={appLooks?.[editing] ?? null}
           onSave={(theme) => setAppLook(editing, theme)}
         />

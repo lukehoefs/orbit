@@ -22,7 +22,7 @@ function UnauthorizedSessionHandler() {
 }
 
 /**
- * Orbit Cloud: a write refused because the workspace is read-only or at a trial limit gets one clear toast (callers
+ * lukethomas Cloud: a write refused because the workspace is read-only or at a trial limit gets one clear toast (callers
  * skip their generic failure toast, see `isPaymentRequired`) with a way to the billing page. `ReadOnlyBanner` fetches
  * the billing state again.
  */

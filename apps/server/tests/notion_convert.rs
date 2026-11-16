@@ -185,7 +185,7 @@ fn props_for(kind: &str) -> (&'static [&'static str], &'static [&'static str]) {
         "file" => (&["backgroundColor", "name", "url", "caption"], &[]),
         "page" => (&["pageId"], &[]),
         "database" => (&["databaseId", "linkId"], &[]),
-        other => panic!("block type {other} is not in Orbit's editor schema"),
+        other => panic!("block type {other} is not in lukethomas's editor schema"),
     }
 }
 
@@ -883,7 +883,7 @@ fn user_mentions_with_a_member_email_become_orbit_mentions() {
         "ada@example.com".to_owned(),
         (
             "01900000-0000-7000-8000-0000000000aa".to_owned(),
-            "Ada Orbit".to_owned(),
+            "Ada lukethomas".to_owned(),
         ),
     );
     let mut ctx = ConvertContext::new(&resolver);
@@ -892,7 +892,7 @@ fn user_mentions_with_a_member_email_become_orbit_mentions() {
         converted.content[0]["content"],
         json!([
             {"type": "text", "text": "Ask ", "styles": {}},
-            {"type": "mention", "props": {"userId": "01900000-0000-7000-8000-0000000000aa", "name": "Ada Orbit"}},
+            {"type": "mention", "props": {"userId": "01900000-0000-7000-8000-0000000000aa", "name": "Ada lukethomas"}},
             {"type": "text", "text": "@Grace", "styles": {}},
             {"type": "text", "text": "@Bot", "styles": {}}
         ])
@@ -984,6 +984,6 @@ fn row_properties_table_shows_plain_values_and_can_be_left_out() {
     assert_ne!(
         converted.content.first().map(|block| block["type"].clone()),
         Some(json!("table")),
-        "a row imported into an Orbit database keeps its values there"
+        "a row imported into an lukethomas database keeps its values there"
     );
 }

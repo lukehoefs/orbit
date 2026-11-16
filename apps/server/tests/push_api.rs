@@ -129,7 +129,7 @@ impl Fixture {
                     password_hash: PasswordService::default()
                         .hash("correct horse battery")
                         .unwrap(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "General".to_owned(),
                 },
                 now,
@@ -686,7 +686,7 @@ async fn phones_register_with_apns_get_pushes_and_go_with_their_token_or_session
     let payload: Value = serde_json::from_slice(&message.payload).unwrap();
     assert_eq!(
         payload,
-        json!({ "aps": { "alert": { "title": "Orbit", "body": "Push notifications work on this device." },
+        json!({ "aps": { "alert": { "title": "lukethomas", "body": "Push notifications work on this device." },
             "sound": "default", "thread-id": "test" }, "url": "/profile/notifications" })
     );
     assert_eq!(sent[1].0.token, busy);

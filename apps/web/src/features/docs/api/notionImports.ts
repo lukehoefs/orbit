@@ -34,7 +34,7 @@ export function notionImportErrorMessage(error: unknown): string {
       case 'notion_token_invalid':
         return 'Notion rejected this token. Check that you copied the whole token and that it was not revoked.'
       case 'app_key_missing':
-        return 'Orbit is not ready to import from Notion yet. Ask the Orbit administrator to set the app key.'
+        return 'lukethomas is not ready to import from Notion yet. Ask the lukethomas administrator to set the app key.'
       case 'import_in_progress':
         return 'You already have an import running. Wait for it to finish or cancel it.'
       case 'notion_unavailable':

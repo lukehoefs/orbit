@@ -890,7 +890,7 @@ mod tests {
         assert!(
             S3Bucket::new(S3Config {
                 endpoint: "https://s3.example.com".to_owned(),
-                bucket: "Orbit Files".to_owned(),
+                bucket: "lukethomas Files".to_owned(),
                 ..config
             })
             .is_err()

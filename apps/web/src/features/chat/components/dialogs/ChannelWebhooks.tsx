@@ -471,7 +471,7 @@ function WebhookUrl({ created, onDone }: { created: CreatedWebhook; onDone: () =
       </Field>
       <p className="flex items-start gap-2 text-xs text-muted-foreground">
         <Danger aria-hidden="true" className="mt-px size-4 shrink-0 text-amber-500" />
-        Copy it now: Orbit shows this URL only once. Anyone who has it can post to this channel.
+        Copy it now: lukethomas shows this URL only once. Anyone who has it can post to this channel.
       </p>
       <div className="grid gap-1.5">
         <div className="flex items-center justify-between">

@@ -81,7 +81,7 @@ function ConnectStep({ workspaceId }: { workspaceId: string }) {
               <a className="text-primary underline underline-offset-2" href={KEY_URL} target="_blank" rel="noreferrer noopener">
                 {KEY_URL}
               </a>{' '}
-              (with read access it can read everything you can see in Linear). Orbit keeps it encrypted only until the import finishes.
+              (with read access it can read everything you can see in Linear). lukethomas keeps it encrypted only until the import finishes.
             </p>
           </div>
           <form className="flex flex-col gap-3" onSubmit={(event) => void submit(event)} autoComplete="off">
@@ -159,7 +159,7 @@ function useCancel(workspaceId: string, item: LinearImport) {
       title: started ? 'Cancel the import?' : 'Cancel this import?',
       description: started
         ? 'Projects and issues already imported stay. The import stops before the next issue.'
-        : 'Orbit deletes the Linear API key. You can start a new import at any time.',
+        : 'lukethomas deletes the Linear API key. You can start a new import at any time.',
       confirmLabel: 'Cancel import',
       cancelLabel: 'Keep going',
       danger: true,
@@ -279,7 +279,7 @@ function TeamChooser({ workspaceId, item, tree }: { workspaceId: string; item: L
       </div>
       <div className="flex flex-wrap items-center gap-3 border-t border-border px-3 py-3">
         <p className="min-w-0 flex-1 text-xs text-muted-foreground">
-          Each team becomes a new Orbit project with its workflow states, issues, sub-issues, labels, comments, files and relations. Nobody is
+          Each team becomes a new lukethomas project with its workflow states, issues, sub-issues, labels, comments, files and relations. Nobody is
           notified.
         </p>
         <div className="flex flex-col items-end gap-1.5">
@@ -401,10 +401,10 @@ function ResultStep({ workspaceId, item }: { workspaceId: string; item: LinearIm
   if (report) {
     if (report.relations_linked > 0) notes.push(`${report.relations_linked} blocking, related and duplicate relations were linked.`)
     if (report.relations_skipped > 0)
-      notes.push(`${report.relations_skipped} relations were skipped: Orbit keeps one relation per pair of tasks and one duplicate per task.`)
+      notes.push(`${report.relations_skipped} relations were skipped: lukethomas keeps one relation per pair of tasks and one duplicate per task.`)
     if (report.links_added > 0) notes.push(`${report.links_added} linked attachments (pull requests, threads and links) were added to descriptions.`)
     if (report.unmatched_assignees > 0)
-      notes.push(`${report.unmatched_assignees} issues had an assignee with no Orbit member of the same email; they are unassigned and name the assignee. Assign them to a member in Settings → Import.`)
+      notes.push(`${report.unmatched_assignees} issues had an assignee with no lukethomas member of the same email; they are unassigned and name the assignee. Assign them to a member in Settings → Import.`)
     if (report.missing_files > 0) notes.push(`${report.missing_files} Linear files could not be downloaded.`)
     if (report.detached_sub_issues > 0)
       notes.push(`${report.detached_sub_issues} sub-issues are at the top level (parent in another team, or more than five levels deep); their description names the parent.`)

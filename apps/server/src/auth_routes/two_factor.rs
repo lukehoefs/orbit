@@ -495,7 +495,7 @@ async fn totp_step(
 fn totp_for(secret: Secret, email: &str) -> Option<Totp> {
     Builder::new()
         .with_secret(secret)
-        .with_issuer(Some("Orbit"))
+        .with_issuer(Some("lukethomas"))
         .with_account_name(email.replace(':', ""))
         .build()
         .ok()

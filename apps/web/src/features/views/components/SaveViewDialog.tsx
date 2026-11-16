@@ -108,7 +108,7 @@ function SaveViewForm({ mode, workspaceId, state, view, onSaved, onClose }: Save
       onClose()
     } catch (caught) {
       if (caught instanceof ApiProblem && caught.status === 409) setError('This view changed since you opened it. Reopen it to see the latest version.')
-      else setError(caught instanceof ApiProblem ? caught.detail : "Orbit couldn't save the view. Try again.")
+      else setError(caught instanceof ApiProblem ? caught.detail : "lukethomas couldn't save the view. Try again.")
     }
   }
 

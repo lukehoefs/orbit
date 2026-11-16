@@ -48,7 +48,7 @@ function renderPage(initial: { totp_enabled: boolean; recovery_codes_left: numbe
 
 test('setting up the authenticator app ends with the recovery codes', async () => {
   const { view, requests } = renderPage({ totp_enabled: false, recovery_codes_left: 0 })
-  expect(await view.findByText('Passkeys need Orbit to be opened at a domain name.')).toBeTruthy()
+  expect(await view.findByText('Passkeys need lukethomas to be opened at a domain name.')).toBeTruthy()
   expect(view.queryAllByRole('button', { name: 'Add passkey' })).toHaveLength(0)
 
   fireEvent.click(await view.findByRole('button', { name: 'Set up' }))
@@ -115,7 +115,7 @@ test('an account without a password confirms with its provider when the server a
   })
   try {
     fireEvent.click(await view.findByRole('button', { name: 'Set up' }))
-    await view.findByText('Orbit makes a key for your authenticator app.')
+    await view.findByText('lukethomas makes a key for your authenticator app.')
     expect(view.queryAllByLabelText('Current password')).toHaveLength(0)
     await userEvent.click(view.getByRole('button', { name: 'Continue' }))
     await userEvent.click(await view.findByRole('button', { name: 'Confirm with GitHub' }))

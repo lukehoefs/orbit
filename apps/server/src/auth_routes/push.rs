@@ -217,7 +217,7 @@ pub(super) async fn send_test_push(
     let instance = "/api/v1/push/test";
     let session = authenticate(&state, &headers, instance, request_id.as_ref()).await?;
     let notice = Notice {
-        title: "Orbit".to_owned(),
+        title: "lukethomas".to_owned(),
         body: "Push notifications work on this device.".to_owned(),
         url: "/profile/notifications".to_owned(),
         tag: "test".to_owned(),

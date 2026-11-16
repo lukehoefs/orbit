@@ -54,7 +54,7 @@ impl Fixture {
                     password_hash: PasswordService::default()
                         .hash("correct horse battery")
                         .unwrap(),
-                    workspace_name: "Orbit".into(),
+                    workspace_name: "lukethomas".into(),
                     project_name: "General".into(),
                 },
                 now,
@@ -283,7 +283,7 @@ async fn read_endpoints_return_public_fields_of_approved_projects_only() {
     assert_eq!(me["token"]["scopes"], json!(["tasks:read"]));
     assert_eq!(me["token"]["project_ids"], json!([f.project]));
     assert_eq!(me["token"]["expires_at"], Value::Null);
-    assert_eq!(me["workspace"], json!({"id": f.workspace, "name": "Orbit"}));
+    assert_eq!(me["workspace"], json!({"id": f.workspace, "name": "lukethomas"}));
     assert_eq!(
         me["user"],
         json!({"id": f.user, "email": "owner@example.com", "display_name": "Owner"})
@@ -1402,7 +1402,7 @@ async fn paths_name_the_token_s_workspace() {
     assert_eq!(code, StatusCode::OK);
     assert_eq!(
         me["workspaces"],
-        json!([{"id": f.workspace, "name": "Orbit", "scopes": ["tasks:read"], "project_ids": [f.project]}])
+        json!([{"id": f.workspace, "name": "lukethomas", "scopes": ["tasks:read"], "project_ids": [f.project]}])
     );
     assert_eq!(me["token"]["id"], json!(token_id));
 

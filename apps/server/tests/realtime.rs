@@ -183,7 +183,7 @@ async fn subscription_requires_current_session_and_workspace_membership() {
                 password_hash: orbit_platform::PasswordService::default()
                     .hash("correct horse battery")
                     .unwrap(),
-                workspace_name: "Orbit".into(),
+                workspace_name: "lukethomas".into(),
                 project_name: "General".into(),
             },
             now,

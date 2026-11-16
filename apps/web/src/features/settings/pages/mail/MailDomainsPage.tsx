@@ -69,11 +69,11 @@ function MailDomains() {
       {disabled ? (
         <Alert>
           <Danger />
-          <AlertTitle>Mail is off on this Orbit server</AlertTitle>
+          <AlertTitle>Mail is off on this lukethomas server</AlertTitle>
           <AlertDescription>An instance administrator can turn it on in Admin → Inbound mail.</AlertDescription>
         </Alert>
       ) : null}
-      <SettingsCard title="Add a domain" description="Orbit receives mail for the domain once its verification record is in the DNS.">
+      <SettingsCard title="Add a domain" description="lukethomas receives mail for the domain once its verification record is in the DNS.">
         <form className="flex flex-col gap-3" onSubmit={submit}>
           <Field>
             <FieldLabel htmlFor="mail-domain-name">Domain</FieldLabel>
@@ -145,7 +145,7 @@ function DomainCard({ listed, mailboxes, providers }: { listed: MailDomain; mail
     }
     const timer = setTimeout(() => {
       setChecking(null)
-      toast('The DNS has not answered yet. Orbit checks again on its next run.')
+      toast('The DNS has not answered yet. lukethomas checks again on its next run.')
     }, Math.max(0, checking.until - Date.now()))
     return () => clearTimeout(timer)
   }, [checking, waiting, queryClient, workspaceId])
@@ -169,7 +169,7 @@ function DomainCard({ listed, mailboxes, providers }: { listed: MailDomain; mail
     }
     const confirmed = await confirmAction({
       title: `Remove ${domain.name}?`,
-      description: 'No address uses it. Orbit stops receiving mail for it, and you can delete its DNS records afterwards.',
+      description: 'No address uses it. lukethomas stops receiving mail for it, and you can delete its DNS records afterwards.',
       confirmLabel: 'Remove',
       danger: true,
     })
@@ -221,7 +221,7 @@ function DomainCard({ listed, mailboxes, providers }: { listed: MailDomain; mail
                   <AlertTitle>The verification record is gone</AlertTitle>
                   <AlertDescription>
                     {verify?.status.status === 'wrong' ? `The TXT record at ${verify.name} has another value. ` : `The TXT record at ${verify?.name ?? `_orbit-verify.${domain.name}`} was not found. `}
-                    {domain.grace_ends_at ? `Orbit receives mail for ${domain.name} until ${dateTime(domain.grace_ends_at)}, then refuses it. ` : null}
+                    {domain.grace_ends_at ? `lukethomas receives mail for ${domain.name} until ${dateTime(domain.grace_ends_at)}, then refuses it. ` : null}
                     Publish the record again, then click Check now.
                   </AlertDescription>
                 </Alert>
@@ -231,7 +231,7 @@ function DomainCard({ listed, mailboxes, providers }: { listed: MailDomain; mail
             <SettingsRow className="flex-nowrap">
               <span className="flex min-w-0 flex-1 items-center gap-1.5 text-[0.8125rem] font-medium text-foreground">
                 Mail on
-                <InfoTip text={`Off: Orbit refuses all mail for ${domain.name}. Mailboxes and their mail stay.`} />
+                <InfoTip text={`Off: lukethomas refuses all mail for ${domain.name}. Mailboxes and their mail stay.`} />
               </span>
               <Switch
                 aria-label={`Receive mail for ${domain.name}`}
@@ -276,7 +276,7 @@ function statusText(domain: MailDomain): string {
   const checked = domain.checked_at ? ` Last checked ${since(domain.checked_at)}.` : ' Not checked yet.'
   switch (domain.status) {
     case 'pending':
-      return `Publish the records below at your DNS provider. Orbit checks every 10 minutes for 72 hours after you add the domain; Check now checks at once.${checked}`
+      return `Publish the records below at your DNS provider. lukethomas checks every 10 minutes for 72 hours after you add the domain; Check now checks at once.${checked}`
     case 'verified':
       return `Receives mail${domain.verified_at ? ` since ${shortDate(domain.verified_at)}` : ''}. ${count(domain.address_count, 'address', 'addresses')}.${checked}`
     case 'suspended':

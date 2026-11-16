@@ -1640,7 +1640,7 @@ impl NotionImportService {
                 report.rows_truncated += 1;
                 self.save_progress(context.import_id, report, 0, 0).await?;
                 Err(Failure::Page(
-                    "The database already holds 5,000 rows, the most Orbit allows.".to_owned(),
+                    "The database already holds 5,000 rows, the most lukethomas allows.".to_owned(),
                 ))
             }
             Err(error) => Err(row_failure(error)),

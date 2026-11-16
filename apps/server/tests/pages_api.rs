@@ -43,7 +43,7 @@ impl Fixture {
                     password_hash: PasswordService::default()
                         .hash("correct horse battery")
                         .unwrap(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "General".to_owned(),
                 },
                 now,
@@ -1349,7 +1349,7 @@ async fn duplicate_copies_a_page_or_subtree_after_the_original() {
 #[tokio::test]
 async fn pages_are_isolated_between_workspaces() {
     let fixture = Fixture::new().await;
-    let page = fixture.create(json!({"title": "Private to Orbit"})).await;
+    let page = fixture.create(json!({"title": "Private to lukethomas"})).await;
     let foreign_workspace = create_workspace(&fixture, "Foreign").await;
     let (_, outsider_cookie) =
         add_member(&fixture, &foreign_workspace, "outsider@example.com").await;
@@ -1408,7 +1408,7 @@ async fn pages_are_isolated_between_workspaces() {
     let (status, list) = fixture.call("GET", &foreign_pages, None).await;
     assert_eq!(status, StatusCode::OK);
     assert!(list["items"].as_array().unwrap().is_empty());
-    assert_eq!(fixture.get(id_of(&page)).await["title"], "Private to Orbit");
+    assert_eq!(fixture.get(id_of(&page)).await["title"], "Private to lukethomas");
 
     // Workspace members other than the creator can edit every page.
     let (_, member_cookie) =

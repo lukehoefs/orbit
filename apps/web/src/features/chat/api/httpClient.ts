@@ -133,7 +133,7 @@ const samePresence = (a: PresenceEntry, b: PresenceEntry) =>
   a.status === b.status && a.emoji === b.emoji && a.text === b.text && a.expiresAt === b.expiresAt
 
 /**
- * Chat on the Orbit server, for one workspace and the signed-in user. A write's response lists the events that the
+ * Chat on the lukethomas server, for one workspace and the signed-in user. A write's response lists the events that the
  * write caused for the user; they go to the subscribers, so the cache changes the same way for the user's own writes
  * and (through the live socket) for everybody else's. The socket is open while somebody is subscribed.
  */

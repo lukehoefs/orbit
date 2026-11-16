@@ -225,7 +225,7 @@ async fn database_github_app_routes_issues_without_orbit_tokens() {
                 .header(header::ORIGIN, "https://orbit.test")
                 .header(header::CONTENT_TYPE, "application/json")
                 .body(Body::from(
-                    json!({"installation_id":1234,"repository":"acme/other","label":"Orbit"})
+                    json!({"installation_id":1234,"repository":"acme/other","label":"lukethomas"})
                         .to_string(),
                 ))
                 .unwrap(),
@@ -244,7 +244,7 @@ async fn database_github_app_routes_issues_without_orbit_tokens() {
                 .header(header::ORIGIN, "https://orbit.test")
                 .header(header::CONTENT_TYPE, "application/json")
                 .body(Body::from(
-                    json!({"installation_id":1234,"repository":"acme/repo","label":"Orbit"})
+                    json!({"installation_id":1234,"repository":"acme/repo","label":"lukethomas"})
                         .to_string(),
                 ))
                 .unwrap(),
@@ -280,7 +280,7 @@ async fn database_github_app_routes_issues_without_orbit_tokens() {
                 .header(header::ORIGIN, "https://orbit.test")
                 .header(header::CONTENT_TYPE, "application/json")
                 .body(Body::from(
-                    json!({"installation_id":1234,"repository":"acme/repo","label":"Orbit"})
+                    json!({"installation_id":1234,"repository":"acme/repo","label":"lukethomas"})
                         .to_string(),
                 ))
                 .unwrap(),
@@ -311,7 +311,7 @@ async fn database_github_app_routes_issues_without_orbit_tokens() {
     assert_eq!(connection_events, 2);
 
     let issue = json!({"action":"labeled","installation":{"id":1234,"app_id":77},"repository":{"full_name":"acme/repo"},
-        "issue":{"number":12,"title":"GitHub task","body":"Issue body","state":"open","labels":[{"name":"Orbit"}]}});
+        "issue":{"number":12,"title":"GitHub task","body":"Issue body","state":"open","labels":[{"name":"lukethomas"}]}});
     assert_eq!(
         app.clone()
             .oneshot(github_request("issues", issue, true))
@@ -462,7 +462,7 @@ async fn database_github_app_routes_issues_without_orbit_tokens() {
     assert_eq!(event.sequence, after_pause.to_string());
 
     let relabeled = json!({"action":"labeled","installation":{"id":1234},"repository":{"full_name":"acme/repo"},
-        "issue":{"number":12,"title":"Updated after relabeling","body":"Changed body","state":"open","labels":[{"name":"Orbit"}]}});
+        "issue":{"number":12,"title":"Updated after relabeling","body":"Changed body","state":"open","labels":[{"name":"lukethomas"}]}});
     assert_eq!(
         app.clone()
             .oneshot(github_request("issues", relabeled, true))
@@ -527,7 +527,7 @@ async fn database_github_app_routes_issues_without_orbit_tokens() {
     );
     let mut same_issue_relabeled = same_issue;
     same_issue_relabeled["action"] = json!("labeled");
-    same_issue_relabeled["issue"]["labels"] = json!([{"name":"Orbit"}]);
+    same_issue_relabeled["issue"]["labels"] = json!([{"name":"lukethomas"}]);
     assert_eq!(
         app.clone()
             .oneshot(github_request("issues", same_issue_relabeled, true))
@@ -580,7 +580,7 @@ async fn database_github_app_routes_issues_without_orbit_tokens() {
             .unwrap();
     assert_eq!(paused_while_deleted, 1);
     let relabeled_after_delete = json!({"action":"labeled","installation":{"id":1234},"repository":{"full_name":"acme/repo"},
-        "issue":{"number":12,"title":"Restored from GitHub","body":"Current GitHub body","state":"closed","labels":[{"name":"Orbit"}]}});
+        "issue":{"number":12,"title":"Restored from GitHub","body":"Current GitHub body","state":"closed","labels":[{"name":"lukethomas"}]}});
     assert_eq!(
         app.clone()
             .oneshot(github_request("issues", relabeled_after_delete, true))
@@ -635,7 +635,7 @@ async fn database_github_app_routes_issues_without_orbit_tokens() {
             .unwrap();
     assert_eq!(paused_after_restore, 1);
     let relabeled_again = json!({"action":"labeled","installation":{"id":1234},"repository":{"full_name":"acme/repo"},
-        "issue":{"number":12,"title":"Restored from GitHub","body":"Current GitHub body","state":"closed","labels":[{"name":"Orbit"}]}});
+        "issue":{"number":12,"title":"Restored from GitHub","body":"Current GitHub body","state":"closed","labels":[{"name":"lukethomas"}]}});
     assert_eq!(
         app.clone()
             .oneshot(github_request("issues", relabeled_again, true))
@@ -677,7 +677,7 @@ async fn database_github_app_routes_issues_without_orbit_tokens() {
     assert_eq!(second_task_project, second_project.id.to_string());
 
     let ambiguous = json!({"action":"labeled","installation":{"id":1234},"repository":{"full_name":"acme/repo"},
-        "issue":{"number":14,"title":"Ambiguous","body":"","state":"open","labels":[{"name":"Orbit"},{"name":"Platform"}]}});
+        "issue":{"number":14,"title":"Ambiguous","body":"","state":"open","labels":[{"name":"lukethomas"},{"name":"Platform"}]}});
     let response = app
         .clone()
         .oneshot(github_request("issues", ambiguous, true))
@@ -700,7 +700,7 @@ async fn database_github_app_routes_issues_without_orbit_tokens() {
         app.clone()
             .oneshot(github_request(
                 "pull_request",
-                pull("labeled", "Fix", vec!["Orbit"], "open", false),
+                pull("labeled", "Fix", vec!["lukethomas"], "open", false),
                 true
             ))
             .await
@@ -761,7 +761,7 @@ async fn database_github_app_routes_issues_without_orbit_tokens() {
         app.clone()
             .oneshot(github_request(
                 "pull_request",
-                pull("edited", "Fix again", vec!["Orbit"], "open", false),
+                pull("edited", "Fix again", vec!["lukethomas"], "open", false),
                 true
             ))
             .await
@@ -798,7 +798,7 @@ async fn database_github_app_routes_issues_without_orbit_tokens() {
         app.clone()
             .oneshot(github_request(
                 "pull_request",
-                pull("labeled", "Resumed", vec!["Orbit"], "open", false),
+                pull("labeled", "Resumed", vec!["lukethomas"], "open", false),
                 true
             ))
             .await
@@ -812,7 +812,7 @@ async fn database_github_app_routes_issues_without_orbit_tokens() {
         app.clone()
             .oneshot(github_request(
                 "pull_request",
-                pull("closed", "Resumed", vec!["Orbit"], "closed", true),
+                pull("closed", "Resumed", vec!["lukethomas"], "closed", true),
                 true
             ))
             .await
@@ -861,7 +861,7 @@ async fn database_github_app_routes_issues_without_orbit_tokens() {
         app.clone()
             .oneshot(github_request(
                 "pull_request",
-                pull("labeled", "Restored PR", vec!["Orbit"], "closed", true),
+                pull("labeled", "Restored PR", vec!["lukethomas"], "closed", true),
                 true
             ))
             .await
@@ -899,7 +899,7 @@ async fn database_github_app_routes_issues_without_orbit_tokens() {
     assert_eq!(existing_count, 1);
 
     let closed = json!({"action":"labeled","number":9,"installation":{"id":1234},"repository":{"full_name":"acme/repo"},
-        "pull_request":{"number":9,"title":"Unmerged pull request","body":"","state":"open","merged":false,"labels":[{"name":"Orbit"}]}});
+        "pull_request":{"number":9,"title":"Unmerged pull request","body":"","state":"open","merged":false,"labels":[{"name":"lukethomas"}]}});
     assert_eq!(
         app.clone()
             .oneshot(github_request("pull_request", closed.clone(), true))
@@ -1560,7 +1560,7 @@ async fn github_app(fixture: &Fixture) -> axum::Router {
         .execute(pool).await.unwrap();
     sqlx::query("INSERT INTO github_installations (installation_id, workspace_id, account_login) VALUES (1234, $1, 'acme')")
         .bind(&workspace).execute(pool).await.unwrap();
-    sqlx::query("INSERT INTO github_project_connections (project_id, workspace_id, installation_id, repository, label) VALUES ($1, $2, 1234, 'acme/repo', 'Orbit')")
+    sqlx::query("INSERT INTO github_project_connections (project_id, workspace_id, installation_id, repository, label) VALUES ($1, $2, 1234, 'acme/repo', 'lukethomas')")
         .bind(fixture.project_id.to_string()).bind(&workspace).execute(pool).await.unwrap();
     integration_router(state).layer(HttpPlatformLayer::new(OriginPolicy::new(
         "https://orbit.test",
@@ -1569,7 +1569,7 @@ async fn github_app(fixture: &Fixture) -> axum::Router {
 
 fn github_issue(number: i64) -> Value {
     json!({"action":"opened","installation":{"id":1234,"app_id":77},"repository":{"full_name":"acme/repo"},
-        "issue":{"number":number,"title":"GitHub task","body":"","state":"open","labels":[{"name":"Orbit"}]}})
+        "issue":{"number":number,"title":"GitHub task","body":"","state":"open","labels":[{"name":"lukethomas"}]}})
 }
 
 async fn live_tasks(fixture: &Fixture) -> i64 {
@@ -1795,7 +1795,7 @@ async fn fixture() -> Fixture {
                 password_hash: PasswordService::default()
                     .hash("correct horse battery")
                     .unwrap(),
-                workspace_name: "Orbit".to_owned(),
+                workspace_name: "lukethomas".to_owned(),
                 project_name: "General".to_owned(),
             },
             now,
@@ -1864,7 +1864,7 @@ async fn integrations_do_not_write_to_a_read_only_cloud_workspace() {
         .execute(pool).await.unwrap();
     sqlx::query("INSERT INTO github_installations (installation_id, workspace_id, account_login) VALUES (1234, $1, 'acme')")
         .bind(&workspace).execute(pool).await.unwrap();
-    sqlx::query("INSERT INTO github_project_connections (project_id, workspace_id, installation_id, repository, label) VALUES ($1, $2, 1234, 'acme/repo', 'Orbit')")
+    sqlx::query("INSERT INTO github_project_connections (project_id, workspace_id, installation_id, repository, label) VALUES ($1, $2, 1234, 'acme/repo', 'lukethomas')")
         .bind(fixture.project_id.to_string()).bind(&workspace).execute(pool).await.unwrap();
     let discord = fixture
         .tokens
@@ -1883,7 +1883,7 @@ async fn integrations_do_not_write_to_a_read_only_cloud_workspace() {
         .unwrap();
     let issue = |number: i64| {
         json!({"action":"opened","installation":{"id":1234,"app_id":77},"repository":{"full_name":"acme/repo"},
-            "issue":{"number":number,"title":"GitHub task","body":"","state":"open","labels":[{"name":"Orbit"}]}})
+            "issue":{"number":number,"title":"GitHub task","body":"","state":"open","labels":[{"name":"lukethomas"}]}})
     };
     let tasks = || async {
         sqlx::query_scalar::<_, i64>("SELECT COUNT(*) FROM tasks WHERE workspace_id = $1")

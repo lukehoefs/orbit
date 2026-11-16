@@ -1,4 +1,4 @@
-// Orbit's service worker: shows pushed notifications, opens Orbit when one is clicked, and keeps the images of chat
+// lukethomas's service worker: shows pushed notifications, opens lukethomas when one is clicked, and keeps the images of chat
 // messages so a reload does not read them from the server again. Every other request goes to the network as if the
 // worker were not there.
 
@@ -29,9 +29,9 @@ self.addEventListener('push', (event) => {
   } catch {
     // A push that is not JSON still shows a notification: browsers take the permission away after silent pushes.
   }
-  const title = typeof notice.title === 'string' && notice.title ? notice.title : 'Orbit'
+  const title = typeof notice.title === 'string' && notice.title ? notice.title : 'lukethomas'
   event.waitUntil(
-    // A visible Orbit window got the same notice and plays Orbit's sound: the system's sound would be a second one.
+    // A visible lukethomas window got the same notice and plays lukethomas's sound: the system's sound would be a second one.
     // A hidden or frozen one may play nothing, so the system's sound stays.
     self.clients.matchAll({ type: 'window' }).then((windows) =>
       self.registration.showNotification(title, {

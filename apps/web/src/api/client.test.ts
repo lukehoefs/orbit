@@ -85,7 +85,7 @@ test('public credential and setup-token failures do not expire a session', async
   }
 })
 
-test('API client reports writes refused by Orbit Cloud billing with the server detail', async () => {
+test('API client reports writes refused by lukethomas Cloud billing with the server detail', async () => {
   const refusals = [
     { code: 'workspace_read_only', detail: 'This workspace is read-only because it has no active subscription.' },
     { code: 'trial_limit_reached', detail: 'The trial allows 50 tasks. Choose a plan to add more.' },

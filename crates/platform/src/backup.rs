@@ -171,7 +171,7 @@ pub enum BackupError {
     Cancelled,
     #[error("backup blocking task failed: {0}")]
     BlockingTask(String),
-    #[error("database is currently owned by a serving Orbit process: {path}")]
+    #[error("database is currently owned by a serving lukethomas process: {path}")]
     RestoreTargetOwned { path: PathBuf },
     #[error(
         "restore database path {database_path} and attachment path {attachment_path} must not overlap"

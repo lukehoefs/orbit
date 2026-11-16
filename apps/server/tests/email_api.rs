@@ -45,7 +45,7 @@ async fn fixture() -> Fixture {
                 password_hash: PasswordService::default()
                     .hash("correct horse battery")
                     .unwrap(),
-                workspace_name: "Orbit".to_owned(),
+                workspace_name: "lukethomas".to_owned(),
                 project_name: "General".to_owned(),
             },
             now,
@@ -115,7 +115,7 @@ async fn call(
 fn smtp_body() -> Value {
     json!({
         "host": "smtp.example.com", "port": 587, "security": "starttls", "username": "orbit",
-        "password": "s3cret-smtp-password", "from_address": "orbit@example.com", "from_name": "Orbit"
+        "password": "s3cret-smtp-password", "from_address": "orbit@example.com", "from_name": "lukethomas"
     })
 }
 
@@ -504,8 +504,8 @@ async fn emailed_invitations_need_a_mail_server_and_send_the_link_instead_of_ret
     assert!(body.get("url").is_none());
     let emails = sent(&outbox, 1).await;
     assert_eq!(emails[0].to, "guest@example.com");
-    assert_eq!(emails[0].subject, "You have been invited to Orbit");
-    assert!(emails[0].body.contains("the workspace \"Orbit\""));
+    assert_eq!(emails[0].subject, "You have been invited to lukethomas");
+    assert!(emails[0].body.contains("the workspace \"lukethomas\""));
     assert!(
         emails[0]
             .body
@@ -740,7 +740,7 @@ async fn orbit_cloud_keeps_its_mail_server_and_needs_it_for_registration() {
     assert_eq!(body["code"], "smtp_required");
     assert_eq!(
         body["detail"],
-        "Orbit Cloud needs a mail server. Save a different one instead."
+        "lukethomas Cloud needs a mail server. Save a different one instead."
     );
     let (_, settings) = call(app, "GET", "/api/v1/admin/settings", root, None).await;
     assert_eq!(settings["smtp"]["host"], "smtp.example.com");

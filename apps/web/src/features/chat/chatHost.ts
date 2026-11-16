@@ -6,10 +6,10 @@ import type { Message } from './api/types'
  * (a route component) supplies these.
  */
 export interface ChatHost {
-  /** A card for an Orbit task, page or view URL in a message; `null` for any other URL. */
+  /** A card for an lukethomas task, page or view URL in a message; `null` for any other URL. */
   renderLinkCard: (url: string) => ReactNode
   /**
-   * A bare Orbit URL in the text of a message: a chip that names the task, page or view, or nothing when `hidden` (the card
+   * A bare lukethomas URL in the text of a message: a chip that names the task, page or view, or nothing when `hidden` (the card
    * stands in for the URL). `plain` is the default link, for every other URL and for what the reader cannot see. A typed
    * task identifier comes here as the URL of its task, with the typed text as `plain`.
    */

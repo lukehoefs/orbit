@@ -6,7 +6,7 @@ import { useLinkProviderSignIn, useProviderName } from '@/features/auth/api'
 import { AuthForm, AuthInput } from '@/features/auth/components/AuthForm'
 
 /**
- * The password step when a provider account first connects to an existing Orbit account by its email.
+ * The password step when a provider account first connects to an existing lukethomas account by its email.
  * `onTwoFactor` gets the code challenge when the account has two-factor sign-in on. `onBack` gets the reason when
  * the step expired or was used up, and `null` when the person pressed Back.
  */
@@ -24,7 +24,7 @@ export function LinkPasswordStep({ token, provider, email, onSignedIn, onTwoFact
   return (
     <AuthForm
       title={`Connect ${name}`}
-      description={`An Orbit account for ${email} already exists. Enter its password to connect your ${name} account. You only do this once.`}
+      description={`An lukethomas account for ${email} already exists. Enter its password to connect your ${name} account. You only do this once.`}
       error={link.error}
       pending={link.isPending}
       submitLabel="Connect and sign in"

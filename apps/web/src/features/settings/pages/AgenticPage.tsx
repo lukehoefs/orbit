@@ -4,15 +4,15 @@ import { SettingsCard } from '@/components/common/SettingsCard'
 import { CopyCodeButton } from '@/components/common/CopyCodeButton'
 import { OAuthConnections } from '@/features/auth/components/OAuthConnections'
 
-/** Account view: connect AI clients to Orbit's scoped MCP server, and see the connected ones. */
+/** Account view: connect AI clients to lukethomas's scoped MCP server, and see the connected ones. */
 export function AgenticPage() {
   const url = mcpUrl(window.location.origin)
   return (
     <>
-      <SettingsCard title="MCP server" description="AI clients such as Claude, Codex and Grok can use tasks and read docs and chat through this address. Sign in with your Orbit account and select the workspace, projects and permissions.">
+      <SettingsCard title="MCP server" description="AI clients such as Claude, Codex and Grok can use tasks and read docs and chat through this address. Sign in with your lukethomas account and select the workspace, projects and permissions.">
         <CodeBlock text={url} />
       </SettingsCard>
-      <SettingsCard title="Connect a client" description="Run the command for your client in a terminal. Then sign in to Orbit in the browser, select the projects and permissions, then allow access.">
+      <SettingsCard title="Connect a client" description="Run the command for your client in a terminal. Then sign in to lukethomas in the browser, select the projects and permissions, then allow access.">
         <div className="flex flex-col gap-4">
           {mcpClientCommands(url).map((entry) => (
             <div key={entry.client} className="flex flex-col gap-1.5">

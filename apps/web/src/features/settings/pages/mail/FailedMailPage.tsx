@@ -14,7 +14,7 @@ import { MailManagersOnly } from './MailDomainsPage'
 import { count, dateTime, mailProblem } from './mailSettingsLib'
 
 /**
- * Messages Orbit accepted but could not file into their mailboxes (`failed`), or that have waited for over an hour
+ * Messages lukethomas accepted but could not file into their mailboxes (`failed`), or that have waited for over an hour
  * without a job (`stuck`). The raw message is kept; **Retry** files it again.
  */
 export function FailedMailPage() {
@@ -34,7 +34,7 @@ function FailedMail() {
   }
   const { count: total, receipts: rows, rejected } = receipts.data
   if (total === 0 && rejected.length === 0) {
-    return <EmptyState icon={SmsTracking} title="No failed messages" description="Every message Orbit accepted reached its mailboxes." />
+    return <EmptyState icon={SmsTracking} title="No failed messages" description="Every message lukethomas accepted reached its mailboxes." />
   }
   const shown = rows.length < total ? ` The newest ${rows.length} are shown.` : ''
   return (
@@ -53,14 +53,14 @@ const REASON_TEXTS: Record<MailRejectReason, string> = {
 }
 
 /**
- * Mail a provider accepted that Orbit could not deliver, so the sender got no bounce. No body was kept; add an alias
+ * Mail a provider accepted that lukethomas could not deliver, so the sender got no bounce. No body was kept; add an alias
  * or a catch-all for an address that should exist. Kept for 30 days.
  */
 function NotDelivered({ rejected }: { rejected: MailRejectedDelivery[] }) {
   return (
     <SettingsCard
       title="Not delivered"
-      description="A provider accepted these messages, but no mailbox could take them, so the sender was not told. Orbit kept no copy. They stay listed for 30 days."
+      description="A provider accepted these messages, but no mailbox could take them, so the sender was not told. lukethomas kept no copy. They stay listed for 30 days."
       flush
     >
       <div className="px-2 py-1">
@@ -95,7 +95,7 @@ function FailedReceipts({ total, rows, shown }: { total: number; rows: MailFaile
   return (
     <SettingsCard
       title="Failed messages"
-      description={`${count(total, 'message', 'messages')} did not reach their mailboxes. Orbit keeps each one; fix the cause, then retry.${shown}`}
+      description={`${count(total, 'message', 'messages')} did not reach their mailboxes. lukethomas keeps each one; fix the cause, then retry.${shown}`}
       flush
     >
       <div className="px-2 py-1">
@@ -146,7 +146,7 @@ function ReceiptRow({ receipt }: { receipt: MailFailedReceipt }) {
           aria-label={`Retry the message from ${sender}`}
           disabled={retry.isPending}
           onClick={() => retry.mutate(receipt.id, {
-            onSuccess: () => toast('Orbit files the message again'),
+            onSuccess: () => toast('lukethomas files the message again'),
             onError: (error) => toast.error(mailProblem(error, 'The message could not be retried.')),
           })}
         >

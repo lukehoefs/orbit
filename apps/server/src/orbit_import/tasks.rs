@@ -227,7 +227,7 @@ async fn ensure_teamspace(
                                 "The importing member left the workspace.".to_owned(),
                             ),
                             other => {
-                                Failure::Item(format!("Orbit refused the teamspace: {other}."))
+                                Failure::Item(format!("lukethomas refused the teamspace: {other}."))
                             }
                         })?;
                     created.id
@@ -760,7 +760,7 @@ fn description(
     if !unmatched_assignees.is_empty() {
         fields.push(("Assignees", unmatched_assignees.join(", ")));
     }
-    with_source_details(body, "Imported from Orbit", &fields, &[])
+    with_source_details(body, "Imported from lukethomas", &fields, &[])
 }
 
 /// Files, comments and relations of one task. Each step skips what an earlier import or attempt

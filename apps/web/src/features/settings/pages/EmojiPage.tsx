@@ -28,12 +28,12 @@ const SERVER_PROBLEMS: Record<string, string> = {
   validation_failed: 'A name has 2 to 32 characters: lower case letters, digits and underscores.',
   emoji_name_taken: 'An emoji with this name exists already. Choose another name.',
   emoji_limit_reached: 'The workspace has 200 custom emoji, which is the limit. Delete one first.',
-  storage_quota_exceeded: 'The workspace storage is full. Delete files, or ask the administrator of this Orbit for a higher quota.',
+  storage_quota_exceeded: 'The workspace storage is full. Delete files, or ask the administrator of this lukethomas for a higher quota.',
 }
 
 /** The reason in words: ours for a known code, else what the server said (with the status), else that it did not answer. */
 function serverProblem(error: unknown, fallback: string): string {
-  if (!(error instanceof ApiProblem)) return `${fallback} Orbit did not answer. Check your connection and try again.`
+  if (!(error instanceof ApiProblem)) return `${fallback} lukethomas did not answer. Check your connection and try again.`
   return SERVER_PROBLEMS[error.code] ?? `${fallback} ${error.detail} (${error.status} ${error.code})`
 }
 

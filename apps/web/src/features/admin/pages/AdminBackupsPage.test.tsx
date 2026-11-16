@@ -28,7 +28,7 @@ test('creating a backup refreshes the list with a download link', async () => {
   fireEvent.click(view.getByRole('button', { name: 'Create backup now' }))
   const link = await view.findByRole('link', { name: /Download backup from/ })
   expect(link.getAttribute('href')).toBe('/api/v1/admin/backups/backup-1/download')
-  expect(view.getByText('2.0 KB · 3 files · Orbit 0.1.0')).toBeTruthy()
+  expect(view.getByText('2.0 KB · 3 files · lukethomas 0.1.0')).toBeTruthy()
 })
 
 test('deleting a backup asks first, then removes it from the list', async () => {

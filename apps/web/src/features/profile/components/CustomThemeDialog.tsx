@@ -20,8 +20,8 @@ import {
   type CustomTheme,
 } from '@/lib/customTheme'
 
-/** The colours the fields start from when the user edits the Orbit default. */
-const CUSTOM_BASE: CustomTheme = { sidebar: '#1f1f23', selected: '#34343b', accent: '#f2458f', chat: '#26262b' }
+/** The colours the fields start from when the user edits the lukethomas default. */
+const CUSTOM_BASE: CustomTheme = { sidebar: '#1f1f23', selected: '#34343b', accent: '#4f46e5', chat: '#26262b' }
 
 const COLOR_FIELDS: readonly { key: keyof CustomTheme; label: string; hint: string }[] = [
   { key: 'sidebar', label: 'Sidebar', hint: 'The app sidebar' },
@@ -32,7 +32,7 @@ const COLOR_FIELDS: readonly { key: keyof CustomTheme; label: string; hint: stri
 
 /**
  * The colour editor: presets, four colours, a live preview, and a code to share. For the whole app (Custom) or for one
- * part of it (Per app). "Orbit" (`null`) is the Light, System or Dark theme.
+ * part of it (Per app). "lukethomas" (`null`) is the Light, System or Dark theme.
  */
 export function CustomThemeDialog({
   open,
@@ -98,7 +98,7 @@ function CustomThemeForm({ value, onSave }: { value: CustomTheme | null; onSave:
             Presets
           </h3>
           <div role="group" aria-labelledby={presetsId} className="grid grid-cols-3 gap-x-2 gap-y-2.5">
-            <PresetButton name="Orbit" theme={null} pressed={theme === null} onSelect={() => replace(null)} />
+            <PresetButton name="lukethomas" theme={null} pressed={theme === null} onSelect={() => replace(null)} />
             {CUSTOM_THEME_PRESETS.map((preset) => (
               <PresetButton
                 key={preset.name}
@@ -187,7 +187,7 @@ function CustomThemeForm({ value, onSave }: { value: CustomTheme | null; onSave:
 }
 
 /**
- * Orbit's own colours (`index.css`), for the "Orbit" preset's thumbnail. Literal, because while a custom theme is on
+ * lukethomas's own colours (`index.css`), for the "lukethomas" preset's thumbnail. Literal, because while a custom theme is on
  * it replaces the `var(--…)` colours on the page.
  */
 const ORBIT_COLORS: Record<Theme, CustomTheme & { text: string }> = {
@@ -202,7 +202,7 @@ function useOrbitScheme(): Theme {
   return typeof window.matchMedia === 'function' && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
 }
 
-/** A preset as a thumbnail of chat in its colours, with its name below. "Orbit" (`theme` null) is the default look. */
+/** A preset as a thumbnail of chat in its colours, with its name below. "lukethomas" (`theme` null) is the default look. */
 function PresetButton({ name, theme, pressed, onSelect }: { name: string; theme: CustomTheme | null; pressed: boolean; onSelect: () => void }) {
   return (
     <button
@@ -221,7 +221,7 @@ function PresetButton({ name, theme, pressed, onSelect }: { name: string; theme:
   )
 }
 
-/** A thumbnail of chat in the theme's colours. `null` is the Orbit default. */
+/** A thumbnail of chat in the theme's colours. `null` is the lukethomas default. */
 export function CustomThemeSwatch({ theme, className }: { theme: CustomTheme | null; className?: string }) {
   const orbit = ORBIT_COLORS[useOrbitScheme()]
   const colors = theme ?? orbit

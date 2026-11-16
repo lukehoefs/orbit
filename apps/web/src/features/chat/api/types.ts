@@ -154,7 +154,7 @@ export interface ChannelWebhook {
   events: boolean
 }
 
-/** One click that Orbit sent to a webhook's request URL. */
+/** One click that lukethomas sent to a webhook's request URL. */
 export interface WebhookDelivery {
   id: string
   actionId: string
@@ -166,7 +166,7 @@ export interface WebhookDelivery {
   createdAt: number
 }
 
-/** The sticker of a message: a custom image of the workspace, shown large. `url` is the image, served by Orbit. */
+/** The sticker of a message: a custom image of the workspace, shown large. `url` is the image, served by lukethomas. */
 export interface MessageSticker {
   id: string
   name: string

@@ -69,7 +69,7 @@ test('an operator with a workspace gets the workspace app', async () => {
   await waitFor(() => expect(view.getByTestId('page').textContent).toBe(`/tasks ${workspace.name}`))
 })
 
-test('in Orbit Cloud the app waits for the billing state, so the trial line does not appear late', async () => {
+test('in lukethomas Cloud the app waits for the billing state, so the trial line does not appear late', async () => {
   const workspace = { id: 'alpha', name: 'Alpha', role: 'owner', permissions: [], version: 1 }
   let sendBilling = () => {}
   const billing = new Promise<void>((resolve) => { sendBilling = resolve })

@@ -23,8 +23,8 @@ function failure(error: unknown, fallback: string) {
   return error instanceof ApiProblem ? error.problem.detail : fallback
 }
 
-/** Orbit Cloud emails the person about a changed email, a password reset and a two-factor reset, so they need a mail server. */
-const NO_MAIL_SERVER = 'Needs a mail server on Orbit Cloud'
+/** lukethomas Cloud emails the person about a changed email, a password reset and a two-factor reset, so they need a mail server. */
+const NO_MAIL_SERVER = 'Needs a mail server on lukethomas Cloud'
 
 function MenuItemReason({ children }: { children: string }) {
   return <span className="block text-xs text-muted-foreground">{children}</span>
@@ -45,7 +45,7 @@ function StatGrid({ stats }: { stats: { label: string; value: number | undefined
 }
 
 /**
- * The number of accounts and, on Orbit Cloud, of workspaces on a trial and with an expired trial; then the daily,
+ * The number of accounts and, on lukethomas Cloud, of workspaces on a trial and with an expired trial; then the daily,
  * weekly and monthly active users.
  */
 function SummaryCard() {
@@ -63,7 +63,7 @@ function SummaryCard() {
           ]}
         />
       </SettingsCard>
-      <SettingsCard title="Active users" description="Accounts that used Orbit while signed in during the last 24 hours, 7 days and 30 days. API tokens do not count." flush>
+      <SettingsCard title="Active users" description="Accounts that used lukethomas while signed in during the last 24 hours, 7 days and 30 days. API tokens do not count." flush>
         <StatGrid
           stats={[
             { label: 'Daily', value: summary?.active.daily },
@@ -249,7 +249,7 @@ export function AdminUsersPage() {
   )
 }
 
-/** Self-hosted only: Orbit Cloud emails the link instead of showing it. */
+/** Self-hosted only: lukethomas Cloud emails the link instead of showing it. */
 function RecoveryLinkDialog({ user, url, expiresAt, onClose }: { user: AdminUser; url: string; expiresAt: string; onClose: () => void }) {
   const [copied, setCopied] = useState(false)
   const copy = async () => {

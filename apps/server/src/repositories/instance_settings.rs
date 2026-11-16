@@ -109,7 +109,7 @@ pub enum PasswordChange {
 pub enum InstanceSettingsError {
     #[error("registration needs a configured mail server")]
     EmailNotConfigured,
-    #[error("Orbit Cloud needs a mail server")]
+    #[error("lukethomas Cloud needs a mail server")]
     SmtpRequired,
     #[error("instance settings are unavailable")]
     Unavailable(#[from] sqlx::Error),

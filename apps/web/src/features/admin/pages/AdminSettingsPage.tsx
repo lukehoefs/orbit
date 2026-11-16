@@ -24,7 +24,7 @@ export function AdminSettingsPage() {
 function RegistrationCard({ open, ready, locked }: { open: boolean; ready: boolean; locked: boolean }) {
   const setRegistration = useSetRegistration()
   return (
-    <SettingsCard title="Registration" description="Who can create an account on this Orbit." flush>
+    <SettingsCard title="Registration" description="Who can create an account on this lukethomas." flush>
       <SettingsRow className="flex-nowrap">
         <div className="flex min-w-0 flex-1 flex-col gap-0.5 text-[0.8125rem]">
           {ready

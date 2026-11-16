@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from 'react'
 
 /**
- * What Orbit keeps on this device so a reload does not read everything from the server again: chat data (IndexedDB)
+ * What lukethomas keeps on this device so a reload does not read everything from the server again: chat data (IndexedDB)
  * and the images of chat messages (the service worker's cache, see `public/sw.js`). It belongs to one signed-in user:
  * sign-out, an expired session and another user clear it. Without the browser APIs (a private window, a test) every
  * function does nothing.
@@ -32,7 +32,7 @@ function open(): Promise<IDBDatabase | null> {
       const request = indexedDB.open(DATABASE, 1)
       request.onupgradeneeded = () => request.result.createObjectStore(STORE, { keyPath: 'key' })
       request.onsuccess = () => resolve(request.result)
-      // Storage is blocked: Orbit works without the cache.
+      // Storage is blocked: lukethomas works without the cache.
       request.onerror = () => resolve(null)
       request.onblocked = () => resolve(null)
     } catch {
@@ -185,7 +185,7 @@ export function withinTime(work: Promise<unknown>, ms = 2000): Promise<void> {
   })
 }
 
-/** Removes everything Orbit cached on this device. Settings (theme, drafts, this limit) are not a cache and stay. */
+/** Removes everything lukethomas cached on this device. Settings (theme, drafts, this limit) are not a cache and stay. */
 export async function clearLocalCache() {
   await clearEntries()
   if (typeof caches !== 'undefined') await caches.delete(MEDIA_CACHE).catch(() => false)

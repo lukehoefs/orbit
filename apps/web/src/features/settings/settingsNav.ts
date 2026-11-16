@@ -14,7 +14,7 @@ export interface SettingsNavItem {
   end?: boolean
   /** Shown only to roles that hold this permission. */
   permission?: Permission
-  /** Shown only in Orbit Cloud (billing on). */
+  /** Shown only in lukethomas Cloud (billing on). */
   cloud?: boolean
   /** Shown only while Mail is on for the server. */
   mail?: boolean
@@ -115,7 +115,7 @@ const AREAS: Record<SettingsAreaName, SettingsArea> = {
       },
     ],
   },
-  /** What belongs to the whole Orbit instance. Only the root user (the account created at setup) sees it. */
+  /** What belongs to the whole lukethomas instance. Only the root user (the account created at setup) sees it. */
   admin: {
     title: 'Admin',
     icon: SecurityUser,

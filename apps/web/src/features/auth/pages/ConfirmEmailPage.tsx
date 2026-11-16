@@ -33,7 +33,7 @@ export function ConfirmEmailPage() {
       <AuthCard>
         <h1 className="mb-1 text-xl font-semibold">Your email is changed</h1>
         <p className="text-[0.8125rem] leading-[1.6] text-muted-foreground">You now sign in with {confirm.data}. Your other devices are signed out.</p>
-        <p className="mt-4 text-[0.8125rem]"><Link to="/" className="font-medium text-foreground">Continue to Orbit</Link></p>
+        <p className="mt-4 text-[0.8125rem]"><Link to="/" className="font-medium text-foreground">Continue to lukethomas</Link></p>
       </AuthCard>
     )
   }

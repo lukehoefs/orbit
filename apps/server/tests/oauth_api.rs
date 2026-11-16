@@ -48,7 +48,7 @@ impl Fixture {
                     password_hash: PasswordService::default()
                         .hash("correct horse battery")
                         .unwrap(),
-                    workspace_name: "Orbit".into(),
+                    workspace_name: "lukethomas".into(),
                     project_name: "General".into(),
                 },
                 now,
@@ -1075,7 +1075,7 @@ async fn disconnecting_one_workspace_keeps_the_others_and_revoke_ends_them_all()
         .as_array()
         .unwrap()
         .iter()
-        .find(|g| g["workspace_name"] == "Orbit")
+        .find(|g| g["workspace_name"] == "lukethomas")
         .unwrap()["id"]
         .as_str()
         .unwrap()

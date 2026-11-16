@@ -62,7 +62,7 @@ impl Fixture {
                     email: "root@example.com".to_owned(),
                     display_name: "Root".to_owned(),
                     password_hash: PasswordService::default().hash(PASSWORD).unwrap(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "General".to_owned(),
                 },
                 now,
@@ -543,7 +543,7 @@ async fn an_email_change_is_confirmed_from_the_new_address_and_signs_out_other_s
     assert_eq!(emails.len(), 1);
     assert_eq!(
         (emails[0].to.as_str(), emails[0].subject.as_str()),
-        ("Ada@New.example", "Confirm your new Orbit email")
+        ("Ada@New.example", "Confirm your new lukethomas email")
     );
     let token = token_in(&emails[0].body, "https://orbit.test/confirm-email?token=");
     // Nothing changes before the link is opened.
@@ -595,7 +595,7 @@ async fn an_email_change_is_confirmed_from_the_new_address_and_signs_out_other_s
     assert_eq!(emails.len(), 2);
     assert_eq!(
         (emails[1].to.as_str(), emails[1].subject.as_str()),
-        ("ada@example.com", "Your Orbit email was changed")
+        ("ada@example.com", "Your lukethomas email was changed")
     );
     assert!(
         emails[1].body.contains("changed to Ada@New.example"),
@@ -938,7 +938,7 @@ async fn an_admin_email_change_notifies_the_old_address_and_keeps_an_admins_own_
             .iter()
             .map(|email| (email.to.as_str(), email.subject.as_str()))
             .collect::<Vec<_>>(),
-        [("ada@example.com", "Your Orbit email was changed")]
+        [("ada@example.com", "Your lukethomas email was changed")]
     );
     assert!(
         emails[0].body.contains("changed to ada@new.example"),
@@ -1024,7 +1024,7 @@ async fn orbit_cloud_refuses_admin_account_actions_without_a_mail_server() {
     let (_, member) = fixture
         .add_user("bob@example.com", Some(PASSWORD), true)
         .await;
-    let detail = "Orbit Cloud emails the person about this change. Save a mail server in Admin → Settings first.";
+    let detail = "lukethomas Cloud emails the person about this change. Save a mail server in Admin → Settings first.";
 
     let changed = fixture
         .admin_change_email(&fixture.root_cookie, &ada.to_string(), "new@example.com")
@@ -1104,13 +1104,13 @@ async fn orbit_cloud_tells_the_old_and_the_new_address_about_an_admin_email_chan
         [
             (
                 "ada@example.com".to_owned(),
-                "Your Orbit email was changed".to_owned(),
-                "The email of your Orbit account was changed to ada@new.example.\n\nIf this was not you, contact support right away.\n".to_owned(),
+                "Your lukethomas email was changed".to_owned(),
+                "The email of your lukethomas account was changed to ada@new.example.\n\nIf this was not you, contact support right away.\n".to_owned(),
             ),
             (
                 "ada@new.example".to_owned(),
-                "Your Orbit email was changed".to_owned(),
-                "An Orbit administrator set this address as the email of your account.\n\nIf you did not ask for this, contact support.\n".to_owned(),
+                "Your lukethomas email was changed".to_owned(),
+                "An lukethomas administrator set this address as the email of your account.\n\nIf you did not ask for this, contact support.\n".to_owned(),
             ),
         ]
     );
@@ -1143,12 +1143,12 @@ async fn orbit_cloud_emails_an_admin_recovery_link_instead_of_returning_it() {
     assert_eq!(emails.len(), 1);
     assert_eq!(
         (emails[0].to.as_str(), emails[0].subject.as_str()),
-        ("ada@example.com", "Reset your Orbit password")
+        ("ada@example.com", "Reset your lukethomas password")
     );
     assert!(
         emails[0]
             .body
-            .starts_with("An Orbit administrator started a password reset for your account.")
+            .starts_with("An lukethomas administrator started a password reset for your account.")
     );
     let token = token_in(&emails[0].body, "https://orbit.test/recovery?token=");
     let expires_at: i64 =
@@ -1245,7 +1245,7 @@ async fn orbit_cloud_emails_a_notice_when_an_admin_turns_off_two_step_sign_in() 
         [(
             "ada@example.com".to_owned(),
             "Two-step sign-in was turned off".to_owned(),
-            "An Orbit administrator turned off two-step sign-in for your account. If you did not ask for this, contact support.\n".to_owned(),
+            "An lukethomas administrator turned off two-step sign-in for your account. If you did not ask for this, contact support.\n".to_owned(),
         )]
     );
 }

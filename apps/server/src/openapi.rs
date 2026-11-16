@@ -11,7 +11,7 @@ pub const CONTRACT_ID: &str = "orbit-api-v1";
 
 #[derive(OpenApi)]
 #[openapi(
-    info(title = "Orbit API", version = "orbit-api-v1"),
+    info(title = "lukethomas API", version = "orbit-api-v1"),
     components(schemas(
         orbit_platform::Problem,
         orbit_platform::ConflictMetadata,

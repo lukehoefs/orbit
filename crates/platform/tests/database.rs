@@ -586,7 +586,7 @@ async fn task_relations_migration_rebuilds_statuses_and_seeds_duplicate_statuses
         "INSERT INTO users (id, email, normalized_email, display_name, password_hash, created_at, updated_at)
          VALUES ('{user}', 'owner@example.com', 'owner@example.com', 'Owner', 'x', 1, 1);
          INSERT INTO workspaces (id, name, version, owner_membership_id, created_at, updated_at)
-         VALUES ('{workspace}', 'Orbit', 0, '{membership}', 1, 1);
+         VALUES ('{workspace}', 'lukethomas', 0, '{membership}', 1, 1);
          INSERT INTO memberships (id, workspace_id, user_id, role, version, created_at, updated_at)
          VALUES ('{membership}', '{workspace}', '{user}', 'owner', 0, 1, 1);
          INSERT INTO projects (id, workspace_id, name, project_key, color, version, deleted_at, created_at, updated_at)
@@ -1728,7 +1728,7 @@ async fn views_migration_backfills_completed_at_and_creates_view_tables() {
         "INSERT INTO users (id, email, normalized_email, display_name, password_hash, created_at, updated_at)
          VALUES ('{user}', 'owner@example.com', 'owner@example.com', 'Owner', 'x', 1, 1);
          INSERT INTO workspaces (id, name, version, owner_membership_id, created_at, updated_at)
-         VALUES ('{workspace}', 'Orbit', 0, '{membership}', 1, 1);
+         VALUES ('{workspace}', 'lukethomas', 0, '{membership}', 1, 1);
          INSERT INTO memberships (id, workspace_id, user_id, role, version, created_at, updated_at)
          VALUES ('{membership}', '{workspace}', '{user}', 'owner', 0, 1, 1);
          INSERT INTO projects (id, workspace_id, name, project_key, color, version, deleted_at, created_at, updated_at)
@@ -1831,7 +1831,7 @@ async fn sub_issues_migration_links_parents_in_one_workspace_and_adds_project_fl
         "INSERT INTO users (id, email, normalized_email, display_name, password_hash, created_at, updated_at)
          VALUES ('{user}', 'owner@example.com', 'owner@example.com', 'Owner', 'x', 1, 1);
          INSERT INTO workspaces (id, name, version, owner_membership_id, created_at, updated_at)
-         VALUES ('{workspace}', 'Orbit', 0, '{membership}', 1, 1),
+         VALUES ('{workspace}', 'lukethomas', 0, '{membership}', 1, 1),
                 ('{other_workspace}', 'Other', 0, '{other_membership}', 1, 1);
          INSERT INTO memberships (id, workspace_id, user_id, role, version, created_at, updated_at)
          VALUES ('{membership}', '{workspace}', '{user}', 'owner', 0, 1, 1),
@@ -2064,7 +2064,7 @@ async fn task_numbers_migration_backfills_allocates_and_never_reuses() {
          INSERT INTO users (id, email, normalized_email, display_name, password_hash, created_at, updated_at)
          VALUES ('{user}', 'owner@example.com', 'owner@example.com', 'Owner', 'x', 1, 1);
          INSERT INTO workspaces (id, name, version, owner_membership_id, created_at, updated_at)
-         VALUES ('{workspace}', 'Orbit', 0, '{membership}', 1, 1);
+         VALUES ('{workspace}', 'lukethomas', 0, '{membership}', 1, 1);
          INSERT INTO memberships (id, workspace_id, user_id, role, version, created_at, updated_at)
          VALUES ('{membership}', '{workspace}', '{user}', 'owner', 0, 1, 1);
          INSERT INTO projects (id, workspace_id, name, project_key, color, version, deleted_at, created_at, updated_at)

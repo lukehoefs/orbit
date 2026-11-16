@@ -388,19 +388,19 @@ fn import_problem(
             StatusCode::CONFLICT,
             "app_key_missing",
             "App key missing",
-            "The server app key (ORBIT_APP_KEY) must be configured before importing from another Orbit.",
+            "The server app key (ORBIT_APP_KEY) must be configured before importing from another lukethomas.",
         ),
         OrbitImportError::UrlInvalid => (
             StatusCode::UNPROCESSABLE_ENTITY,
             "orbit_url_invalid",
             "Instance URL invalid",
-            "Enter the other Orbit's address as https://orbit.example.com.",
+            "Enter the other lukethomas's address as https://orbit.example.com.",
         ),
         OrbitImportError::TokenInvalid => (
             StatusCode::UNPROCESSABLE_ENTITY,
             "orbit_token_invalid",
             "API token invalid",
-            "The other Orbit rejected the API token. Paste a valid export token.",
+            "The other lukethomas rejected the API token. Paste a valid export token.",
         ),
         OrbitImportError::ScopeMissing => (
             StatusCode::UNPROCESSABLE_ENTITY,
@@ -411,8 +411,8 @@ fn import_problem(
         OrbitImportError::Unreachable => (
             StatusCode::BAD_GATEWAY,
             "orbit_unreachable",
-            "Orbit instance unreachable",
-            "The other Orbit could not be reached. Check the address and try again in a moment.",
+            "lukethomas instance unreachable",
+            "The other lukethomas could not be reached. Check the address and try again in a moment.",
         ),
         OrbitImportError::ExportTooLarge => (
             StatusCode::PAYLOAD_TOO_LARGE,
@@ -423,8 +423,8 @@ fn import_problem(
         OrbitImportError::FormatUnsupported => (
             StatusCode::UNPROCESSABLE_ENTITY,
             "orbit_format_unsupported",
-            "Not an Orbit export",
-            "Upload the ZIP archive of an Orbit workspace export.",
+            "Not an lukethomas export",
+            "Upload the ZIP archive of an lukethomas workspace export.",
         ),
         OrbitImportError::InProgress => (
             StatusCode::CONFLICT,
@@ -445,7 +445,7 @@ fn import_problem(
             "A full import needs a workspace owner or administrator.",
         ),
         OrbitImportError::Unavailable(error) => {
-            tracing::error!(error = %error, "Orbit import storage failed");
+            tracing::error!(error = %error, "lukethomas import storage failed");
             return ApiError::new(
                 StatusCode::INTERNAL_SERVER_ERROR,
                 "internal_error",

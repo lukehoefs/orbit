@@ -106,7 +106,7 @@ impl Fixture {
                     email: "owner@example.com".to_owned(),
                     display_name: "Owner".to_owned(),
                     password_hash: "unused".to_owned(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "General".to_owned(),
                 },
                 now,

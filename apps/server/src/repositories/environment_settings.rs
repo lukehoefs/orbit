@@ -172,10 +172,10 @@ impl EnvironmentSettings {
         }
         let refuse = |reason: &str| {
             format!(
-                "the attachment files may still be in the {recorded}, and Orbit would use {used} now \
-                 ({reason}). Start Orbit with that bucket and ORBIT_S3_ATTACHMENTS=false (or S3 for \
+                "the attachment files may still be in the {recorded}, and lukethomas would use {used} now \
+                 ({reason}). Start lukethomas with that bucket and ORBIT_S3_ATTACHMENTS=false (or S3 for \
                  attachments turned off in Admin → Storage), and wait until Admin → Storage shows no files left \
-                 to move. If the files in that bucket are no longer needed, stop Orbit and run `orbit \
+                 to move. If the files in that bucket are no longer needed, stop lukethomas and run `orbit \
                  attachments forget-bucket --yes`",
                 used = used.map_or("no bucket".to_owned(), |s3| BucketLocation::of(s3)
                     .to_string()),
@@ -186,7 +186,7 @@ impl EnvironmentSettings {
             .as_ref()
             .filter(|s3| BucketLocation::of(s3) == recorded)
         else {
-            return Err(refuse("Orbit has no credentials to check that bucket"));
+            return Err(refuse("lukethomas has no credentials to check that bucket"));
         };
         let has_files =
             crate::object_storage::saved_bucket(old, Some(app_key), Owner::Installation)?

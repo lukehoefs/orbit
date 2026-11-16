@@ -100,7 +100,7 @@ impl Server {
                     password_hash: PasswordService::default()
                         .hash("correct horse battery")
                         .unwrap(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "General".to_owned(),
                 },
                 now,
@@ -164,7 +164,7 @@ async fn email_caps_hold_across_servers() {
     // A mail server that refuses connections: the emails fail after they were counted.
     let smtp = json!({
         "host": "127.0.0.1", "port": 9, "security": "none", "username": null, "password": null,
-        "from_address": "orbit@example.com", "from_name": "Orbit"
+        "from_address": "orbit@example.com", "from_name": "lukethomas"
     });
     let (status, body) = one
         .call("PUT", "/api/v1/admin/settings/smtp", Some(&root), smtp)

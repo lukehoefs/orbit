@@ -855,7 +855,7 @@ pub enum ConfigError {
     InvalidEnvironment { key: String, value: String },
     #[error("invalid configuration setting {key}: {detail}")]
     InvalidSetting { key: &'static str, detail: String },
-    #[error("unknown Orbit environment setting {0}")]
+    #[error("unknown lukethomas environment setting {0}")]
     UnknownEnvironment(String),
     #[error("both {key} and {key}_FILE are set")]
     AmbiguousSecret { key: String },
@@ -1163,7 +1163,7 @@ fn apply_environment(
     {
         return Err(ConfigError::InvalidSetting {
             key: "ORBIT_OPEN_REGISTRATION",
-            detail: "Orbit Cloud needs ORBIT_SMTP_* to open registration".to_owned(),
+            detail: "lukethomas Cloud needs ORBIT_SMTP_* to open registration".to_owned(),
         });
     }
     Ok(())

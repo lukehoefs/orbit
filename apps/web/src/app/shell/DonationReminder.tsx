@@ -25,7 +25,7 @@ function readDismissedAt(): string | null {
 }
 
 /**
- * Self-hosted Orbit only (no billing): a card in the bottom corner asks installation admins for a donation, once a
+ * Self-hosted lukethomas only (no billing): a card in the bottom corner asks installation admins for a donation, once a
  * month. Any choice (donate, "Maybe next time", close) hides it until next month in this browser.
  */
 export function DonationReminder() {
@@ -46,7 +46,7 @@ export function DonationReminder() {
   return (
     <section
       data-slot="donation-reminder"
-      aria-label="Support Orbit"
+      aria-label="Support lukethomas"
       className="fixed right-4 bottom-4 z-40 w-[min(380px,calc(100vw-2rem))] rounded-xl border bg-popover p-4 text-popover-foreground shadow-lg animate-in fade-in-0 slide-in-from-bottom-2 duration-200 ease-out motion-reduce:animate-none max-[899px]:bottom-[calc(5rem+env(safe-area-inset-bottom,0px))]"
     >
       <button
@@ -62,9 +62,9 @@ export function DonationReminder() {
           <Heart className="size-5" />
         </span>
         <div className="min-w-0">
-          <h2 className="text-sm font-semibold">Enjoy Orbit? Support our work.</h2>
+          <h2 className="text-sm font-semibold">Enjoy lukethomas? Support our work.</h2>
           <p className="mt-1 text-xs leading-5 text-muted-foreground">
-            Orbit will be free forever. To support our work, please consider a donation.
+            lukethomas will be free forever. To support our work, please consider a donation.
           </p>
         </div>
       </div>

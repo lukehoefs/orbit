@@ -80,8 +80,8 @@ test('cancelling sends nothing; the owner is told to transfer ownership first', 
   expect(owner.view.queryAllByRole('button', { name: 'Leave workspace' })).toHaveLength(0)
 })
 
-test('on Orbit Cloud the owner is told that ownership transfer is not available', async () => {
+test('on lukethomas Cloud the owner is told that ownership transfer is not available', async () => {
   const owner = setup('owner', { billing: true })
-  expect(await owner.view.findByText(/^The owner cannot leave. Ownership transfer is not available on Orbit Cloud yet./)).toBeTruthy()
+  expect(await owner.view.findByText(/^The owner cannot leave. Ownership transfer is not available on lukethomas Cloud yet./)).toBeTruthy()
   expect(owner.view.queryAllByText(/first transfer ownership/)).toHaveLength(0)
 })

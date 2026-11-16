@@ -34,7 +34,7 @@ function EmojiButton({ emoji, ...props }: EmojiPickerListEmojiProps) {
 
 /**
  * The emoji picker panel: search, categories, keyboard navigation and skin tones (Frimousse), with Twemoji images.
- * The emoji data comes from Orbit itself, not from a CDN. `onRemove` adds a Remove action (page and callout icons).
+ * The emoji data comes from lukethomas itself, not from a CDN. `onRemove` adds a Remove action (page and callout icons).
  * `custom` (chat only) adds the workspace's custom emoji in a group above the list; one of them is picked as the text
  * `:name:`. Frimousse has no place for entries that are not characters, so the group is ours and the search filters it.
  */

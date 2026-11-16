@@ -24,7 +24,7 @@ export function AuthCard({ children, className }: { children: React.ReactNode; c
 
 export function AuthBrand() {
   // 22px keeps the 11-unit pixel logo on whole device pixels.
-  return <span className="flex items-center gap-2 text-[0.8125rem] font-bold tracking-[0.08em] text-primary uppercase"><img src="/logo.svg" alt="" className="size-[22px]" />Orbit</span>
+  return <span className="flex items-center gap-2 text-[0.8125rem] font-bold tracking-[0.08em] text-primary uppercase"><img src="/logo.svg" alt="" className="size-[22px]" />lukethomas</span>
 }
 
 /** Header, an inset panel with the fields and actions, and an optional footer row (Coolify's sign-in layout). */

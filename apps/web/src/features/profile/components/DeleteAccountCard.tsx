@@ -92,7 +92,7 @@ function OwnedWorkspaces({ workspaces, cloud }: { workspaces: OwnedWorkspace[]; 
       </ul>
       <p className="text-muted-foreground">
         {cloud
-          ? 'Delete them first in Workspace settings → Danger zone. Ownership transfer is not available on Orbit Cloud.'
+          ? 'Delete them first in Workspace settings → Danger zone. Ownership transfer is not available on lukethomas Cloud.'
           : 'Transfer them to another member (Workspace settings → Members) or delete them (Workspace settings → Danger zone) first.'}
       </p>
     </div>

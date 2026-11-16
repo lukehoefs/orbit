@@ -86,7 +86,7 @@ test('downloadPageMarkdown shows the limit message for 413 and a generic one oth
 
 test('printPage prints with the print class and the page title, then restores both after printing', () => {
   const root = document.documentElement
-  document.title = 'Orbit'
+  document.title = 'lukethomas'
   const during: Array<{ printing: boolean; title: string }> = []
   let print = () => {
     during.push({ printing: root.hasAttribute(PRINT_ATTR), title: document.title })
@@ -104,7 +104,7 @@ test('printPage prints with the print class and the page title, then restores bo
   expect(root.hasAttribute(PRINT_ATTR)).toBe(true)
   events.dispatchEvent(new Event('afterprint'))
   expect(root.hasAttribute(PRINT_ATTR)).toBe(false)
-  expect(document.title).toBe('Orbit')
+  expect(document.title).toBe('lukethomas')
 
   // A browser without print support leaves nothing behind.
   print = () => {
@@ -112,7 +112,7 @@ test('printPage prints with the print class and the page title, then restores bo
   }
   printPage('  ', win)
   expect(root.hasAttribute(PRINT_ATTR)).toBe(false)
-  expect(document.title).toBe('Orbit')
+  expect(document.title).toBe('lukethomas')
 })
 
 test('the print stylesheet is static CSS in index.css (no runtime <style> under the production CSP)', async () => {

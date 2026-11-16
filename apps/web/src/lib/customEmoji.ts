@@ -1,4 +1,4 @@
-/** What the app needs of a workspace's custom emoji to show it. `url` is the image, served by Orbit. */
+/** What the app needs of a workspace's custom emoji to show it. `url` is the image, served by lukethomas. */
 export interface CustomEmoji {
   /** Without colons: `party_parrot`. */
   name: string

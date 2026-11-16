@@ -40,7 +40,7 @@ function download(url: string) {
 function OriginalMessage({ messageId, onClose }: { messageId: string; onClose: () => void }) {
   const raw = useRawMessage(messageId)
   return (
-    <Modal title="Original message" description="The message as Orbit received it." onClose={onClose} className="sm:max-w-4xl">
+    <Modal title="Original message" description="The message as lukethomas received it." onClose={onClose} className="sm:max-w-4xl">
       {raw.data ? (
         <>
           <pre className="max-h-[60vh] overflow-auto rounded-md border bg-muted/40 p-3 font-mono text-xs whitespace-pre-wrap break-all">{raw.data.text}</pre>

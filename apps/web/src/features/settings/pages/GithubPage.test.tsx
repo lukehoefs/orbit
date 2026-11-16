@@ -29,7 +29,7 @@ test('workspace settings start GitHub App registration', async () => {
     if (request.method === 'POST') {
       requestPath = new URL(request.url).pathname
       sentBody = await request.json()
-      return Response.json({ action: 'https://github.com/organizations/acme/settings/apps/new?state=secret', manifest: { name: 'Orbit', default_events: ['issues'] } })
+      return Response.json({ action: 'https://github.com/organizations/acme/settings/apps/new?state=secret', manifest: { name: 'lukethomas', default_events: ['issues'] } })
     }
     return Response.json({ app_slug: null, install_url: null, can_manage: true, key_configured: true })
   }) as typeof fetch

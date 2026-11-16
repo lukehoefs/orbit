@@ -300,7 +300,7 @@ async fn server_metadata(State(state): State<OAuthState>) -> Json<Value> {
 async fn resource_metadata(State(state): State<OAuthState>) -> Json<Value> {
     Json(
         json!({"resource": state.resource, "authorization_servers": [state.origin],
-        "scopes_supported": SCOPES, "bearer_methods_supported": ["header"], "resource_name": "Orbit tasks, docs and chat"}),
+        "scopes_supported": SCOPES, "bearer_methods_supported": ["header"], "resource_name": "lukethomas tasks, docs and chat"}),
     )
 }
 

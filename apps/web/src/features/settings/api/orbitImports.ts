@@ -10,7 +10,7 @@ import { chatKeys } from '@/features/chat/api/keys'
 import { UploadUnreachable, uploadImportArchive } from '@/features/docs/api/obsidianImports'
 import { IMPORT_POLL_MS, isActiveImport, isFinalImport } from '@/features/tasks/api/importStatus'
 
-/** A user-facing sentence for a failed Orbit import request. */
+/** A user-facing sentence for a failed lukethomas import request. */
 export function orbitImportErrorMessage(error: unknown): string {
   if (error instanceof ApiProblem) {
     const message = orbitImportProblemMessage(error.code)
@@ -50,7 +50,7 @@ function refreshImported(queryClient: QueryClient, workspaceId: string) {
   void queryClient.invalidateQueries({ queryKey: chatKeys.conversations(workspaceId) })
 }
 
-/** The member's 20 most recent Orbit imports in this workspace, polled slowly while one runs. */
+/** The member's 20 most recent lukethomas imports in this workspace, polled slowly while one runs. */
 export function useOrbitImports(workspaceId: string) {
   return useQuery({
     queryKey: queryKeys.orbitImports.list(workspaceId),

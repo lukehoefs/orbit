@@ -691,7 +691,7 @@ fn trace_headers(
     let date = chrono::Utc::now().to_rfc2822();
     let results = authentication_results(hostname, auth).replace("; ", ";\r\n\t");
     format!(
-        "Received: from {} by {hostname} (Orbit) with HTTPS;\r\n\t{date}\r\n\
+        "Received: from {} by {hostname} (lukethomas) with HTTPS;\r\n\t{date}\r\n\
          Authentication-Results: {results}\r\n",
         provider.kind.as_str()
     )

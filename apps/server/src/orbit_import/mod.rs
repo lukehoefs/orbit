@@ -179,7 +179,7 @@ pub enum OrbitImportError {
     TokenInvalid,
     #[error("the API token has no export scope")]
     ScopeMissing,
-    #[error("the other Orbit instance is unreachable")]
+    #[error("the other lukethomas instance is unreachable")]
     Unreachable,
     #[error("the archive is too large")]
     ExportTooLarge,
@@ -606,11 +606,11 @@ impl OrbitImportService {
             Ok(me) => me,
             Err(ClientError::TokenInvalid) => return Err(OrbitImportError::TokenInvalid),
             Err(ClientError::Unreachable(error)) => {
-                tracing::warn!(error = %error, "Orbit import token validation failed");
+                tracing::warn!(error = %error, "lukethomas import token validation failed");
                 return Err(OrbitImportError::Unreachable);
             }
             Err(error) => {
-                tracing::warn!(error = %error, "Orbit import token validation refused");
+                tracing::warn!(error = %error, "lukethomas import token validation refused");
                 return Err(OrbitImportError::TokenInvalid);
             }
         };
@@ -1026,7 +1026,7 @@ impl OrbitImportService {
                 .delete(workspace_id, import_id, location)
                 .await
             {
-                tracing::warn!(%error, import_id = %id, "Orbit import archive could not be deleted");
+                tracing::warn!(%error, import_id = %id, "lukethomas import archive could not be deleted");
                 continue;
             }
             sqlx::query("UPDATE orbit_imports SET archive_location = NULL WHERE id = $1")
@@ -1054,7 +1054,7 @@ impl OrbitImportService {
                 )
                 .await
         {
-            tracing::warn!(import_id = %import_id, error = %error, cleanup = %cleanup, "Orbit import could not be finalized");
+            tracing::warn!(import_id = %import_id, error = %error, cleanup = %cleanup, "lukethomas import could not be finalized");
         }
         result
     }
@@ -1084,7 +1084,7 @@ impl OrbitImportService {
         match failure {
             Failure::Interrupted => Err(JobError::Retryable("interrupted by shutdown".to_owned())),
             Failure::Transient(message) if !run.last_attempt && !run.cancel.is_cancelled() => {
-                tracing::warn!(import_id = %import_id, error = %message, "Orbit import will retry");
+                tracing::warn!(import_id = %import_id, error = %message, "lukethomas import will retry");
                 Err(JobError::Retryable(message))
             }
             Failure::Transient(message) if run.cancel.is_cancelled() => {
@@ -1163,14 +1163,14 @@ impl OrbitImportService {
                     WorkspaceExportStatus::Ready => break,
                     WorkspaceExportStatus::Failed => {
                         return Err(Failure::Fatal(
-                            "The export failed on the other Orbit instance.".to_owned(),
+                            "The export failed on the other lukethomas instance.".to_owned(),
                         ));
                     }
                     WorkspaceExportStatus::Queued | WorkspaceExportStatus::Running => {}
                 }
                 if TimestampMillis::now().as_millis() > deadline.as_millis() {
                     return Err(Failure::Fatal(
-                        "The other Orbit instance did not finish the export within 24 hours."
+                        "The other lukethomas instance did not finish the export within 24 hours."
                             .to_owned(),
                     ));
                 }

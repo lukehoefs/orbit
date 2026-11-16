@@ -259,42 +259,42 @@ fn steps(provider: &MailProvider) -> Vec<String> {
     let steps: Vec<String> = match provider.kind {
         ProviderKind::Postshiba => vec![
             "In PostShiba, add the domain as a sending domain, then open Inbound → Inboxes and select Issue inbox on it.".to_owned(),
-            "Under Where should mail land?, choose Root domain (or a subdomain, and add that subdomain to Orbit instead). Set Address to * so every address reaches Orbit.".to_owned(),
-            "Set Webhook URL to the webhook URL and Webhook format to PostShiba JSON. Copy the inbox's signing secret, and an API key of a team admin (Orbit reads the raw message with it), into this provider.".to_owned(),
+            "Under Where should mail land?, choose Root domain (or a subdomain, and add that subdomain to lukethomas instead). Set Address to * so every address reaches lukethomas.".to_owned(),
+            "Set Webhook URL to the webhook URL and Webhook format to PostShiba JSON. Copy the inbox's signing secret, and an API key of a team admin (lukethomas reads the raw message with it), into this provider.".to_owned(),
             "Publish the MX record that the inbox shows (inbound.postshiba.com) and select Check MX.".to_owned(),
-            "In Orbit, route the domain to this provider.".to_owned(),
+            "In lukethomas, route the domain to this provider.".to_owned(),
         ],
         ProviderKind::Cloudflare => vec![
             "In Cloudflare, open the domain, then Email → Email Routing, and turn it on. Cloudflare adds its MX records.".to_owned(),
             "In Workers & Pages, create a Worker, paste the script below and deploy it.".to_owned(),
             "In the Worker's settings, add the variable ORBIT_WEBHOOK_URL with the webhook URL, and the secret ORBIT_SIGNING_SECRET with the signing secret.".to_owned(),
             "In Email Routing → Routing rules, set the catch-all address to Send to a Worker, with this Worker.".to_owned(),
-            "In Orbit, route the domain to this provider.".to_owned(),
+            "In lukethomas, route the domain to this provider.".to_owned(),
         ],
         ProviderKind::Postmark => vec![
             "In Postmark, open the server, then the Default Inbound Stream → Settings.".to_owned(),
             "Set the inbound webhook URL to the webhook URL with its credentials, and turn on Include raw email content in JSON payload.".to_owned(),
             "Add the domain as the inbound domain, and point its MX record to inbound.postmarkapp.com.".to_owned(),
-            "In Orbit, route the domain to this provider.".to_owned(),
+            "In lukethomas, route the domain to this provider.".to_owned(),
         ],
         ProviderKind::Mailgun => vec![
             "In Mailgun, add the domain and publish the MX records that Mailgun shows.".to_owned(),
             "Create a receiving route: match the recipient .*@<domain>, forward to the webhook URL (it ends in /mime), and stop.".to_owned(),
             "Copy the HTTP webhook signing key into this provider.".to_owned(),
-            "In Orbit, route the domain to this provider.".to_owned(),
+            "In lukethomas, route the domain to this provider.".to_owned(),
         ],
         ProviderKind::Resend => vec![
             "In Resend, add the domain, turn on receiving, and publish the MX record that Resend shows. Enter its host here as the MX host.".to_owned(),
             "Add a webhook with the webhook URL and the event email.received. Copy its signing secret (whsec_…) and an API key that can read received emails into this provider.".to_owned(),
-            "Resend keeps its own copy of each message; Orbit cannot delete it.".to_owned(),
-            "In Orbit, route the domain to this provider.".to_owned(),
+            "Resend keeps its own copy of each message; lukethomas cannot delete it.".to_owned(),
+            "In lukethomas, route the domain to this provider.".to_owned(),
         ],
         ProviderKind::Ses => vec![
             format!("In Amazon SES ({region}), verify the domain and point its MX record to inbound-smtp.{region}.amazonaws.com."),
-            "Create an SNS topic, enter its ARN here, and add an HTTPS subscription with the webhook URL. Orbit confirms it.".to_owned(),
+            "Create an SNS topic, enter its ARN here, and add an HTTPS subscription with the webhook URL. lukethomas confirms it.".to_owned(),
             format!("Create a receipt rule for the domain with the action Deliver to S3 bucket {bucket} and this SNS topic."),
-            format!("Create an IAM user for Orbit with s3:GetObject and s3:DeleteObject on {bucket}, and enter its keys here. Orbit deletes each message from the bucket once it has stored it."),
-            "In Orbit, route the domain to this provider.".to_owned(),
+            format!("Create an IAM user for lukethomas with s3:GetObject and s3:DeleteObject on {bucket}, and enter its keys here. lukethomas deletes each message from the bucket once it has stored it."),
+            "In lukethomas, route the domain to this provider.".to_owned(),
         ],
     };
     steps

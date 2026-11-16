@@ -22,7 +22,7 @@ import { LoadingText } from '@/components/ui/spinner'
 const SERVER_PROBLEMS: Record<string, string> = {
   chat_forbidden: 'Only workspace owners and administrators can manage stickers.',
   sticker_too_large: 'The image is too large. The limit is 512 KB.',
-  storage_quota_exceeded: 'The workspace storage is full. Delete files, or ask the administrator of this Orbit for a higher quota.',
+  storage_quota_exceeded: 'The workspace storage is full. Delete files, or ask the administrator of this lukethomas for a higher quota.',
   invalid_sticker: 'The file is not a PNG, JPEG, WebP or GIF image.',
   validation_failed: 'A name has 2 to 30 characters.',
   sticker_name_taken: 'A sticker with this name exists already. Choose another name.',
@@ -31,7 +31,7 @@ const SERVER_PROBLEMS: Record<string, string> = {
 
 /** The reason in words: ours for a known code, else what the server said (with the status), else that it did not answer. */
 function serverProblem(error: unknown, fallback: string): string {
-  if (!(error instanceof ApiProblem)) return `${fallback} Orbit did not answer. Check your connection and try again.`
+  if (!(error instanceof ApiProblem)) return `${fallback} lukethomas did not answer. Check your connection and try again.`
   return SERVER_PROBLEMS[error.code] ?? `${fallback} ${error.detail} (${error.status} ${error.code})`
 }
 

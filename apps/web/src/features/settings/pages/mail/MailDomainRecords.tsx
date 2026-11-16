@@ -14,8 +14,8 @@ function recordBadge(record: MailDnsRecord, checked: boolean): { label: string; 
       return { label: 'OK', variant: 'secondary', hint: 'The record was found with this value.' }
     case 'unknown':
       return checked
-        ? { label: 'Unknown', variant: 'outline', hint: 'The DNS lookup did not answer. Orbit tries again on the next check.' }
-        : { label: 'Not checked', variant: 'outline', hint: 'Orbit has not checked the DNS yet.' }
+        ? { label: 'Unknown', variant: 'outline', hint: 'The DNS lookup did not answer. lukethomas tries again on the next check.' }
+        : { label: 'Not checked', variant: 'outline', hint: 'lukethomas has not checked the DNS yet.' }
     case 'missing':
       return required
         ? { label: 'Required', variant: 'destructive', hint: 'The record was not found. Mail needs it.' }

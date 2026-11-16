@@ -49,7 +49,7 @@ function GithubCardContent({ settings, workspaceId, save, remove, onPendingChang
 }) {
   const current = settings.repositories.find((item) => item.repository === settings.repository)
   const savedSelection = current ? `${current.installation_id}:${current.repository}` : NO_REPOSITORY
-  const savedLabel = settings.label ?? 'Orbit'
+  const savedLabel = settings.label ?? 'lukethomas'
   const [selection, setSelection] = useState(savedSelection)
   const [label, setLabel] = useState(savedLabel)
   const selected = settings.repositories.find((item) => `${item.installation_id}:${item.repository}` === selection)

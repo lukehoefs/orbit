@@ -33,7 +33,7 @@ export function ViewActionsMenu({ workspaceId, view, onEdit, onDuplicate, onDele
       await deleteView.mutateAsync(view.id)
       onDeleted?.()
     } catch (error) {
-      toast.error(error instanceof ApiProblem ? error.detail : "Orbit couldn't delete the view.")
+      toast.error(error instanceof ApiProblem ? error.detail : "lukethomas couldn't delete the view.")
     }
   }
 

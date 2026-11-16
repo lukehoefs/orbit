@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 
 /**
- * The emoji picker loads its data from Orbit's own copy of the data. In a test it comes from the `emojibase-data`
+ * The emoji picker loads its data from lukethomas's own copy of the data. In a test it comes from the `emojibase-data`
  * package: a fake `fetch` returns this for such a URL, and `null` means the URL is not an emoji data request.
  */
 export function emojibaseResponse(input: RequestInfo | URL): Response | null {

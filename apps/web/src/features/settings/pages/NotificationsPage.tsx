@@ -45,13 +45,13 @@ function ThisDevice() {
   const test = useSendTestPush()
 
   if (needsHomeScreen(navigator.userAgent, (navigator as { standalone?: boolean }).standalone, navigator.maxTouchPoints)) {
-    return <p className="text-sm text-muted-foreground">Add Orbit to your Home Screen to get notifications: in Safari, tap Share, then "Add to Home Screen", and open Orbit from there.</p>
+    return <p className="text-sm text-muted-foreground">Add lukethomas to your Home Screen to get notifications: in Safari, tap Share, then "Add to Home Screen", and open lukethomas from there.</p>
   }
   if (!pushSupported()) return <p className="text-sm text-muted-foreground">This browser does not support notifications.</p>
   if (Notification.permission === 'denied') {
     return (
       <p className="text-sm text-muted-foreground">
-        Notifications are blocked for Orbit in this browser. Allow them in the site settings (the icon beside the address bar), then reload this page.
+        Notifications are blocked for lukethomas in this browser. Allow them in the site settings (the icon beside the address bar), then reload this page.
       </p>
     )
   }
@@ -164,7 +164,7 @@ function OtherDevices() {
   return (
     <FieldGrid>
       <Field>
-        <FieldLabel htmlFor="away-minutes" className="items-center gap-1.5">Notify my other devices when this window is out of focus for <InfoTip text="Before that, only this device notifies you. A closed or idle Orbit always notifies your other devices." /></FieldLabel>
+        <FieldLabel htmlFor="away-minutes" className="items-center gap-1.5">Notify my other devices when this window is out of focus for <InfoTip text="Before that, only this device notifies you. A closed or idle lukethomas always notifies your other devices." /></FieldLabel>
         <Select items={AWAY_OPTIONS} value={String(minutes)} onValueChange={(value) => setMinutes(Number(value))}>
           <SelectTrigger id="away-minutes">
             <SelectValue />
@@ -224,11 +224,11 @@ function Sounds() {
   )
 }
 
-/** Account view: where and about what Orbit notifies the user. */
+/** Account view: where and about what lukethomas notifies the user. */
 export function NotificationsPage() {
   return (
     <>
-      <SettingsCard title="This device" description="Get a notification here when you are not looking at Orbit.">
+      <SettingsCard title="This device" description="Get a notification here when you are not looking at lukethomas.">
         <ThisDevice />
       </SettingsCard>
       <SettingsCard title="Devices" flush>

@@ -15,7 +15,7 @@ import { useChatPeople } from './people'
 import { findTypedTaskIds, linkTaskIds, taskIdUrl } from './taskIds'
 
 /**
- * Cards for the URLs in a message: the host's card for an Orbit task, page or view, a preview for another site. In
+ * Cards for the URLs in a message: the host's card for an lukethomas task, page or view, a preview for another site. In
  * `body` the task identifiers are task URLs already (`linkTaskIds`).
  */
 function LinkCards({ body }: { body: string }) {
@@ -35,7 +35,7 @@ function LinkCards({ body }: { body: string }) {
 /**
  * What a message says: its markdown with mentions shown as names, "(edited)", its sticker, attachments and link cards. A long
  * message collapses behind "Show more". No list or toolbar concerns, so previews (pins, search, unreads) can use it.
- * An Orbit URL the reader can see shows as a chip; one that is a whole line shows only as its card. A typed task
+ * An lukethomas URL the reader can see shows as a chip; one that is a whole line shows only as its card. A typed task
  * identifier (`ENG-12`) shows as the URL of its task does, and stays the typed text when the reader cannot see the task
  * or a backslash is before it (`\ENG-12`). A message of only emoji shows them large.
  */

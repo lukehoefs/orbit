@@ -528,7 +528,7 @@ fn trace_headers(hostname: &str, ctx: &SessionContext, auth: &AuthOutcome) -> St
     let date = chrono::Utc::now().to_rfc2822();
     let results = authentication_results(hostname, auth).replace("; ", ";\r\n\t");
     format!(
-        "Received: from {helo} ([{ip}])\r\n\tby {hostname} (Orbit) with {protocol};\r\n\t{date}\r\n\
+        "Received: from {helo} ([{ip}])\r\n\tby {hostname} (lukethomas) with {protocol};\r\n\t{date}\r\n\
          Authentication-Results: {results}\r\n"
     )
 }

@@ -144,7 +144,7 @@ test('Add relation → Blocked by… links the picked task and never offers the 
 test('relations read as one aligned list: a count in the heading and each kind named once beside its first row', async () => {
   const calls: Call[] = []
   api(calls, [
-    relation('rel-1', 'blocks', 'outgoing', { id: 'task-5be3', title: 'Review the Orbit foundation' }),
+    relation('rel-1', 'blocks', 'outgoing', { id: 'task-5be3', title: 'Review the lukethomas foundation' }),
     relation('rel-2', 'blocks', 'outgoing', { id: 'task-55ee', title: 'Release notes' }),
     relation('rel-3', 'related', 'outgoing', { id: 'task-12cd', title: 'Safari cookie policy' }),
   ])

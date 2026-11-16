@@ -94,7 +94,7 @@ async fn invitation_preview_is_public_read_only_and_rejects_inactive_tokens() {
                 assert_eq!(response.status(), StatusCode::OK);
                 assert_eq!(
                     response_json(response).await,
-                    json!({"email": email, "workspace_name": "Orbit", "channels": []})
+                    json!({"email": email, "workspace_name": "lukethomas", "channels": []})
                 );
             } else {
                 assert_eq!(response.status(), StatusCode::NOT_FOUND);
@@ -2407,7 +2407,7 @@ async fn setup_owner(repository: &IdentityRepository) -> (String, String) {
                 password_hash: PasswordService::default()
                     .hash("correct horse battery")
                     .unwrap(),
-                workspace_name: "Orbit".to_owned(),
+                workspace_name: "lukethomas".to_owned(),
                 project_name: "General".to_owned(),
             },
             now,

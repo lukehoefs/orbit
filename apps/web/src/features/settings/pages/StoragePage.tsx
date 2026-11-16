@@ -12,7 +12,7 @@ import { cacheUsage, clearLocalCache, MEDIA_LIMITS_MB, useMediaLimit } from '@/l
 const LIMIT_OPTIONS = MEDIA_LIMITS_MB.map((megabytes) => ({ value: String(megabytes), label: megabytes >= 1000 ? `${megabytes / 1000} GB` : `${megabytes} MB` }))
 const USAGE_KEY = ['local-cache-usage'] as const
 
-/** Account view: what Orbit keeps on this device, how much it may keep, and the button that removes it. */
+/** Account view: what lukethomas keeps on this device, how much it may keep, and the button that removes it. */
 export function StoragePage() {
   const queryClient = useQueryClient()
   const [limit, setLimit] = useMediaLimit()
@@ -27,7 +27,7 @@ export function StoragePage() {
   return (
     <SettingsCard
       title="Storage on this device"
-      description="Orbit keeps a copy of your chat on this device, so a reload does not read everything from the server again. Sign-out removes it."
+      description="lukethomas keeps a copy of your chat on this device, so a reload does not read everything from the server again. Sign-out removes it."
       actions={
         <Button type="button" variant="outline" disabled={clear.isPending} onClick={() => clear.mutate()}>
           Clear cache

@@ -246,7 +246,7 @@ pub enum DatabaseError {
         #[source]
         source: std::io::Error,
     },
-    #[error("database is already owned by another Orbit process: {path}")]
+    #[error("database is already owned by another lukethomas process: {path}")]
     AlreadyOwned { path: PathBuf },
     #[error("lost the database ownership lock: {reason}")]
     OwnershipLost { reason: String },
@@ -267,7 +267,7 @@ pub enum DatabaseError {
     },
     /// `url` has its password redacted.
     #[error(
-        "Postgres database {url} does not order and fold text like Orbit needs; create it with \
+        "Postgres database {url} does not order and fold text like lukethomas needs; create it with \
          CREATE DATABASE <name> TEMPLATE template0 ENCODING 'UTF8' LOCALE_PROVIDER builtin \
          BUILTIN_LOCALE 'C.UTF-8' LOCALE 'C.UTF-8'"
     )]

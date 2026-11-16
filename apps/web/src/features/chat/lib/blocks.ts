@@ -56,7 +56,7 @@ function inline(elements: readonly RichInline[]): string {
 }
 
 /**
- * A Slack `rich_text` block as Orbit Markdown with mention tokens, so it renders like a message body: sections are
+ * A Slack `rich_text` block as lukethomas Markdown with mention tokens, so it renders like a message body: sections are
  * paragraphs, lists keep their indent, quotes are `>` lines and preformatted runs are a code block.
  */
 export function richTextMarkdown(elements: readonly RichElement[]): string {

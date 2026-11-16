@@ -195,7 +195,7 @@ export function DocEditor({ workspaceId, page, pages, teamspaces, onRequestTrash
   const setPageLock = useSetPageLock(workspaceId)
   /** Locked pages are read-only here (the server refuses edits too, see `POST .../lock`). */
   const locked = page.locked_at !== null
-  // Orbit Cloud without a subscription: the server drops edits, so offer none.
+  // lukethomas Cloud without a subscription: the server drops edits, so offer none.
   const workspaceReadOnly = useWorkspaceReadOnly()
   const readOnly = locked || workspaceReadOnly
   usePageVisit(workspaceId, page.id)
@@ -1080,7 +1080,7 @@ export function DocEditor({ workspaceId, page, pages, teamspaces, onRequestTrash
               {notice === 'too-large'
                 ? 'Your latest change is too large to sync. Reload the page to continue from the saved version.'
                 : notice === 'protocol'
-                  ? 'This page cannot sync with this version of Orbit. Reload the app.'
+                  ? 'This page cannot sync with this version of lukethomas. Reload the app.'
                   : 'Could not reconnect to this page.'}
             </span>
             <Button

@@ -7,9 +7,9 @@ use orbit_domain::{
 #[test]
 fn workspace_defaults_create_owner_project_and_workflow() {
     let owner_id = Id::new_v7();
-    let defaults = WorkspaceDefaults::new(owner_id, "Orbit", "General");
+    let defaults = WorkspaceDefaults::new(owner_id, "lukethomas", "General");
 
-    assert_eq!(defaults.workspace.name, "Orbit");
+    assert_eq!(defaults.workspace.name, "lukethomas");
     assert_eq!(defaults.workspace.version, 0);
     assert_eq!(defaults.owner.workspace_id, defaults.workspace.id);
     assert_eq!(defaults.owner.user_id, owner_id);

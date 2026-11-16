@@ -39,7 +39,7 @@ export function GithubPage() {
   if (query.data === undefined) return <SettingsCard title="GitHub">Loading GitHub settings.</SettingsCard>
   const settings = query.data
 
-  return <SettingsCard title="GitHub" description={`Manage the GitHub App for this workspace. Connect repositories to projects in each project's settings. ${settings.app_slug ? "After installation, open a project's settings to select a repository and issue label." : 'Register a GitHub App from Orbit. GitHub will return you to this workspace.'}`}>
+  return <SettingsCard title="GitHub" description={`Manage the GitHub App for this workspace. Connect repositories to projects in each project's settings. ${settings.app_slug ? "After installation, open a project's settings to select a repository and issue label." : 'Register a GitHub App from lukethomas. GitHub will return you to this workspace.'}`}>
     {!settings.app_slug ? (
       <div className="flex flex-col items-start gap-2">
         {settings.can_manage ? <>
@@ -47,7 +47,7 @@ export function GithubPage() {
             <Label htmlFor="github-organization">GitHub organization (optional)</Label>
             <Input id="github-organization" value={organization} onChange={(event) => setOrganization(event.target.value)} placeholder="Leave blank for a personal App" />
           </div>
-          {!settings.key_configured ? <p role="alert" className="text-xs text-destructive">Orbit is not ready to register a GitHub App yet. Ask the Orbit administrator to set the app key.</p> : null}
+          {!settings.key_configured ? <p role="alert" className="text-xs text-destructive">lukethomas is not ready to register a GitHub App yet. Ask the lukethomas administrator to set the app key.</p> : null}
           <Button disabled={!settings.key_configured || register.isPending} onClick={() => void beginRegistration()}>Register GitHub App</Button>
           {register.isError ? <p role="alert" className="text-xs text-destructive">{register.error instanceof Error ? register.error.message : 'App registration could not start.'}</p> : null}
         </> : <p className="text-sm text-muted-foreground">Ask a workspace owner or admin to register the App.</p>}

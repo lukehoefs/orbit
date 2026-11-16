@@ -11,7 +11,7 @@ export interface SessionView extends SessionRecord {
 }
 
 export function sessionView(session: SessionRecord): SessionView {
-  return { ...session, device: 'Signed-in device', browser: 'Orbit web' }
+  return { ...session, device: 'Signed-in device', browser: 'lukethomas web' }
 }
 
 export function useSessions() {

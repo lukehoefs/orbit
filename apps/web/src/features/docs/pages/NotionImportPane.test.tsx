@@ -142,7 +142,7 @@ test('connect: the token field is a password field and problems show friendly me
   code = 'app_key_missing'
   fireEvent.click(scan)
   await waitFor(() =>
-    expect(view.getByRole('alert').textContent).toContain('Ask the Orbit administrator to set the app key'),
+    expect(view.getByRole('alert').textContent).toContain('Ask the lukethomas administrator to set the app key'),
   )
 })
 
@@ -334,12 +334,12 @@ test('done: database notes read as sentences; other kinds stay in the lists', as
         }),
       )
   })
-  expect(await view.findByText('2 Notion databases became Orbit databases with properties, views and rows.')).toBeTruthy()
-  expect(view.getByText('1 row was not imported: an Orbit database holds at most 5,000 rows.')).toBeTruthy()
-  expect(view.getByText('1 formula property was imported as fixed values (Orbit does not recompute them).')).toBeTruthy()
-  expect(view.getByText('3 people in person properties have no Orbit member with the same email and were left out.')).toBeTruthy()
-  expect(view.getByText('Views imported as tables (Orbit has table and board views only): calendar (2), gallery (1).')).toBeTruthy()
-  expect(view.getByText('Skipped database properties (not supported in Orbit): place (2), button (1).')).toBeTruthy()
+  expect(await view.findByText('2 Notion databases became lukethomas databases with properties, views and rows.')).toBeTruthy()
+  expect(view.getByText('1 row was not imported: an lukethomas database holds at most 5,000 rows.')).toBeTruthy()
+  expect(view.getByText('1 formula property was imported as fixed values (lukethomas does not recompute them).')).toBeTruthy()
+  expect(view.getByText('3 people in person properties have no lukethomas member with the same email and were left out.')).toBeTruthy()
+  expect(view.getByText('Views imported as tables (lukethomas has table and board views only): calendar (2), gallery (1).')).toBeTruthy()
+  expect(view.getByText('Skipped database properties (not supported in lukethomas): place (2), button (1).')).toBeTruthy()
   expect(view.getByText('embed (1)')).toBeTruthy()
   expect(view.getByText('column list (1)')).toBeTruthy()
 })

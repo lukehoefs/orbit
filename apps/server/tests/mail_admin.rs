@@ -68,7 +68,7 @@ impl Fixture {
                     password_hash: PasswordService::default()
                         .hash("correct horse battery")
                         .unwrap(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "General".to_owned(),
                 },
                 now,
@@ -830,7 +830,7 @@ async fn a_test_message_over_smtp_reaches_the_health_card() {
                 password_hash: PasswordService::default()
                     .hash("correct horse battery")
                     .unwrap(),
-                workspace_name: "Orbit".to_owned(),
+                workspace_name: "lukethomas".to_owned(),
                 project_name: "General".to_owned(),
             },
             now,

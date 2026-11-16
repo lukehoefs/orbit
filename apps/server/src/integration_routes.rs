@@ -558,7 +558,7 @@ fn github_registration_origin(
         StatusCode::UNPROCESSABLE_ENTITY,
         "github_https_required",
         "HTTPS required",
-        "Open Orbit through a public HTTPS URL before you register the App.",
+        "Open lukethomas through a public HTTPS URL before you register the App.",
         request_id,
     ))
 }
@@ -628,7 +628,7 @@ pub(crate) async fn start_github_manifest(
             )
         },
         manifest: serde_json::json!({
-            "name": "Orbit",
+            "name": "lukethomas",
             "url": origin,
             "hook_attributes": { "url": format!("{origin}/api/v1/integrations/github/webhook"), "active": true },
             "redirect_url": format!("{origin}/api/v1/integrations/github/manifest/callback"),
@@ -701,7 +701,7 @@ pub(crate) async fn github_manifest_callback(
             "https://api.github.com/app-manifests/{}/conversions",
             query.code
         ))
-        .header("User-Agent", "Orbit")
+        .header("User-Agent", "lukethomas")
         .header("Accept", "application/vnd.github+json")
         .header("X-GitHub-Api-Version", "2022-11-28")
         .send()
@@ -711,7 +711,7 @@ pub(crate) async fn github_manifest_callback(
                 StatusCode::BAD_GATEWAY,
                 "github_registration_failed",
                 "GitHub registration failed",
-                "Orbit could not contact GitHub.",
+                "lukethomas could not contact GitHub.",
                 id,
             )
         })?;
@@ -915,7 +915,7 @@ async fn github_webhook_from_database(
                 StatusCode::SERVICE_UNAVAILABLE,
                 "app_key_invalid",
                 "App key invalid",
-                "Orbit cannot read the saved GitHub credentials.",
+                "lukethomas cannot read the saved GitHub credentials.",
                 id,
             )
         } else {
@@ -1046,7 +1046,7 @@ async fn github_webhook_from_database(
                 StatusCode::CONFLICT,
                 "github_labels_ambiguous",
                 "GitHub labels conflict",
-                "This GitHub issue or pull request has labels for more than one Orbit project.",
+                "This GitHub issue or pull request has labels for more than one lukethomas project.",
                 id,
             ));
         }
@@ -1703,7 +1703,7 @@ mod tests {
                     password_hash: PasswordService::default()
                         .hash("correct horse battery")
                         .unwrap(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "General".to_owned(),
                 },
                 now,

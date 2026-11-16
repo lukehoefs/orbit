@@ -55,7 +55,7 @@ function BucketCard({ s3, locked }: { s3: S3View | null; locked: boolean }) {
   async function removeBucket() {
     const confirmed = await confirmAction({
       title: 'Remove the bucket?',
-      description: 'Orbit stops using it. Backups already in the bucket stay there.',
+      description: 'lukethomas stops using it. Backups already in the bucket stay there.',
       confirmLabel: 'Remove',
       danger: true,
     })
@@ -70,7 +70,7 @@ function BucketCard({ s3, locked }: { s3: S3View | null; locked: boolean }) {
     <S3BucketForm
       s3={s3}
       title="S3 bucket"
-      description="An S3-compatible bucket (AWS S3, Cloudflare R2, MinIO, …) for attachments and backups. Orbit writes, reads and deletes a test file before it saves."
+      description="An S3-compatible bucket (AWS S3, Cloudflare R2, MinIO, …) for attachments and backups. lukethomas writes, reads and deletes a test file before it saves."
       endpointPlaceholder="https://s3.eu-central-1.amazonaws.com"
       saving={save.isPending}
       removing={remove.isPending}
@@ -119,7 +119,7 @@ function UsageCard({ storage, environment }: { storage: StorageView; environment
     ? (storage.attachments_in_s3 ? 'Done. All files are in the bucket.' : 'Done. All files are on this server.')
     : null
   return (
-    <SettingsCard title="Usage" description="What Orbit keeps in the bucket, and how often it backs up by itself." flush>
+    <SettingsCard title="Usage" description="What lukethomas keeps in the bucket, and how often it backs up by itself." flush>
       <div className="flex flex-col divide-y">
         <SettingsRow className="flex-nowrap">
           <div className="flex min-w-0 flex-1 flex-col gap-0.5 text-[0.8125rem]">
@@ -127,13 +127,13 @@ function UsageCard({ storage, environment }: { storage: StorageView; environment
             {ready ? null : <span className="text-xs text-muted-foreground">Save a bucket above first.</span>}
             {moving ? (
               <span role="status" className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                {/* The spinner stops when moving failed; Orbit only tries again later. */}
+                {/* The spinner stops when moving failed; lukethomas only tries again later. */}
                 {storage.move_error ? null : <Spinner role="presentation" aria-hidden aria-label={undefined} className="size-3.5" />}
                 {moving}
               </span>
             ) : null}
             {moved ? <span role="status" className="text-xs text-muted-foreground">{moved}</span> : null}
-            {storage.move_error ? <span role="alert" className="text-xs text-destructive">Moving files stopped: {storage.move_error} Orbit tries again every ten minutes.</span> : null}
+            {storage.move_error ? <span role="alert" className="text-xs text-destructive">Moving files stopped: {storage.move_error} lukethomas tries again every ten minutes.</span> : null}
             {environment.attachments_in_s3 ? <SetByEnvironment variable="ORBIT_S3_ATTACHMENTS" /> : null}
           </div>
           <Switch
@@ -158,7 +158,7 @@ function UsageCard({ storage, environment }: { storage: StorageView; environment
         </SettingsRow>
         <SettingsRow className="flex-nowrap">
           <div className="flex min-w-0 flex-1 flex-col gap-0.5 text-[0.8125rem]">
-            <span className="inline-flex items-center gap-1.5 font-medium text-foreground">Automatic backups <InfoTip text="Orbit keeps the newest backup of each of the last 7 days and 4 weeks." /></span>
+            <span className="inline-flex items-center gap-1.5 font-medium text-foreground">Automatic backups <InfoTip text="lukethomas keeps the newest backup of each of the last 7 days and 4 weeks." /></span>
             {environment.backup_schedule ? <SetByEnvironment variable="ORBIT_AUTOMATIC_BACKUPS" /> : null}
           </div>
           <Select
@@ -176,7 +176,7 @@ function UsageCard({ storage, environment }: { storage: StorageView; environment
         {ready ? (
           <SettingsRow className="flex-nowrap">
             <div className="flex min-w-0 flex-1 flex-col gap-0.5 text-[0.8125rem]">
-              <span className="inline-flex items-center gap-1.5 font-medium text-foreground">Keep deleted files in S3 <InfoTip text="A deleted or replaced attachment file (for example an image original after Compress images) stays in the bucket this long, then Orbit deletes it. Backups do not contain S3 files: restoring a backup older than this can miss files. The default, 40 days, covers all kept backups." /></span>
+              <span className="inline-flex items-center gap-1.5 font-medium text-foreground">Keep deleted files in S3 <InfoTip text="A deleted or replaced attachment file (for example an image original after Compress images) stays in the bucket this long, then lukethomas deletes it. Backups do not contain S3 files: restoring a backup older than this can miss files. The default, 40 days, covers all kept backups." /></span>
               {environment.s3_keep_deleted_days ? <SetByEnvironment variable="ORBIT_S3_KEEP_DELETED_DAYS" /> : null}
             </div>
             <Select
@@ -205,7 +205,7 @@ function ImagesCard({ status }: { status: CompressionStatus }) {
     ? `${status.compressed} ${status.compressed === 1 ? 'image' : 'images'} compressed: ${formatSize(status.bytes_before)} → ${formatSize(status.bytes_after)}.`
     : 'No image was compressed.'
   return (
-    <SettingsCard title="Images" description="Large images keep their original size if they were uploaded before Orbit made images smaller on upload." flush>
+    <SettingsCard title="Images" description="Large images keep their original size if they were uploaded before lukethomas made images smaller on upload." flush>
       <SettingsRow className="flex-nowrap">
         <div className="flex min-w-0 flex-1 flex-col gap-0.5 text-[0.8125rem]">
           <span className="inline-flex items-center gap-1.5 font-medium text-foreground">Compress images <InfoTip text="Scales JPEG, PNG and WebP images of 512 KB or more to at most 2560 px and saves them as WebP. The originals are replaced; GIFs and other files stay as they are." /></span>

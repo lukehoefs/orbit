@@ -48,7 +48,7 @@ impl Fixture {
                     password_hash: PasswordService::default()
                         .hash("correct horse battery")
                         .unwrap(),
-                    workspace_name: "Orbit".to_owned(),
+                    workspace_name: "lukethomas".to_owned(),
                     project_name: "General".to_owned(),
                 },
                 now,
@@ -188,7 +188,7 @@ async fn github_pull_task_reports_its_source_and_state() {
                 fixture.workspace_id
             ),
             &fixture.owner_cookie,
-            json!({"expected_version":0,"title":"Orbit edit"}),
+            json!({"expected_version":0,"title":"lukethomas edit"}),
         ))
         .await
         .unwrap();
@@ -1050,7 +1050,7 @@ async fn removing_a_membership_removes_its_task_assignments() {
 async fn github_issue_task_text_is_read_only_but_other_fields_can_change() {
     let fixture = Fixture::new().await;
     let github_task = fixture.create_task("GitHub title").await;
-    let ordinary_task = fixture.create_task("Orbit title").await;
+    let ordinary_task = fixture.create_task("lukethomas title").await;
     let github_id = github_task["id"].as_str().unwrap();
     sqlx::query("INSERT INTO github_issue_links (workspace_id, repository, issue_number, task_id) VALUES ($1, $2, $3, $4)")
         .bind(&fixture.workspace_id)
@@ -1062,8 +1062,8 @@ async fn github_issue_task_text_is_read_only_but_other_fields_can_change() {
         .unwrap();
 
     for body in [
-        json!({"expected_version":0,"title":"Orbit edit"}),
-        json!({"expected_version":0,"description":"Orbit edit"}),
+        json!({"expected_version":0,"title":"lukethomas edit"}),
+        json!({"expected_version":0,"description":"lukethomas edit"}),
     ] {
         let response = fixture
             .app
@@ -1095,7 +1095,7 @@ async fn github_issue_task_text_is_read_only_but_other_fields_can_change() {
             &fixture.owner_cookie,
             json!({"updates":[
                 {"id":ordinary_task["id"],"expected_version":0,"priority":"high"},
-                {"id":github_id,"expected_version":0,"title":"Orbit edit"}
+                {"id":github_id,"expected_version":0,"title":"lukethomas edit"}
             ]}),
         ))
         .await
@@ -1156,7 +1156,7 @@ async fn github_issue_task_text_is_read_only_but_other_fields_can_change() {
                 ordinary_task["id"].as_str().unwrap()
             ),
             &fixture.owner_cookie,
-            json!({"expected_version":0,"title":"Orbit edit"}),
+            json!({"expected_version":0,"title":"lukethomas edit"}),
         ))
         .await
         .unwrap();

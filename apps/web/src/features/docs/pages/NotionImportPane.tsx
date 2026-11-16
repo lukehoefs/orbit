@@ -75,7 +75,7 @@ function ConnectStep({ workspaceId }: { workspaceId: string }) {
               <a className="text-primary underline underline-offset-2" href={TOKEN_URL} target="_blank" rel="noreferrer noopener">
                 {TOKEN_URL}
               </a>{' '}
-              (it can read everything you can see in Notion). Orbit keeps it encrypted only until the import finishes.
+              (it can read everything you can see in Notion). lukethomas keeps it encrypted only until the import finishes.
             </p>
           </div>
           <form className="flex flex-col gap-3" onSubmit={(event) => void submit(event)} autoComplete="off">
@@ -129,7 +129,7 @@ function useCancel(workspaceId: string, item: NotionImport) {
       title: started ? 'Cancel the import?' : 'Cancel this import?',
       description: started
         ? 'Pages already imported stay. Empty pages the import created but did not fill yet are moved to the trash.'
-        : 'Orbit deletes the Notion token. You can start a new import at any time.',
+        : 'lukethomas deletes the Notion token. You can start a new import at any time.',
       confirmLabel: 'Cancel import',
       cancelLabel: 'Keep going',
       danger: true,
@@ -270,7 +270,7 @@ function ResultStep({ workspaceId, item }: { workspaceId: string; item: NotionIm
             ))}
             {skipped.length > 0 ? (
               <p className="text-sm text-foreground">
-                Skipped blocks (not supported in Orbit):{' '}
+                Skipped blocks (not supported in lukethomas):{' '}
                 <span className="text-muted-foreground">{skipped.map(([kind, count]) => `${kind.replaceAll('_', ' ')} (${count})`).join(', ')}</span>
               </p>
             ) : null}

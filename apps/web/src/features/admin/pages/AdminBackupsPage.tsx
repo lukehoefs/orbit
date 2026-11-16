@@ -20,7 +20,7 @@ export function AdminBackupsPage() {
   return (
     <SettingsCard
       title="Backups"
-      description="Create a verified snapshot of the database and attachments without stopping Orbit."
+      description="Create a verified snapshot of the database and attachments without stopping lukethomas."
       actions={
         <Button disabled={backup.isPending} onClick={() => backup.mutate()}>
           {backup.isPending ? 'Creating backup…' : 'Create backup now'}
@@ -55,7 +55,7 @@ function BackupRow({ backup, deleting, onBrowse, onDelete }: { backup: BackupSum
           {backup.location === 's3' ? <Badge variant="secondary">S3</Badge> : null}
         </span>
         <span className="text-xs text-muted-foreground/70">
-          {formatSize(backup.byte_size)} · {backup.file_count} {backup.file_count === 1 ? 'file' : 'files'} · Orbit {backup.application_version}
+          {formatSize(backup.byte_size)} · {backup.file_count} {backup.file_count === 1 ? 'file' : 'files'} · lukethomas {backup.application_version}
         </span>
       </div>
       <Button variant="outline" size="sm" onClick={onBrowse} aria-label={`Browse backup from ${created.toLocaleString()}`}>

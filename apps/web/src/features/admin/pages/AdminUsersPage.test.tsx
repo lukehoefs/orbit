@@ -66,7 +66,7 @@ test('the page lists nobody until a search and says when more users match', asyn
   expect(requests).toContain('GET /api/v1/admin/users?q=more&limit=20')
 })
 
-test('the overview counts users, and trials only on Orbit Cloud', async () => {
+test('the overview counts users, and trials only on lukethomas Cloud', async () => {
   const self = renderPage()
   expect(await self.findByText('4')).toBeTruthy()
   expect(self.queryByText('Trials ongoing')).toBeNull()
@@ -204,7 +204,7 @@ test('changing an email shows the current one, shows a taken address under the f
   await waitFor(() => expect(requests.filter((request) => request.startsWith('GET /api/v1/admin/users')).length).toBeGreaterThan(listed))
 })
 
-test('on Orbit Cloud the password reset is emailed to the person and the link is never shown', async () => {
+test('on lukethomas Cloud the password reset is emailed to the person and the link is never shown', async () => {
   const requests: string[] = []
   const view = renderPage(requests, undefined, { billing_enabled: true })
   await view.findByText('Ada')
@@ -215,7 +215,7 @@ test('on Orbit Cloud the password reset is emailed to the person and the link is
   expect(view.queryAllByLabelText('Recovery link')).toHaveLength(0)
 })
 
-test('on Orbit Cloud without a mail server the actions that email the person are off and say why', async () => {
+test('on lukethomas Cloud without a mail server the actions that email the person are off and say why', async () => {
   const requests: string[] = []
   const view = renderPage(requests, undefined, { billing_enabled: true, email_enabled: false })
   await view.findByText('Ada')
@@ -223,10 +223,10 @@ test('on Orbit Cloud without a mail server the actions that email the person are
   await view.findByRole('menuitem', { name: /Change email/ })
   const items = view.getAllByRole('menuitem').map((item) => [item.textContent, item.getAttribute('aria-disabled')])
   expect(items).toEqual([
-    ['Change emailNeeds a mail server on Orbit Cloud', 'true'],
+    ['Change emailNeeds a mail server on lukethomas Cloud', 'true'],
     ['Make admin', null],
-    ['Send password reset emailNeeds a mail server on Orbit Cloud', 'true'],
-    ['Reset two-factorNeeds a mail server on Orbit Cloud', 'true'],
+    ['Send password reset emailNeeds a mail server on lukethomas Cloud', 'true'],
+    ['Reset two-factorNeeds a mail server on lukethomas Cloud', 'true'],
     ['Suspend account', null],
   ])
   fireEvent.click(view.getByRole('menuitem', { name: /Send password reset email/ }))
