@@ -1054,6 +1054,8 @@ fn apply_environment(
             config.http.public_origin = value.clone();
         } else if key == HTTP_TRUSTED_PROXIES_ENV {
             config.http.trusted_proxies = parse_list(key, value)?;
+        } else if key == "ORBIT_EXTRA_ORIGINS" || key == "ORBIT_FRAME_ANCESTORS" {
+            // lukethomas: read where they are used (apps/server/src/app.rs, http/security.rs).
         } else if key == HTTP_DEV_NATIVE_REDIRECTS_ENV {
             config.http.dev_native_redirects = value
                 .split(',')
