@@ -280,6 +280,26 @@ fn forwarded_transport(headers: &HeaderMap) -> Result<Option<RequestTransport>, 
     Ok(transport)
 }
 
+/// lukethomas: who may embed the app. `'none'` (the default) unless `ORBIT_FRAME_ANCESTORS` lists exact
+/// https origins, e.g. `https://agent.lthops.tech`; then `'self'` plus those origins. Anything else is ignored.
+fn frame_ancestors() -> &'static str {
+    static ANCESTORS: std::sync::OnceLock<String> = std::sync::OnceLock::new();
+    ANCESTORS.get_or_init(|| {
+        let listed: Vec<String> = std::env::var("ORBIT_FRAME_ANCESTORS")
+            .unwrap_or_default()
+            .split(',')
+            .map(str::trim)
+            .filter(|o| {
+                o.starts_with("https://")
+                    && o.len() > 8
+                    && o[8..].chars().all(|c| c.is_ascii_alphanumeric() || matches!(c, '.' | '-' | ':'))
+            })
+            .map(str::to_owned)
+            .collect();
+        if listed.is_empty() { "'none'".to_owned() } else { format!("'self' {}", listed.join(" ")) }
+    })
+}
+
 pub(crate) fn add_security_headers(
     headers: &mut HeaderMap,
     secure: bool,
@@ -292,8 +312,9 @@ pub(crate) fn add_security_headers(
     // plugin creates and then fills through the CSSOM (`insertRule`), which CSP does not restrict.
     // `frame-src` `blob:` is the PDF preview (the file URL itself cannot be framed). Vimeo joins YouTube.
     // `media-src` `https:` lets a document play an audio or video file the page links to.
+    let ancestors = frame_ancestors();
     let policy = format!(
-        "default-src 'self'; {script_source}style-src 'self' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='; style-src-attr 'unsafe-inline'; img-src 'self' data: blob: https:; frame-src blob: https://www.youtube-nocookie.com https://player.vimeo.com; media-src 'self' https:; frame-ancestors 'none'; object-src 'none'; base-uri 'none'; form-action 'self' https://github.com"
+        "default-src 'self'; {script_source}style-src 'self' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='; style-src-attr 'unsafe-inline'; img-src 'self' data: blob: https:; frame-src blob: https://www.youtube-nocookie.com https://player.vimeo.com; media-src 'self' https:; frame-ancestors {ancestors}; object-src 'none'; base-uri 'none'; form-action 'self' https://github.com"
     );
     // A handler that sets its own policy keeps it (the sandboxed mail view document).
     let handler_policy = headers.contains_key(CONTENT_SECURITY_POLICY);
@@ -307,7 +328,8 @@ pub(crate) fn add_security_headers(
     // For browsers without CSP `frame-ancestors`. A handler with its own policy (the sandboxed
     // mail view document, which the app frames) keeps its framing rules. Provider sign-in is a
     // full-page redirect, not a popup, so `same-origin` breaks no opener.
-    if !handler_policy {
+    // X-Frame-Options cannot name another site, so it is left out when embedding is allowed (CSP rules then).
+    if !handler_policy && ancestors == "'none'" {
         headers.insert(X_FRAME_OPTIONS, HeaderValue::from_static("DENY"));
     }
     headers.insert(

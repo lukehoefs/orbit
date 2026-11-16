@@ -507,6 +507,13 @@ impl App {
         for proxy in &config.http.trusted_proxies {
             origin_policy = origin_policy.trust_proxy(*proxy);
         }
+        // lukethomas: extra exact origins that serve this same instance (e.g. a separate preview address
+        // whose sign-in is kept apart from the main one). Comma-separated, each like https://preview.example.com.
+        if let Ok(extra) = std::env::var("ORBIT_EXTRA_ORIGINS") {
+            for origin in extra.split(',').map(str::trim).filter(|o| o.starts_with("https://") || o.starts_with("http://")) {
+                origin_policy = origin_policy.allow_origin(origin.trim_end_matches('/').to_owned());
+            }
+        }
         let metrics = Metrics::default();
         let oauth = crate::oauth::OAuthState::new(
             Arc::clone(&identity),
