@@ -3,7 +3,8 @@ import { Link, useLocation, useNavigate } from 'react-router'
 import { toast } from 'sonner'
 import { ApiProblem } from '@orbit/api/problem'
 import { useProviderExchange, useProviderName } from '@/features/auth/api'
-import { AuthCard } from '@/features/auth/components/AuthForm'
+import { cn } from 'cn'
+import { AUTH_HELP, AUTH_LINK, AUTH_TITLE, AuthCard } from '@/features/auth/components/AuthForm'
 import { AuthMessage } from '@/features/auth/components/AuthMessage'
 import { LinkPasswordStep } from '@/features/auth/components/LinkPasswordStep'
 import { TwoFactorStep } from '@/features/auth/components/TwoFactorStep'
@@ -59,12 +60,12 @@ export function ProviderCallbackPage() {
     const problem = error instanceof ApiProblem ? error : null
     return (
       <AuthCard>
-        <h1 className="mb-1 text-xl font-semibold">{problem?.problem.title ?? 'Sign-in expired'}</h1>
-        <p role="alert" className="text-[0.8125rem] leading-[1.6] text-muted-foreground">{problem ? problem.detail : error ? 'The server could not complete the sign-in. Try again.' : 'This sign-in has expired or was opened in another tab. Start again.'}</p>
-        <p className="mt-4 text-[0.8125rem]">
+        <h1 className={cn('mb-1.5', AUTH_TITLE)}>{problem?.problem.title ?? 'Sign-in expired'}</h1>
+        <p role="alert" className={AUTH_HELP}>{problem ? problem.detail : error ? 'The server could not complete the sign-in. Try again.' : 'This sign-in has expired or was opened in another tab. Start again.'}</p>
+        <p className="mt-4 text-sm">
           {signingIn
-            ? <Link to="/login" className="font-medium text-foreground">Back to sign in</Link>
-            : <Link to={settingsDestination(returnTo)} className="font-medium text-foreground">Back to settings</Link>}
+            ? <Link to="/login" className={AUTH_LINK}>Back to sign in</Link>
+            : <Link to={settingsDestination(returnTo)} className={AUTH_LINK}>Back to settings</Link>}
         </p>
       </AuthCard>
     )

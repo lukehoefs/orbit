@@ -210,6 +210,40 @@
     font-size: 125%;
 }
 
+/* The sign-in screens (AuthCard in features/auth/components/AuthForm.tsx) use the lukethomas app's light palette in
+   every portal theme, so the portal's sign-in and the app's look like one product: the app's pale blue-grey ground,
+   white card, near-black text, AA greys (muted text 9:1 on the card), indigo accent and Inter (suparagent
+   frontend/app/globals.css). The values are scoped to that subtree, and AuthCard adds .light to turn the dark:
+   variants off inside it, so the portal's own theme does not change. The mobile token generator reads only the
+   first :root and .dark blocks, so it does not see this one. */
+[data-slot='auth-screen'] {
+    --background: #f1f1f1;
+    --foreground: #111111;
+    --card: #ffffff;
+    --card-foreground: #111111;
+    --popover: #ffffff;
+    --popover-foreground: #111111;
+    --primary: #4f46e5;
+    --primary-foreground: #ffffff;
+    --secondary: #f1f1f1;
+    --secondary-foreground: #111111;
+    --muted: #f1f1f1;
+    --muted-foreground: #474747;
+    --accent: #e2e2e2;
+    --accent-foreground: #111111;
+    --destructive: #c0262c;
+    --border: rgb(0 0 0 / 8%);
+    --input: #d4d4d4;
+    --ring: #4f46e5;
+    --font-ui: 'Inter Variable', sans-serif;
+    color-scheme: light;
+    /* The app's canvas wash: a cool glow from the top and a lighter one from the bottom. */
+    background-color: var(--background);
+    background-image:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgb(235 241 251 / 0.9) 30%, transparent 80%),
+        radial-gradient(ellipse 70% 45% at 50% 100%, rgb(246 249 253 / 0.8) 30%, transparent 80%);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50 [scrollbar-width:thin] [scrollbar-color:color-mix(in_oklch,var(--foreground)_18%,transparent)_transparent];

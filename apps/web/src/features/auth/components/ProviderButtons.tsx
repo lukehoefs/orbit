@@ -18,7 +18,7 @@ export function ProviderButtons({ providers, returnTo = null, disabled = false }
           Continue with {providerName(provider)}
         </Button>
       ))}
-      {start.isError ? <p role="alert" className="text-[0.8125rem] text-destructive">{start.error instanceof ApiProblem ? start.error.detail : 'The sign-in could not start. Try again.'}</p> : null}
+      {start.isError ? <p role="alert" className="text-sm text-destructive">{start.error instanceof ApiProblem ? start.error.detail : 'The sign-in could not start. Try again.'}</p> : null}
     </>
   )
 }

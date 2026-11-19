@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useAuthOptions, useCompleteRegistration, useRequestRegistration } from '@/features/auth/api'
-import { AuthCard, AuthForm, AuthInput } from '@/features/auth/components/AuthForm'
+import { AUTH_HELP, AUTH_LINK, AUTH_TITLE, AuthCard, AuthForm, AuthInput } from '@/features/auth/components/AuthForm'
 import { AuthMessage } from '@/features/auth/components/AuthMessage'
 import { ProviderButtons } from '@/features/auth/components/ProviderButtons'
 import { useConsumedToken } from '@/features/auth/useConsumedToken'
@@ -25,9 +25,9 @@ function RequestRegistration() {
   if (options.data && !options.data.registration_open) {
     return (
       <AuthCard className="grid gap-4">
-        <h1 className="text-xl font-semibold">Create your account</h1>
-        <div className="grid gap-3"><ProviderButtons providers={providers} /></div>
-        <p className="text-center text-[0.8125rem] text-muted-foreground"><Link to="/login">Already have an account? Sign in</Link></p>
+        <h1 className={AUTH_TITLE}>Create your account</h1>
+        <div className="grid gap-3 [&_[data-slot=button]]:h-11"><ProviderButtons providers={providers} /></div>
+        <p className={`text-center ${AUTH_HELP}`}><Link to="/login" className={AUTH_LINK}>Already have an account? Sign in</Link></p>
       </AuthCard>
     )
   }
