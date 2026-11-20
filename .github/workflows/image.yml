@@ -13,6 +13,7 @@ on:
       - '!**/AGENTS.md'
       - '!.github/pull_request_template.md'
       - '!.github/workflows/testflight.yml'
+      - '!.github/workflows/checks.yml'
       - '!apps/mobile/**'
       - 'apps/mobile/package.json'
   # A pull request runs CI and builds and smoke-tests the amd64 image without pushing it.
@@ -26,6 +27,7 @@ on:
       - '!**/AGENTS.md'
       - '!.github/pull_request_template.md'
       - '!.github/workflows/testflight.yml'
+      - '!.github/workflows/checks.yml'
       - '!apps/mobile/**'
       - 'apps/mobile/package.json'
   # Run by hand (Actions, Container image, Run workflow) to rebuild main without a new commit.
@@ -48,7 +50,7 @@ permissions:
   contents: read
 
 jobs:
-  # web, rust and e2e checks, in parallel with the image build. publish needs them.
+  # The web build and type check plus the Rust tests, in parallel with the image build. publish needs them.
   ci:
     uses: ./.github/workflows/ci.yml
 

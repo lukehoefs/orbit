@@ -1,7 +1,7 @@
 name: CI
 
-# Called by image.yml on every pull request and push to main, so the image build runs in parallel with these
-# checks and nothing is published until they pass. Run it alone from Actions when you only want the checks.
+# The publish gate. image.yml calls it on every pull request and push to main, so the image build runs in
+# parallel and nothing is published until it passes. fmt, clippy, web unit tests and e2e are in checks.yml.
 on:
   workflow_call:
   workflow_dispatch:
@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  # The web type check (tsc -b), build, lint and tests. A type error fails here, not inside the Docker build.
+  # The web type check (tsc -b), build and lint. A type error fails here, not inside the Docker build.
   web:
     runs-on: ubuntu-24.04
     steps:
@@ -30,14 +30,10 @@ jobs:
         working-directory: apps/web
       - run: bun run lint
         working-directory: apps/web
-      # Not blocking yet: 10 web unit tests already fail on main. Drop continue-on-error once they pass.
-      - run: bun run test
-        working-directory: apps/web
-        continue-on-error: true
       - run: bun run test
         working-directory: packages/api
 
-  # fmt, clippy and the Rust tests. The server embeds apps/web/dist (include_dir!), so build it first.
+  # The Rust tests. The server embeds apps/web/dist (include_dir!), so build it first.
   rust:
     runs-on: ubuntu-24.04
     steps:
@@ -45,10 +41,10 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: 1.97.1
-          components: rustfmt, clippy
       - uses: Swatinem/rust-cache@v2
         with:
-          shared-key: rust
+          shared-key: rust-test
+          cache-on-failure: true
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.4.4
@@ -57,44 +53,7 @@ jobs:
           path: ~/.bun/install/cache
           key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
           restore-keys: bun-${{ runner.os }}-
-      # Not blocking yet: main has unformatted files. Run `cargo fmt`, then drop continue-on-error.
-      - run: cargo fmt --check
-        continue-on-error: true
       - run: bun install --frozen-lockfile
       - run: bun run build
         working-directory: apps/web
-      # Not blocking yet: clippy 1.97 flags about 11 existing spots on main. Fix them, then drop continue-on-error.
-      - run: cargo clippy --workspace --all-targets -- -D warnings
-        continue-on-error: true
       - run: cargo test --workspace
-
-  # Playwright against a development server. Not blocking yet (21 specs already fail on main), so it does not
-  # hold up publish. Drop continue-on-error once they pass.
-  e2e:
-    runs-on: ubuntu-24.04
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: 1.97.1
-      - uses: Swatinem/rust-cache@v2
-        with:
-          shared-key: e2e
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: 1.4.4
-      - uses: actions/cache@v4
-        with:
-          path: ~/.bun/install/cache
-          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
-          restore-keys: bun-${{ runner.os }}-
-      - uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('bun.lock') }}
-      - uses: extractions/setup-just@v3
-      - run: just setup
-      - run: bun x playwright install --with-deps chromium
-        working-directory: apps/web
-      - run: just e2e
