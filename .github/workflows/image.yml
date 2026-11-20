@@ -3,6 +3,8 @@ name: Container image
 on:
   push:
     branches: [main]
+  # Run by hand (Actions, Container image, Run workflow) to rebuild main without a new commit.
+  workflow_dispatch:
   # A published GitHub release also publishes the image as `<version>`, `<major>.<minor>` and `latest`.
   release:
     types: [published]
@@ -185,12 +187,19 @@ jobs:
           docker buildx imagetools inspect "$image:$tag" | tee manifest.txt
           grep -E 'Platform:[[:space:]]+linux/amd64' manifest.txt
           grep -E 'Platform:[[:space:]]+linux/arm64' manifest.txt
-      - name: Deploy to Coolify Cloud
-        if: github.event_name == 'push'
+      # lukethomas: portal.lthops.tech runs this image (ghcr.io/lukehoefs/orbit:main) on our own Coolify.
+      # With the two secrets set, a push to main deploys it; without them the image is still published
+      # and the deploy is started from Coolify, so the step skips instead of failing the run.
+      - name: Deploy to Coolify
+        if: github.event_name != 'release'
         env:
           COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN }}
           COOLIFY_WEBHOOK: ${{ secrets.COOLIFY_WEBHOOK }}
         run: |
+          if [ -z "$COOLIFY_TOKEN" ] || [ -z "$COOLIFY_WEBHOOK" ]; then
+            echo "COOLIFY_TOKEN or COOLIFY_WEBHOOK is not set: image published, deploy it from Coolify."
+            exit 0
+          fi
           curl --fail-with-body --silent --show-error \
             --request POST \
             --header "Authorization: Bearer $COOLIFY_TOKEN" \
