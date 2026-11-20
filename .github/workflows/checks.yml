@@ -1,7 +1,7 @@
 name: Checks (not gating)
 
-# fmt, clippy, web unit tests and Playwright. They report on every pull request and push to main but do not hold
-# up publish: all four already fail on main. Move a job into ci.yml once it passes.
+# The Rust tests, fmt, clippy, web unit tests and Playwright. They report on every pull request and push to main
+# but do not hold up publish (the Rust tests take longer than the image build; the others already fail on main).
 on:
   push:
     branches: [main]
@@ -38,6 +38,31 @@ permissions:
   contents: read
 
 jobs:
+  # The Rust tests (~15-20 min, longer than the image build). The server embeds apps/web/dist (include_dir!), so build it first.
+  rust-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.97.1
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: rust-test
+          cache-on-failure: true
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+      - uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+        working-directory: apps/web
+      - run: cargo test --workspace
+
   rust-lint:
     runs-on: ubuntu-24.04
     steps:

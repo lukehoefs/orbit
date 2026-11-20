@@ -1,7 +1,8 @@
 name: CI
 
 # The publish gate. image.yml calls it on every pull request and push to main, so the image build runs in
-# parallel and nothing is published until it passes. fmt, clippy, web unit tests and e2e are in checks.yml.
+# parallel and nothing is published until it (and the image smoke test) pass. The Rust tests, fmt, clippy,
+# web unit tests and e2e report from checks.yml without holding up a deploy.
 on:
   workflow_call:
   workflow_dispatch:
@@ -32,28 +33,3 @@ jobs:
         working-directory: apps/web
       - run: bun run test
         working-directory: packages/api
-
-  # The Rust tests. The server embeds apps/web/dist (include_dir!), so build it first.
-  rust:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: 1.97.1
-      - uses: Swatinem/rust-cache@v2
-        with:
-          shared-key: rust-test
-          cache-on-failure: true
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: 1.4.4
-      - uses: actions/cache@v4
-        with:
-          path: ~/.bun/install/cache
-          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
-          restore-keys: bun-${{ runner.os }}-
-      - run: bun install --frozen-lockfile
-      - run: bun run build
-        working-directory: apps/web
-      - run: cargo test --workspace

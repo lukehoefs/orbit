@@ -50,7 +50,7 @@ permissions:
   contents: read
 
 jobs:
-  # The web build and type check plus the Rust tests, in parallel with the image build. publish needs them.
+  # The web build and type check, in parallel with the image build. publish needs it and the image smoke test.
   ci:
     uses: ./.github/workflows/ci.yml
 
