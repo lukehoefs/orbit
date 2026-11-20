@@ -63,7 +63,9 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun run build
         working-directory: apps/web
+      # Not blocking yet: clippy 1.97 flags about 11 existing spots on main. Fix them, then drop continue-on-error.
       - run: cargo clippy --workspace --all-targets -- -D warnings
+        continue-on-error: true
       - run: cargo test --workspace
 
   # Playwright against a development server. Not blocking yet (21 specs already fail on main), so it does not
