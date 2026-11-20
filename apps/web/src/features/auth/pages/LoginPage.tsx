@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
 import { ApiProblem } from '@orbit/api/problem'
+import { cn } from 'cn'
 import { Button } from '@/components/ui/button'
 import { isTwoFactorChallenge, useAuthOptions, useLogin, usePasskeyLogin } from '@/features/auth/api'
 import { initialLoginValues } from '@/features/auth/authState'
-import { AuthForm, AuthInput } from '@/features/auth/components/AuthForm'
+import { AUTH_LINK, AuthForm, AuthInput } from '@/features/auth/components/AuthForm'
 import { ProviderButtons } from '@/features/auth/components/ProviderButtons'
 import { TwoFactorStep } from '@/features/auth/components/TwoFactorStep'
 import { isPasskeyCancel, passkeysSupported } from '@/features/auth/passkey'
@@ -59,10 +60,10 @@ export function LoginPage() {
         Sign in with a passkey
       </Button> : null}
       <ProviderButtons providers={options.data?.providers ?? []} returnTo={params.get('return_to')} disabled={mutation.isPending || passkey.isPending} />
-    </>} footer={options.data?.registration_open || options.data?.provider_registration_open ? <>New to lukethomas? <Link to="/register" className="font-medium text-foreground">Create an account</Link></> : undefined}>
+    </>} footer={options.data?.registration_open || options.data?.provider_registration_open ? <>New to lukethomas? <Link to="/register">Create an account</Link></> : undefined}>
       <AuthInput label="Email" type="email" value={email} onChange={setEmail} />
       <AuthInput label="Password" type="password" value={password} onChange={setPassword} />
-      <Link to="/recovery" className="justify-self-end text-[0.8125rem] text-muted-foreground hover:text-foreground">Forgot password?</Link>
+      <Link to="/recovery" className={cn('justify-self-end text-sm', AUTH_LINK)}>Forgot password?</Link>
     </AuthForm>
   )
 }

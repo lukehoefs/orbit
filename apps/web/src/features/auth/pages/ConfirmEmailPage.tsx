@@ -2,7 +2,8 @@ import { useEffect, useRef } from 'react'
 import { Link } from 'react-router'
 import { ApiProblem } from '@orbit/api/problem'
 import { useConfirmEmailChange } from '@/features/auth/api'
-import { AuthCard } from '@/features/auth/components/AuthForm'
+import { cn } from 'cn'
+import { AUTH_HELP, AUTH_LINK, AUTH_TITLE, AuthCard } from '@/features/auth/components/AuthForm'
 import { AuthMessage } from '@/features/auth/components/AuthMessage'
 import { useConsumedToken } from '@/features/auth/useConsumedToken'
 
@@ -31,9 +32,9 @@ export function ConfirmEmailPage() {
   if (confirm.isSuccess) {
     return (
       <AuthCard>
-        <h1 className="mb-1 text-xl font-semibold">Your email is changed</h1>
-        <p className="text-[0.8125rem] leading-[1.6] text-muted-foreground">You now sign in with {confirm.data}. Your other devices are signed out.</p>
-        <p className="mt-4 text-[0.8125rem]"><Link to="/" className="font-medium text-foreground">Continue to lukethomas</Link></p>
+        <h1 className={cn('mb-1.5', AUTH_TITLE)}>Your email is changed</h1>
+        <p className={AUTH_HELP}>You now sign in with {confirm.data}. Your other devices are signed out.</p>
+        <p className="mt-4 text-sm"><Link to="/" className={AUTH_LINK}>Continue to lukethomas</Link></p>
       </AuthCard>
     )
   }
@@ -41,9 +42,9 @@ export function ConfirmEmailPage() {
     const problem = confirm.error instanceof ApiProblem ? confirm.error : null
     return (
       <AuthCard>
-        <h1 className="mb-1 text-xl font-semibold">{(problem && ERROR_TITLES[problem.code]) ?? 'Your email is not changed'}</h1>
-        <p role="alert" className="text-[0.8125rem] leading-[1.6] text-muted-foreground">{problem ? problem.detail : 'The server could not change the email. Try opening the link again.'}</p>
-        <p className="mt-4 text-[0.8125rem]"><Link to="/profile" className="font-medium text-foreground">Go to your account settings</Link></p>
+        <h1 className={cn('mb-1.5', AUTH_TITLE)}>{(problem && ERROR_TITLES[problem.code]) ?? 'Your email is not changed'}</h1>
+        <p role="alert" className={AUTH_HELP}>{problem ? problem.detail : 'The server could not change the email. Try opening the link again.'}</p>
+        <p className="mt-4 text-sm"><Link to="/profile" className={AUTH_LINK}>Go to your account settings</Link></p>
       </AuthCard>
     )
   }

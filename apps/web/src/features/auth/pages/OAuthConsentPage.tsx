@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label'
 import { InfoTip } from '@/components/common/InfoTip'
 import { LoadingScreen } from '@/components/common/LoadingScreen'
 import { AccessPicker, ProjectPicker, type ScopeResource } from '@/components/common/ScopeAccess'
-import { AuthBrand, AuthCard } from '@/features/auth/components/AuthForm'
+import { AUTH_TITLE, AuthBrand, AuthCard } from '@/features/auth/components/AuthForm'
 import { currentUserQueryOptions } from '@/features/auth/api'
 import { createApiClient } from '@/api/client'
 import { oauthRequest, type OAuthConsent } from '@/features/auth/oauth'
@@ -77,7 +77,7 @@ export function OAuthConsentPage() {
   }
   if (callback) return <AuthCard><div className="grid gap-5">
     <AuthBrand />
-    <h1 className="text-xl font-semibold">{callback.approved ? 'Complete the connection' : 'Connection denied'}</h1>
+    <h1 className={AUTH_TITLE}>{callback.approved ? 'Complete the connection' : 'Connection denied'}</h1>
     <p className="text-sm text-muted-foreground">Paste the full callback URL into the terminal where you started sign-in with --no-browser.</p>
     {callback.approved ? <p className="text-sm text-muted-foreground">The authorization code expires after one minute. If it expires, restart sign-in from your client.</p> : null}
     <Label htmlFor="callback-url">Callback URL</Label>
@@ -90,7 +90,7 @@ export function OAuthConsentPage() {
   const complete = chosen.length > 0 && chosen.every(({ id }) => pickOf(id).all || (pickOf(id).selected.length > 0 && pickOf(id).selected.length <= 100))
   return <AuthCard><div className="grid gap-5">
     <AuthBrand />
-    <h1 className="text-xl font-semibold">Connect to lukethomas</h1>
+    <h1 className={AUTH_TITLE}>Connect to lukethomas</h1>
     {user.isError || consent.isError || !/^[A-Za-z0-9_-]{43}$/.test(request) ? <p role="alert">This request is not available. Restart the connection from your MCP client.</p> : consent.data ? <>
       <p><strong>{consent.data.client_name}</strong> wants to connect to the workspaces and projects you select.</p>
       <p className="text-sm text-muted-foreground">Signed in as {user.data?.display_name}.</p>
@@ -122,7 +122,7 @@ export function OAuthConsentPage() {
         <Button variant="outline" disabled={approve.isPending} onClick={() => approve.mutate(false)}>Deny</Button>
         {workspaces.length ? <Button disabled={!complete || approve.isPending} onClick={() => approve.mutate(true)}>{scopes.length ? 'Allow selected access' : 'Allow read access'}</Button> : null}
       </div>
-      {workspaces.length ? <p className="text-xs text-muted-foreground">Allowing will redirect to <strong className="break-words font-medium text-foreground">{consent.data.redirect_to}</strong>.</p> : null}
+      {workspaces.length ? <p className="text-sm text-muted-foreground">Allowing will redirect to <strong className="break-words font-medium text-foreground">{consent.data.redirect_to}</strong>.</p> : null}
     </> : <p><LoadingText>Loading connection…</LoadingText></p>}
   </div></AuthCard>
 }
