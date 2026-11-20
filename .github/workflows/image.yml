@@ -1,27 +1,66 @@
 name: Container image
 
 on:
+  # Docs-only changes build nothing. apps/mobile is not in the image, except its package.json (bun.lock).
   push:
     branches: [main]
+    paths:
+      - '**'
+      - '!docs/**'
+      - '!marketing/**'
+      - '!.ai/**'
+      - '!README.md'
+      - '!**/AGENTS.md'
+      - '!.github/pull_request_template.md'
+      - '!.github/workflows/testflight.yml'
+      - '!.github/workflows/checks.yml'
+      - '!apps/mobile/**'
+      - 'apps/mobile/package.json'
+  # A pull request runs CI and builds and smoke-tests the amd64 image without pushing it.
+  pull_request:
+    paths:
+      - '**'
+      - '!docs/**'
+      - '!marketing/**'
+      - '!.ai/**'
+      - '!README.md'
+      - '!**/AGENTS.md'
+      - '!.github/pull_request_template.md'
+      - '!.github/workflows/testflight.yml'
+      - '!.github/workflows/checks.yml'
+      - '!apps/mobile/**'
+      - 'apps/mobile/package.json'
   # Run by hand (Actions, Container image, Run workflow) to rebuild main without a new commit.
   workflow_dispatch:
-  # A published GitHub release also publishes the image as `<version>`, `<major>.<minor>` and `latest`.
+    inputs:
+      arm64:
+        description: Also build linux/arm64 (pushes to main build amd64 only; the server is x86_64)
+        type: boolean
+        default: false
+  # A published GitHub release builds both architectures and publishes the image as `<version>`,
+  # `<major>.<minor>` and `latest`.
   release:
     types: [published]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'push' }}
+  cancel-in-progress: ${{ github.event_name == 'push' || github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
 
 jobs:
+  # The web build and type check, in parallel with the image build. publish needs it and the image smoke test.
+  ci:
+    uses: ./.github/workflows/ci.yml
+
   # `[workspace.package] version` in Cargo.toml is the Orbit version. A release tag must be `v<version>`.
   version:
     runs-on: ubuntu-24.04
     outputs:
       version: ${{ steps.version.outputs.version }}
+      matrix: ${{ steps.plan.outputs.matrix }}
+      architectures: ${{ steps.plan.outputs.architectures }}
     steps:
       - uses: actions/checkout@v4
       - name: Read version from Cargo.toml
@@ -37,19 +76,28 @@ jobs:
             exit 1
           fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
+      # arm64 takes ~26 min against ~18 for amd64, and the production server is x86_64, so only a release or a
+      # run by hand with the arm64 box ticked builds it.
+      - name: Choose architectures
+        id: plan
+        env:
+          ARM64: ${{ github.event_name == 'release' || inputs.arm64 == true }}
+        run: |
+          amd64='{"architecture":"amd64","runner":"ubuntu-24.04","uname":"x86_64"}'
+          arm64='{"architecture":"arm64","runner":"ubuntu-24.04-arm","uname":"aarch64"}'
+          if [ "$ARM64" = true ]; then
+            echo "matrix={\"include\":[$amd64,$arm64]}" >> "$GITHUB_OUTPUT"
+            echo "architectures=amd64 arm64" >> "$GITHUB_OUTPUT"
+          else
+            echo "matrix={\"include\":[$amd64]}" >> "$GITHUB_OUTPUT"
+            echo "architectures=amd64" >> "$GITHUB_OUTPUT"
+          fi
 
   image:
     needs: version
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - architecture: amd64
-            runner: ubuntu-24.04
-            uname: x86_64
-          - architecture: arm64
-            runner: ubuntu-24.04-arm
-            uname: aarch64
+      matrix: ${{ fromJSON(needs.version.outputs.matrix) }}
     runs-on: ${{ matrix.runner }}
     permissions:
       contents: read
@@ -63,6 +111,7 @@ jobs:
           test "$(uname -m)" = "$EXPECTED_UNAME"
           test "$(docker info --format '{{.Architecture}}')" = "$EXPECTED_UNAME"
       - name: Log in to GHCR
+        if: github.event_name != 'pull_request'
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -97,6 +146,7 @@ jobs:
           docker run --rm "$image" --help
           bash deploy/smoke.sh "$image"
       - name: Publish architecture image
+        if: github.event_name != 'pull_request'
         env:
           ARCHITECTURE: ${{ matrix.architecture }}
         run: |
@@ -132,7 +182,7 @@ jobs:
 
   release-binaries:
     if: github.event_name == 'release'
-    needs: [version, image]
+    needs: [ci, version, image]
     runs-on: ubuntu-24.04
     permissions:
       contents: write
@@ -151,8 +201,10 @@ jobs:
           # --clobber replaces the files when the workflow runs again for the same release.
           gh release upload "$TAG" "${files[@]}" SHA256SUMS --clobber --repo "$GITHUB_REPOSITORY"
 
+  # Moves :main (or the release tags) only after CI and every image job pass.
   publish:
-    needs: [version, image]
+    if: github.event_name != 'pull_request'
+    needs: [ci, version, image]
     runs-on: ubuntu-24.04
     permissions:
       packages: write
@@ -169,6 +221,7 @@ jobs:
           EVENT: ${{ github.event_name }}
           PRERELEASE: ${{ github.event.release.prerelease }}
           VERSION: ${{ needs.version.outputs.version }}
+          ARCHITECTURES: ${{ needs.version.outputs.architectures }}
         run: |
           image="ghcr.io/${GITHUB_REPOSITORY,,}"
           tag=${GITHUB_SHA::7}
@@ -181,12 +234,13 @@ jobs:
           else
             tags=(--tag "$image:$tag" --tag "$image:main")
           fi
-          docker buildx imagetools create "${tags[@]}" \
-            "$image:$tag-amd64" \
-            "$image:$tag-arm64"
+          sources=()
+          for architecture in $ARCHITECTURES; do sources+=("$image:$tag-$architecture"); done
+          docker buildx imagetools create "${tags[@]}" "${sources[@]}"
           docker buildx imagetools inspect "$image:$tag" | tee manifest.txt
-          grep -E 'Platform:[[:space:]]+linux/amd64' manifest.txt
-          grep -E 'Platform:[[:space:]]+linux/arm64' manifest.txt
+          for architecture in $ARCHITECTURES; do
+            grep -E "Platform:[[:space:]]+linux/$architecture" manifest.txt
+          done
       # lukethomas: portal.lthops.tech runs this image (ghcr.io/lukehoefs/orbit:main) on our own Coolify.
       # With the two secrets set, a push to main deploys it; without them the image is still published
       # and the deploy is started from Coolify, so the step skips instead of failing the run.

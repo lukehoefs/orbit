@@ -1,0 +1,140 @@
+name: Checks (not gating)
+
+# The Rust tests, fmt, clippy, web unit tests and Playwright. They report on every pull request and push to main
+# but do not hold up publish (the Rust tests take longer than the image build; the others already fail on main).
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**'
+      - '!docs/**'
+      - '!marketing/**'
+      - '!.ai/**'
+      - '!README.md'
+      - '!**/AGENTS.md'
+      - '!.github/pull_request_template.md'
+      - '!.github/workflows/testflight.yml'
+      - '!apps/mobile/**'
+      - 'apps/mobile/package.json'
+  pull_request:
+    paths:
+      - '**'
+      - '!docs/**'
+      - '!marketing/**'
+      - '!.ai/**'
+      - '!README.md'
+      - '!**/AGENTS.md'
+      - '!.github/pull_request_template.md'
+      - '!.github/workflows/testflight.yml'
+      - '!apps/mobile/**'
+      - 'apps/mobile/package.json'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # The Rust tests (~15-20 min, longer than the image build). The server embeds apps/web/dist (include_dir!), so build it first.
+  rust-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.97.1
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: rust-test
+          cache-on-failure: true
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+      - uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+        working-directory: apps/web
+      # --no-fail-fast: report every failing test binary, not just the first.
+      - run: cargo test --workspace --no-fail-fast
+
+  rust-lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.97.1
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: rust-lint
+          cache-on-failure: true
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+      - uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+      - run: cargo fmt --check
+      - run: bun install --frozen-lockfile
+        if: ${{ !cancelled() }}
+      - run: bun run build
+        if: ${{ !cancelled() }}
+        working-directory: apps/web
+      - run: cargo clippy --workspace --all-targets -- -D warnings
+        if: ${{ !cancelled() }}
+
+  web-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+      - uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+      - run: bun install --frozen-lockfile
+      - run: bun run test
+        working-directory: apps/web
+
+  # Playwright against a development server.
+  e2e:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.97.1
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: e2e
+          cache-on-failure: true
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+      - uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+      - uses: extractions/setup-just@v3
+      - run: just setup
+      - run: bun x playwright install --with-deps chromium
+        working-directory: apps/web
+      - run: just e2e

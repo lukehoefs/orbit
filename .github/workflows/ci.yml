@@ -1,22 +1,21 @@
 name: CI
 
+# The publish gate. image.yml calls it on every pull request and push to main, so the image build runs in
+# parallel and nothing is published until it (and the image smoke test) pass. The Rust tests, fmt, clippy,
+# web unit tests and e2e report from checks.yml without holding up a deploy.
 on:
+  workflow_call:
   workflow_dispatch:
 
-concurrency:
-  group: ${{ github.workflow }}
-  cancel-in-progress: true
+permissions:
+  contents: read
 
 jobs:
-  gate:
-    runs-on: ubuntu-latest
+  # The web type check (tsc -b), build and lint. A type error fails here, not inside the Docker build.
+  web:
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: 1.97.1
-          components: rustfmt, clippy
-      - uses: Swatinem/rust-cache@v2
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.4.4
@@ -25,24 +24,12 @@ jobs:
           path: ~/.bun/install/cache
           key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
           restore-keys: bun-${{ runner.os }}-
-      - uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('bun.lock') }}
       - uses: extractions/setup-just@v3
-      - run: just setup
-      - run: bun x playwright install --with-deps chromium
+      - run: bun install --frozen-lockfile
+      - run: just version-check
+      - run: bun run build
         working-directory: apps/web
-      - run: just check
-      - run: just e2e
-      - uses: docker/setup-buildx-action@v3
-      # Reads the layer cache that the amd64 job of image.yml writes.
-      - uses: docker/build-push-action@v6
-        with:
-          context: .
-          build-args: ORBIT_BUILD_REVISION=${{ github.sha }}
-          tags: orbit:ci
-          load: true
-          cache-from: type=gha,scope=orbit-amd64
-      - run: docker run --rm orbit:ci --help
-      - run: bash deploy/smoke.sh orbit:ci
+      - run: bun run lint
+        working-directory: apps/web
+      - run: bun run test
+        working-directory: packages/api
