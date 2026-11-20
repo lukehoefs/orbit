@@ -32,12 +32,22 @@ RUN cargo chef prepare --recipe-path recipe.json
 FROM chef AS server
 COPY --from=planner /src/recipe.json recipe.json
 RUN cargo chef cook --locked --release -p orbit-server --recipe-path recipe.json
+# The workspace crates (orbit-domain, orbit-mail, orbit-platform) in their own layer, built through a stub
+# orbit-server so the dependency features match the real build. A change to apps/server or apps/web only
+# recompiles orbit-server. orbit-platform's build.rs reads apps/server/migrations.
 COPY Cargo.toml Cargo.lock rust-toolchain.toml ./
 COPY crates/ crates/
+COPY apps/server/Cargo.toml apps/server/
+COPY apps/server/migrations/ apps/server/migrations/
+RUN mkdir -p apps/server/src && echo 'fn main() {}' > apps/server/src/main.rs \
+    && cargo build --locked --release -p orbit-server \
+    && rm -rf apps/server/src
 COPY apps/server/ apps/server/
 COPY --from=web /src/apps/web/dist/ apps/web/dist/
 ARG ORBIT_BUILD_REVISION
-RUN ORBIT_BUILD_REVISION=${ORBIT_BUILD_REVISION} \
+# touch: the copied sources keep their (older) checkout times, and Cargo must not take the stub as up to date.
+RUN touch apps/server/src/main.rs apps/server/src/lib.rs \
+    && ORBIT_BUILD_REVISION=${ORBIT_BUILD_REVISION} \
     cargo build --locked --release -p orbit-server \
     && cp target/release/orbit /orbit
 
