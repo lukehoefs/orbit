@@ -1,0 +1,6 @@
+# portal.lthops.tech (lukethomas Coolify) runs the image GitHub Actions builds and smoke-tests
+# (.github/workflows/image.yml, pushed as ghcr.io/lukehoefs/orbit:main) instead of compiling Rust on
+# the server for ~25 minutes. Coolify points its Dockerfile location here, so its "build" only pulls.
+# BuildKit resolves the :main tag against the registry on every build, so a deploy gets the newest one.
+FROM ghcr.io/lukehoefs/orbit:main
+HEALTHCHECK --interval=5s --timeout=3s --start-period=5s --retries=10 CMD ["/orbit", "healthcheck"]
